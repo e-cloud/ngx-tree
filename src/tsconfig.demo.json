@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/demo",
+    "module": "es2015",
+    "baseUrl": "",
+    "types": [],
+    "paths": {
+      "ngx-tree": [
+        "./lib"
+      ]
+    }
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}

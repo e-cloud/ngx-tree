@@ -1,0 +1,25 @@
+<div *ngIf="!templates.treeNodeWrapperTemplate"
+     class="node-wrapper"
+     [style.padding-left]="node.getNodePadding()">
+
+  <ngx-tree-node-expander [node]="node"></ngx-tree-node-expander>
+
+  <div class="node-content-wrapper"
+       [class.node-content-wrapper-active]="node.isActive"
+       [class.node-content-wrapper-focused]="node.isFocused"
+       (click)="node.mouseAction('click', $event)"
+       (dblclick)="node.mouseAction('dblClick', $event)"
+       (contextmenu)="node.mouseAction('contextMenu', $event)">
+
+    <ngx-tree-node-content
+      [node]="node"
+      [index]="index"
+      [template]="templates.treeNodeTemplate">
+    </ngx-tree-node-content>
+  </div>
+</div>
+
+<ng-container
+  [ngTemplateOutlet]="templates.treeNodeWrapperTemplate"
+  [ngOutletContext]="{ $implicit: node, node: node, index: index }">
+</ng-container>

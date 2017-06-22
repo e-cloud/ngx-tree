@@ -78,5 +78,10 @@
     "scripts": {
       "postbump": "node tools/bump-version.js && git add ."
     }
+  },
+  "dependencies": {
+    "@types/lodash-es": "^4.14.5",
+    "element-closest": "^2.0.2",
+    "lodash-es": "^4.17.4"
   }
 }

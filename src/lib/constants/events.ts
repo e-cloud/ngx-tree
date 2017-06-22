@@ -1,0 +1,15 @@
+export const TREE_EVENTS = {
+    expand: 'expand',
+    collapse: 'collapse',
+    toggleExpander: 'toggleExpander',
+    activate: 'activate',
+    deactivate: 'deactivate',
+    focus: 'focus',
+    blur: 'blur',
+    initialized: 'initialized',
+    moveNode: 'moveNode',
+    updateData: 'updateData',
+    event: 'event',
+    loadChildren: 'loadChildren',
+    changeFilter: 'changeFilter',
+}

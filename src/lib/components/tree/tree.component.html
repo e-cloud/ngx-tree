@@ -1,0 +1,15 @@
+<ngx-tree-viewport #viewport>
+  <div class="tree">
+    <ngx-tree-node-collection
+      *ngIf="treeModel.roots"
+      [nodes]="treeModel.roots"
+      [treeModel]="treeModel"
+      [templates]="{
+            loadingTemplate: loadingTemplate,
+            treeNodeTemplate: treeNodeTemplate,
+            treeNodeWrapperTemplate: treeNodeWrapperTemplate,
+            treeNodeFullTemplate: treeNodeFullTemplate
+          }">
+    </ngx-tree-node-collection>
+  </div>
+</ngx-tree-viewport>

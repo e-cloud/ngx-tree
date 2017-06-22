@@ -1,0 +1,14 @@
+<span
+  *ngIf="node.hasChildren"
+  class="toggle-children-wrapper"
+  [class.toggle-children-wrapper-expanded]="node.isExpanded"
+  [class.toggle-children-wrapper-collapsed]="node.isCollapsed"
+  (click)="node.mouseAction('expanderClick', $event)">
+
+  <span class="toggle-children"></span>
+</span>
+
+<span
+  *ngIf="!node.hasChildren"
+  class="toggle-children-placeholder">
+</span>

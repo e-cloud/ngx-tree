@@ -1,14 +1,14 @@
-import { TestPPage } from './app.po';
+import { TestPPage } from './app.po'
 
 describe('ngx-tree Demo', () => {
-  let page: TestPPage;
+    let page: TestPPage
 
-  beforeEach(() => {
-    page = new TestPPage();
-  });
+    beforeEach(() => {
+        page = new TestPPage()
+    })
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to demo!!');
-  });
-});
+    it('should display welcome message', () => {
+        page.navigateTo()
+        expect(page.getParagraphText()).toEqual('Welcome to demo!!')
+    })
+})

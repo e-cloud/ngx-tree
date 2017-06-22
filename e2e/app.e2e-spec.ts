@@ -1,10 +1,10 @@
-import { TestPPage } from './app.po'
+import { TestPage } from './app.po'
 
 describe('ngx-tree Demo', () => {
-    let page: TestPPage
+    let page: TestPage
 
     beforeEach(() => {
-        page = new TestPPage()
+        page = new TestPage()
     })
 
     it('should display welcome message', () => {

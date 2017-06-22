@@ -275,19 +275,12 @@ export class TreeNode {
         this.setIsActive(true, multi)
             .ensureVisible()
 
-        setTimeout(this.scrollIntoView.bind(this))
-
         return this
-    }
-
-    scrollIntoView(force = false) {
-        this.treeModel.virtualScroll.scrollIntoView(this, force)
     }
 
     focus() {
         const previousNode = this.treeModel.getFocusedNode()
         this.treeModel.setFocusedNode(this)
-        this.scrollIntoView()
         if (previousNode) {
             this.fireEvent({ eventName: TREE_EVENTS.blur, node: previousNode })
         }

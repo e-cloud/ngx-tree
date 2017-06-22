@@ -15,7 +15,7 @@ export class TreeVirtualScroll {
     viewport = null
 
     constructor(private treeModel: TreeModel) {
-        treeModel.virtualScroll = this
+        // treeModel.virtualScroll = this
     }
 
     get y() {

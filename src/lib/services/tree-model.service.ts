@@ -3,7 +3,6 @@ import { compact, find, first, isFunction, isString, last } from 'lodash'
 import { TREE_EVENTS } from '../constants/events'
 import { TreeNode } from '../models/tree-node'
 import { TreeOptions } from '../models/tree-options.model'
-import { TreeVirtualScroll } from './tree-virtual-scroll.service'
 
 @Injectable()
 export class TreeModel {
@@ -12,7 +11,6 @@ export class TreeModel {
     options: TreeOptions = new TreeOptions()
     nodes: any[]
     eventNames = Object.keys(TREE_EVENTS)
-    virtualScroll: TreeVirtualScroll
 
     roots: TreeNode[]
     expandedNodeIds: { [id: string]: boolean } = {}

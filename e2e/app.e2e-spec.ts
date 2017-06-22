@@ -9,6 +9,8 @@ describe('ngx-tree Demo', () => {
 
     it('should display welcome message', () => {
         page.navigateTo()
-        expect(page.getParagraphText()).toEqual('Welcome to demo!!')
+        page.getParagraphText().then((text) => {
+            expect(text).toEqual('Welcome to demo!!')
+        })
     })
 })

@@ -5,7 +5,7 @@ export class TestPage {
         return browser.get('/')
     }
 
-    getParagraphText(): string {
+    getParagraphText() {
         return element(by.css('demo-root h1')).getText()
     }
 }

@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tree-node-content-active,
+.tree-node-content.tree-node-content-active:hover,
+.tree-node-content-active.tree-node-content-focused {
+  background: #beebff;
+}
+
+.tree-node-content-focused {
+  background: #e7f4f9
+}
+
+.tree-node-content:hover {
+  background: #f7fbff
+}
+
+.tree-node-content-active,
+.tree-node-content-focused,
+.tree-node-content:hover {
+  box-shadow: inset 0 0 1px #999;
+}

@@ -1,17 +1,12 @@
-<div [class.tree-children]="true"
-     [class.tree-children-no-padding]="node.options.levelPadding">
-  <ngx-tree-node-collection
-    *ngIf="node.children"
-    [nodes]="node.children"
-    [templates]="templates"
-    [treeModel]="node.treeModel">
-  </ngx-tree-node-collection>
+<ngx-tree-node
+  *ngFor="let child of nodes; let i = index; trackBy: trackNode"
+  [node]="child"
+  [index]="i"
+  [templates]="templates">
+</ngx-tree-node>
 
-  <ngx-tree-loading
-    [style.padding-left]="node.getNodePadding()"
-    class="tree-node-loading"
-    *ngIf="!node.children"
-    [template]="templates.loadingTemplate"
-    [node]="node"
-  ></ngx-tree-loading>
-</div>
+<ngx-tree-loading
+  *ngIf="!node.children"
+  [style.padding-left]="node.getNodePadding()"
+  [template]="templates.loadingTemplate"
+  [node]="node"></ngx-tree-loading>

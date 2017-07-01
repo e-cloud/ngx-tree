@@ -2,6 +2,7 @@ import {
     Component,
     ContentChild,
     EventEmitter,
+    HostBinding,
     HostListener,
     Input,
     OnChanges,
@@ -10,7 +11,7 @@ import {
     ViewChild,
 } from '@angular/core'
 import 'element-closest'
-import { pick } from 'lodash'
+import { TREE_EVENTS } from '../../constants/events'
 import { TreeNode } from '../../models/tree-node'
 import { TreeOptions } from '../../models/tree-options.model'
 import { TreeModel } from '../../services/tree-model.service'
@@ -22,6 +23,24 @@ import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
     styleUrls: ['./tree.component.scss'],
 })
 export class TreeComponent implements OnChanges {
+    @Input() nodes: TreeNode[]
+    @Input() options: TreeOptions
+    @Input() focused
+
+    @Output() expand: EventEmitter<any> = null
+    @Output() collapse: EventEmitter<any> = null
+    @Output() toggleExpander: EventEmitter<any> = null
+    @Output() activate: EventEmitter<any> = null
+    @Output() deactivate: EventEmitter<any> = null
+    @Output() focus: EventEmitter<any> = null
+    @Output() blur: EventEmitter<any> = null
+    @Output() initialized: EventEmitter<any> = null
+    @Output() moveNode: EventEmitter<any> = null
+    @Output() loadChildren: EventEmitter<any> = null
+    @Output() changeFilter: EventEmitter<any> = null
+
+    @HostBinding('class.ngx-tree') className = true
+
     @ContentChild('loadingTemplate') loadingTemplate: TemplateRef<any>
     @ContentChild('treeNodeTemplate') treeNodeTemplate: TemplateRef<any>
     @ContentChild('treeNodeWrapperTemplate') treeNodeWrapperTemplate: TemplateRef<any>
@@ -29,26 +48,19 @@ export class TreeComponent implements OnChanges {
 
     @ViewChild('viewport') viewportComponent: TreeViewportComponent
 
-    @Input() nodes: TreeNode[]
-    @Input() options: TreeOptions
-    @Input() focused
+    emitterMap: { [name: string]: EventEmitter<any> }
+    treeModel: TreeModel = null
 
-    @Output() expand
-    @Output() collapse
-    @Output() toggleExpander
-    @Output() activate
-    @Output() deactivate
-    @Output() focus
-    @Output() blur
-    @Output() initialized
-    @Output() moveNode
-    @Output() loadChildren
-    @Output() changeFilter
+    constructor() {
+        this.emitterMap = Object.keys(TREE_EVENTS).reduce((map, name) => {
+            if (!this.hasOwnProperty(name)) {
+                throw new TypeError(`Unmatched events: [${name}]`)
+            }
 
-    constructor(
-        public treeModel: TreeModel,
-    ) {
-        treeModel.eventNames.forEach((name) => this[name] = new EventEmitter())
+            this[name] = map[name] = new EventEmitter()
+
+            return map
+        }, {})
     }
 
     @HostListener('body: keydown', ['$event'])
@@ -76,11 +88,11 @@ export class TreeComponent implements OnChanges {
     }
 
     ngOnChanges(changes) {
-        this.treeModel.setData({
-            options: changes.options && changes.options.currentValue,
-            nodes: changes.nodes && changes.nodes.currentValue,
-            events: pick(this, this.treeModel.eventNames),
-        })
+        if (changes.nodes && changes.nodes.currentValue) {
+            this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, this.options)
+        } else if (changes.options && changes.options.currentValue && this.treeModel) {
+            this.treeModel.updateOptions(changes.options.currentValue)
+        }
     }
 
     sizeChanged() {

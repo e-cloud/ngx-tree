@@ -8,10 +8,6 @@ import { TreeOptions } from '../models/tree-options.model'
 export class TreeModel {
     static focusedTree: TreeModel = null
 
-    options: TreeOptions = new TreeOptions()
-    nodes: any[]
-    eventNames = Object.keys(TREE_EVENTS)
-
     roots: TreeNode[]
     expandedNodeIds: { [id: string]: boolean } = {}
     activeNodeIds: { [id: string]: boolean } = {}
@@ -19,10 +15,20 @@ export class TreeModel {
     focusedNodeId: string = null
     virtualRoot: TreeNode
 
-    private firstUpdate = true
-    private events: any
+    constructor(private nodes: any[], private events, public options: TreeOptions = new TreeOptions()) {
+        const virtualRootConfig = {
+            virtual: true,
+            // todo: determine to use fixed children field later
+            [this.options.childrenField]: this.nodes,
+        }
 
-    constructor() {
+        this.virtualRoot = new TreeNode(virtualRootConfig, null, this, 0)
+
+        this.roots = this.virtualRoot.children
+
+        if (this.roots) {
+            this._calculateExpandedNodes()
+        }
     }
 
     get isFocused() {
@@ -49,12 +55,15 @@ export class TreeModel {
         return compact(nodes)
     }
 
+    updateOptions(options) {
+        this.options = options
+    }
+
     // events
     fireEvent(event) {
         event.treeModel = this
 
         this.events[event.eventName].emit(event)
-        this.events.event.emit(event)
     }
 
     subscribe(eventName, fn) {
@@ -157,43 +166,6 @@ export class TreeModel {
     isActive(node) {
         return this.activeNodeIds[node.id]
     }
-
-    setData({ nodes, options = null, events = null }: { nodes: any, options: any, events: any }) {
-        if (options) {
-            this.options = new TreeOptions(options)
-        }
-        if (events) {
-            this.events = events
-        }
-        if (nodes) {
-            this.nodes = nodes
-        }
-
-        this.update()
-    }
-
-    update() {
-        // Rebuild tree:
-        const virtualRootConfig = {
-            virtual: true,
-            [this.options.childrenField]: this.nodes,
-        }
-
-        this.virtualRoot = new TreeNode(virtualRootConfig, null, this, 0)
-
-        this.roots = this.virtualRoot.children
-
-        // Fire event:
-        if (this.firstUpdate) {
-            if (this.roots) {
-                this.firstUpdate = false
-                this._calculateExpandedNodes()
-            }
-        } else {
-            this.fireEvent({ eventName: TREE_EVENTS.updateData })
-        }
-    }
-
 
     setFocusedNode(node) {
         this.focusedNodeId = node ? node.id : null

@@ -1,0 +1,17 @@
+<ng-template [ngIf]="!templates.treeNodeWrapperTemplate">
+  <ngx-tree-node-expander [node]="node"></ngx-tree-node-expander>
+
+  <ngx-tree-node-content
+    [node]="node"
+    [index]="index"
+    [template]="templates.treeNodeTemplate"
+    (click)="node.mouseAction('click', $event)"
+    (dblclick)="node.mouseAction('dblClick', $event)"
+    (contextmenu)="node.mouseAction('contextMenu', $event)">
+  </ngx-tree-node-content>
+</ng-template>
+
+<ng-container
+  [ngTemplateOutlet]="templates.treeNodeWrapperTemplate"
+  [ngOutletContext]="{ $implicit: node, node: node, index: index }">
+</ng-container>

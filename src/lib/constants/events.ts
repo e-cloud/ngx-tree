@@ -8,8 +8,6 @@ export const TREE_EVENTS = {
     blur: 'blur',
     initialized: 'initialized',
     moveNode: 'moveNode',
-    updateData: 'updateData',
-    event: 'event',
     loadChildren: 'loadChildren',
     changeFilter: 'changeFilter',
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { TreeNode } from '../../models/tree-node'
 
 @Component({
@@ -7,8 +7,9 @@ import { TreeNode } from '../../models/tree-node'
     styleUrls: ['./tree-node-expander.component.scss'],
 })
 export class TreeNodeExpanderComponent implements OnInit {
-
     @Input() node: TreeNode
+
+    @HostBinding('class.tree-node-expander') className = true
 
     constructor() {
     }

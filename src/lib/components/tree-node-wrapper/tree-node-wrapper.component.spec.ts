@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { TreeNodeContentWrapperComponent } from './tree-node-content-wrapper.component'
+import { TreeNodeWrapperComponent } from './tree-node-wrapper.component'
 
 describe('TreeNodeContentWrapperComponent', () => {
-    let component: TreeNodeContentWrapperComponent
-    let fixture: ComponentFixture<TreeNodeContentWrapperComponent>
+    let component: TreeNodeWrapperComponent
+    let fixture: ComponentFixture<TreeNodeWrapperComponent>
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-                declarations: [TreeNodeContentWrapperComponent],
+                declarations: [TreeNodeWrapperComponent],
             })
             .compileComponents()
     }))
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TreeNodeContentWrapperComponent)
+        fixture = TestBed.createComponent(TreeNodeWrapperComponent)
         component = fixture.componentInstance
         fixture.detectChanges()
     })

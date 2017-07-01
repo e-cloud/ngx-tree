@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core'
+import { AfterViewInit, Component, HostBinding, HostListener, OnDestroy, OnInit } from '@angular/core'
 
 @Component({
     selector: 'ngx-tree-viewport',
@@ -6,6 +6,7 @@ import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angu
     styleUrls: ['./tree-viewport.component.scss'],
 })
 export class TreeViewportComponent implements AfterViewInit, OnInit, OnDestroy {
+    @HostBinding('class.tree-viewport') className = true
 
     constructor() {
     }
@@ -23,15 +24,7 @@ export class TreeViewportComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     @HostListener('scroll', ['$event'])
-    onScroll(e) {
-        this._onWheel(e)
-    }
-
-    getTotalHeight() {
-        return 'auto'
-    }
-
-    _onWheel(e) {
+    onScroll() {
         this.setViewport()
     }
 

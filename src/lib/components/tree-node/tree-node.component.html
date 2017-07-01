@@ -1,21 +1,9 @@
-<div
-  *ngIf="!templates.treeNodeFullTemplate"
-  [class]="node.getClass()"
-  [class.tree-node]="true"
-  [class.tree-node-expanded]="node.isExpanded && node.hasChildren"
-  [class.tree-node-collapsed]="node.isCollapsed && node.hasChildren"
-  [class.tree-node-leaf]="node.isLeaf"
-  [class.tree-node-active]="node.isActive"
-  [class.tree-node-focused]="node.isFocused">
+<ngx-tree-node-wrapper
+  [node]="node"
+  [index]="index"
+  [templates]="templates"></ngx-tree-node-wrapper>
 
-  <ngx-tree-node-content-wrapper
-    [node]="node"
-    [index]="index"
-    [templates]="templates"></ngx-tree-node-content-wrapper>
-
-  <ngx-tree-node-children [node]="node" [templates]="templates"></ngx-tree-node-children>
-</div>
-<ng-container
-  [ngTemplateOutlet]="templates.treeNodeFullTemplate"
-  [ngOutletContext]="{ $implicit: node, node: node, index: index, templates: templates }">
-</ng-container>
+<ngx-tree-node-children
+  *ngIf="node.isExpanded"
+  [node]="node"
+  [templates]="templates"></ngx-tree-node-children>

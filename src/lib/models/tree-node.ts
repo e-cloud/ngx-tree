@@ -1,45 +1,43 @@
-import { first, last } from 'lodash'
+import { first, last, pullAt } from 'lodash'
 import { TREE_EVENTS } from '../constants/events'
-import { TreeModel } from '../services/tree-model.service'
-import { TreeOptions } from './tree-options.model'
+import { TreeEvent } from './index'
+import { TreeModel } from './tree-model'
 
 export class TreeNode {
-
     children: TreeNode[]
     index: number
     position = 0
     height: number
-    private _originalNode: any
-
-
-    constructor(public data: any, public parent: TreeNode, public treeModel: TreeModel, index: number) {
-        if (this.id === undefined || this.id === null) {
-            this.id = uuid()
-        } // Make sure there's a unique id without overriding existing ids to work with immutable data structures
-        this.index = index
-
-        if (this.getField('children')) {
-            this._initChildren()
-        }
-    }
 
     get isHidden() {
-        return this.treeModel.isHidden(this)
+        return this.treeModel.isNodeHidden(this)
     }
 
     get isExpanded() {
-        return this.treeModel.isExpanded(this)
+        return this.treeModel.isNodeExpanded(this)
+    }
+
+    get isCollapsed() {
+        return !this.isExpanded
     }
 
     get isActive() {
-        return this.treeModel.isActive(this)
+        return this.treeModel.isNodeActive(this)
     }
 
     get isFocused() {
         return this.treeModel.isNodeFocused(this)
     }
 
-    get level(): number {
+    get isLeaf() {
+        return !this.hasChildren
+    }
+
+    get isRoot() {
+        return this.parent === null
+    }
+
+    get level() {
         return this.parent ? this.parent.level + 1 : 0
     }
 
@@ -47,33 +45,13 @@ export class TreeNode {
         return this.parent ? [...this.parent.path, this.id] : []
     }
 
-    get originalNode() {
-        return this._originalNode
-    }
-
     // helper get functions:
-    get hasChildren(): boolean {
+    get hasChildren() {
         return !!(this.data.hasChildren || (this.children && this.children.length > 0))
     }
 
-    get isCollapsed(): boolean {
-        return !this.isExpanded
-    }
-
-    get isLeaf(): boolean {
-        return !this.hasChildren
-    }
-
-    get isRoot(): boolean {
-        return this.parent.data.virtual
-    }
-
-    get realParent(): TreeNode {
-        return this.isRoot ? null : this.parent
-    }
-
     // proxy functions:
-    get options(): TreeOptions {
+    get options() {
         return this.treeModel.options
     }
 
@@ -94,33 +72,49 @@ export class TreeNode {
         return (this.children || []).filter((node) => !node.isHidden)
     }
 
-    fireEvent(event) {
+    get cssClass() {
+        return [this.options.nodeClass(this), `tree-node-level-${ this.level }`].join(' ')
+    }
+
+    constructor(public data: any, public parent: TreeNode, public treeModel: TreeModel, index: number) {
+        if (this.id === undefined || this.id === null) {
+            this.id = uuid()
+        } // Make sure there's a unique id without overriding existing ids to work with immutable data structures
+        this.index = index
+
+        treeModel.addCache(this)
+        if (data[this.options.isExpandedField]) {
+            treeModel.setExpandedNodeInPlace(this)
+        }
+
+        if (this.getField('children')) {
+            this.initChildren()
+        }
+    }
+
+    fireEvent(event: TreeEvent) {
         this.treeModel.fireEvent(event)
     }
 
-    getField(key) {
+    getField(key: string) {
         return this.data[this.options[`${key}Field`]]
     }
 
-    setField(key, value) {
+    setField(key: string, value) {
         this.data[this.options[`${key}Field`]] = value
     }
 
     // traversing:
-    _findAdjacentSibling(steps, skipHidden = false) {
-        return this._getParentsChildren(skipHidden)[this.index + steps]
+    findAdjacentSibling(steps: number, skipHidden = false) {
+        return this.getParentChildren(skipHidden)[this.index + steps]
     }
 
     findNextSibling(skipHidden = false) {
-        return this._findAdjacentSibling(+1, skipHidden)
+        return this.findAdjacentSibling(+1, skipHidden)
     }
 
     findPreviousSibling(skipHidden = false) {
-        return this._findAdjacentSibling(-1, skipHidden)
-    }
-
-    getVisibleChildren() {
-        return this.visibleChildren
+        return this.findAdjacentSibling(-1, skipHidden)
     }
 
     getFirstChild(skipHidden = false) {
@@ -144,18 +138,10 @@ export class TreeNode {
     findPreviousNode(skipHidden = false) {
         const previousSibling = this.findPreviousSibling(skipHidden)
         if (!previousSibling) {
-            return this.realParent
+            return this.parent
         }
 
-        return previousSibling._getLastOpenDescendant(skipHidden)
-    }
-
-    _getLastOpenDescendant(skipHidden = false) {
-        const lastChild = this.getLastChild(skipHidden)
-
-        return (this.isCollapsed || !lastChild)
-            ? this
-            : lastChild._getLastOpenDescendant(skipHidden)
+        return previousSibling.getLastOpenDescendant(skipHidden)
     }
 
     isDescendantOf(node: TreeNode) {
@@ -166,12 +152,12 @@ export class TreeNode {
         }
     }
 
-    getNodePadding(): string {
+    getNodePadding() {
         return this.options.levelPadding * (this.level - 1) + 'px'
     }
 
-    getClass(): string {
-        return [this.options.nodeClass(this), `tree-node-level-${ this.level }`].join(' ')
+    getIndexInParent(skipHidden = false) {
+        return this.getParentChildren(skipHidden).indexOf(this)
     }
 
     // helper methods:
@@ -184,14 +170,15 @@ export class TreeNode {
             .then((children) => {
                 if (children) {
                     this.setField('children', children)
-                    this._initChildren()
+                    this.initChildren()
                     this.children.forEach((child) => {
                         if (child.getField('isExpanded') && child.hasChildren) {
                             child.expand()
                         }
                     })
                 }
-            }).then(() => {
+            })
+            .then(() => {
                 this.fireEvent({
                     eventName: TREE_EVENTS.loadChildren,
                     node: this,
@@ -215,40 +202,27 @@ export class TreeNode {
         return this
     }
 
-    doForAll(fn: (node: TreeNode) => any) {
+    traverse(fn: (node: TreeNode) => any) {
         Promise.resolve(fn(this)).then(() => {
             if (this.children) {
-                this.children.forEach((child) => child.doForAll(fn))
+                this.children.forEach((child) => child.traverse(fn))
             }
         })
     }
 
     expandAll() {
-        this.doForAll((node) => node.expand())
+        this.traverse((node) => node.expand())
     }
 
     collapseAll() {
-        this.doForAll((node) => node.collapse())
+        this.traverse((node) => node.collapse())
     }
 
-    ensureVisible() {
-        if (this.realParent) {
-            this.realParent.expand()
-            this.realParent.ensureVisible()
-        }
-
-        return this
-    }
-
-    toggleExpanded() {
-        return this.setIsExpanded(!this.isExpanded)
-    }
-
-    setIsExpanded(value) {
+    toggleExpanded(isExpanded = !this.isExpanded) {
         if (this.hasChildren) {
-            this.treeModel.setExpandedNode(this, value)
+            this.treeModel.setExpandedNode(this, isExpanded)
 
-            if (!this.children && this.hasChildren && value) {
+            if (!this.children && this.hasChildren && isExpanded) {
                 return this.loadChildren()
             }
         }
@@ -256,24 +230,37 @@ export class TreeNode {
         return Promise.resolve()
     }
 
-    setIsActive(value, multi = false) {
-        this.treeModel.setActiveNode(this, value, multi)
-        if (value) {
+    setActive(isActive = true, isMulti = false) {
+        this.treeModel.setActiveNode(this, isActive, isMulti)
+        if (isActive) {
             this.focus()
         }
 
         return this
     }
 
-    toggleActivated(multi = false) {
-        this.setIsActive(!this.isActive, multi)
+    setHidden(isHidden = true) {
+        this.treeModel.setHiddenNode(this, isHidden)
 
         return this
     }
 
-    setActiveAndVisible(multi = false) {
-        this.setIsActive(true, multi)
+    toggleActivated(isMulti = false) {
+        this.setActive(!this.isActive, isMulti)
+
+        return this
+    }
+
+    setActiveAndVisible(isMulti = false) {
+        return this.setActive(true, isMulti)
             .ensureVisible()
+    }
+
+    ensureVisible() {
+        if (this.parent) {
+            this.parent.expand()
+            this.parent.ensureVisible()
+        }
 
         return this
     }
@@ -299,19 +286,54 @@ export class TreeNode {
         return this
     }
 
-    setIsHidden(value) {
-        this.treeModel.setIsHidden(this, value)
-    }
-
     hide() {
-        this.setIsHidden(true)
+        this.setHidden(true)
+
+        return this
     }
 
     show() {
-        this.setIsHidden(false)
+        this.setHidden(false)
+
+        return this
     }
 
-    mouseAction(actionName: string, $event, data: any = null) {
+    addChild(data: any, index: number) {
+        const node = new TreeNode(data, this, this.treeModel, null)
+
+        this.children.splice(index, 0, node)
+        this.children = this.children.slice()
+
+        this.reCalcChildrenIndices(index)
+
+        this.fireEvent({ eventName: TREE_EVENTS.addNode, node })
+    }
+
+    remove() {
+        this.parent.removeChild(this)
+    }
+
+    removeChild(node: TreeNode) {
+        pullAt(this.getField('children'), node.index)
+        this.children = pullAt(this.children, node.index).slice()
+
+        this.reCalcChildrenIndices(0)
+
+        this.fireEvent({ eventName: TREE_EVENTS.removeNode, node })
+
+        if (node.isFocused) {
+            this.treeModel.setFocusedNode(null)
+            this.treeModel.setActiveNode(node, false)
+        }
+
+        if (node.isExpanded) {
+            this.treeModel.setExpandedNodeInPlace(node, false)
+        }
+
+        node.treeModel = null
+    }
+
+    mouseAction(actionName: string, $event: MouseEvent, data: any = null) {
         this.treeModel.setFocus(true)
 
         const actionMapping = this.options.actionMapping.mouse
@@ -322,24 +344,29 @@ export class TreeNode {
         }
     }
 
-    getSelfHeight() {
-        return this.options.nodeHeight(this)
+    private reCalcChildrenIndices(offset) {
+        this.children.slice(this.index).forEach((child, index) => {
+            child.index = index + offset
+        })
     }
 
-    _initChildren() {
+    private initChildren() {
         this.children = this.getField('children')
-            .map((c, index) => new TreeNode(c, this, this.treeModel, index))
+            .map((data, index) => new TreeNode(data, this, this.treeModel, index))
     }
 
-    /*private getIndexInParent(skipHidden = false) {
-        return this._getParentsChildren(skipHidden).indexOf(this)
-    }*/
+    private getLastOpenDescendant(skipHidden = false) {
+        const lastChild = this.getLastChild(skipHidden)
 
-    private _getParentsChildren(skipHidden = false): any[] {
-        const children = this.parent &&
-            (skipHidden ? this.parent.getVisibleChildren() : this.parent.children)
+        return (this.isCollapsed || !lastChild)
+            ? this
+            : lastChild.getLastOpenDescendant(skipHidden)
+    }
 
-        return children || []
+    private getParentChildren(skipHidden = false): TreeNode[] {
+        return this.parent
+            ? (skipHidden ? this.parent.visibleChildren : this.parent.children)
+            : []
     }
 }
 

@@ -30,7 +30,7 @@ export class TreeNodeComponent implements OnInit {
 
     @HostBinding('class')
     get nodeClass() {
-        return this.node.getClass()
+        return this.node.cssClass
     }
 
     @HostBinding('class.tree-node-expanded')

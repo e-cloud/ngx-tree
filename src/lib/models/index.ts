@@ -3,9 +3,7 @@
  */
 import { TreeNode } from './tree-node'
 
-export interface INodeHeightFn {
-    (node: TreeNode): number;
-}
+export type INodeHeightFn = (node: TreeNode) => number
 
 /**
  * This is the interface of the options input of the tree.
@@ -294,7 +292,7 @@ export interface ITreeModel {
 
     /**
      * Set focus on a node
-     * @param value  true or false - whether to set focus or blur.
+     * @param node
      */
     setFocusedNode(node: ITreeNode);
 
@@ -322,7 +320,7 @@ export interface ITreeModel {
 
     /**
      * @param     path  array of node IDs to be traversed respectively
-     * @param     statrNode  optional. Which node to start traversing from
+     * @param     startNode  optional. Which node to start traversing from
      * @returns   The node, if found - null otherwise
      */
     getNodeByPath(path: any[], startNode?: ITreeNode): ITreeNode;
@@ -336,7 +334,7 @@ export interface ITreeModel {
     /**
      * @param     predicate - either an object or a function, used as a test condition on all nodes.
      *            Could be every predicate that's supported by lodash's `find` method
-     * @param     statrNode  optional. Which node to start traversing from
+     * @param     startNode  optional. Which node to start traversing from
      * @returns   First node that matches the predicate, if found - null otherwise
      */
     getNodeBy(predicate: any, startNode?: ITreeNode): ITreeNode;
@@ -387,14 +385,9 @@ export interface ITreeModel {
      * moves a node from one location in the tree to another
      * @param node location has a from and a to attributes, each has a node and index attributes.
      * The combination of node + index tells which node needs to be moved, and to where
+     * @param to
      */
     moveNode(node: ITreeNode, to: { node: ITreeNode, index: number });
-
-    /**
-     * Invokes a method for every node of the tree - depth first
-     * @param fn  a function that receives the node
-     */
-    doForAll(fn: (node: ITreeNode) => any);
 
     /**
      * expand all nodes
@@ -405,4 +398,11 @@ export interface ITreeModel {
      * collapse all nodes
      */
     collapseAll();
+}
+
+export interface TreeEvent {
+    eventName: string
+    node?: TreeNode
+    isExpanded?: boolean
+    to?: { parent: TreeNode; index: number }
 }

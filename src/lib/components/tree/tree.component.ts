@@ -11,10 +11,10 @@ import {
     ViewChild,
 } from '@angular/core'
 import 'element-closest'
-import { TREE_EVENTS } from '../../constants/events'
+import { EventsMap, TREE_EVENTS } from '../../constants/events'
+import { TreeModel } from '../../models/tree-model'
 import { TreeNode } from '../../models/tree-node'
 import { TreeOptions } from '../../models/tree-options.model'
-import { TreeModel } from '../../services/tree-model.service'
 import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
 
 @Component({
@@ -38,6 +38,8 @@ export class TreeComponent implements OnChanges {
     @Output() moveNode: EventEmitter<any> = null
     @Output() loadChildren: EventEmitter<any> = null
     @Output() changeFilter: EventEmitter<any> = null
+    @Output() addNode: EventEmitter<any> = null
+    @Output() removeNode: EventEmitter<any> = null
 
     @HostBinding('class.ngx-tree') className = true
 
@@ -48,7 +50,7 @@ export class TreeComponent implements OnChanges {
 
     @ViewChild('viewport') viewportComponent: TreeViewportComponent
 
-    emitterMap: { [name: string]: EventEmitter<any> }
+    emitterMap: EventsMap
     treeModel: TreeModel = null
 
     constructor() {
@@ -60,7 +62,7 @@ export class TreeComponent implements OnChanges {
             this[name] = map[name] = new EventEmitter()
 
             return map
-        }, {})
+        }, {}) as any
     }
 
     @HostListener('body: keydown', ['$event'])

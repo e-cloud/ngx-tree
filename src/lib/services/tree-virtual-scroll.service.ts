@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { TREE_EVENTS } from '../constants/events'
+import { TreeModel } from '../models/tree-model'
 import { TreeNode } from '../models/tree-node'
-import { TreeModel } from './tree-model.service'
 
 const Y_OFFSET = 300 // Extra pixels outside the viewport, in each direction, to render nodes in
 const Y_EPSILON = 50 // Minimum pixel change required to recalculate the rendered nodes
@@ -78,7 +78,7 @@ export class TreeVirtualScroll {
             return []
         }
 
-        const visibleNodes = nodes.filter((node) => !node.isHidden)
+        const visibleNodes = nodes.filter((node) => !node.isNodeHidden)
 
         if (!this.isEnabled()) {
             return visibleNodes
@@ -139,7 +139,7 @@ export class TreeVirtualScroll {
     private _getPositionAfterNode(node, startPos) {
         let position = node.getSelfHeight() + startPos
 
-        if (node.children && node.isExpanded) { // TBD: consider loading component as well
+        if (node.children && node.isNodeExpanded) { // TBD: consider loading component as well
             position = this._getPositionAfter(node.visibleChildren, position)
         }
         node.height = position - startPos

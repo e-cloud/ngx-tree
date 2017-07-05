@@ -1,2 +1,17 @@
-<ngx-tree [nodes]="nodes" [options]="customTemplateStringOptions"></ngx-tree>
+<ngx-tree
+  [nodes]="nodes"
+  [options]="customTemplateStringOptions"
+  (expand)="log($event)"
+  (collapse)="log($event)"
+  (changeFilter)="log($event)"
+  (toggleExpander)="log($event)"
+  (addNode)="log($event)"
+  (removeNode)="log($event)"
+  (activate)="log($event)"
+  (deactivate)="log($event)"
+  (focus)="log($event)"
+  (blur)="log($event)"
+  (initialized)="log($event)"
+  (loadChildren)="log($event)"
+></ngx-tree>
 

@@ -1,5 +1,5 @@
-<ngx-tree-viewport #viewport>
-  <div class="tree-root">
+<ngx-tree-viewport [treeModel]="treeModel" #viewport>
+  <div class="tree-root" [style.height.px]="treeModel?.virtualRoot.height">
     <ngx-tree-node-children
       [node]="treeModel?.virtualRoot"
       [templates]="{

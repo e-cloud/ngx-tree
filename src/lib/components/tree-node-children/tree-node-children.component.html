@@ -1,5 +1,5 @@
 <ngx-tree-node
-  *ngFor="let child of nodes; let i = index; trackBy: trackNode"
+  *ngFor="let child of viewportNodes; let i = index; trackBy: trackNode"
   [node]="child"
   [index]="i"
   [templates]="templates">

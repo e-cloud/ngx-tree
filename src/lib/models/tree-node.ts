@@ -7,7 +7,7 @@ export class TreeNode {
     children: TreeNode[]
     index: number
     position = 0
-    height: number
+    height = 0
 
     get isHidden() {
         return this.treeModel.isNodeHidden(this)
@@ -156,10 +156,6 @@ export class TreeNode {
         return this.options.levelPadding * (this.level - 1) + 'px'
     }
 
-    getIndexInParent(skipHidden = false) {
-        return this.getParentChildren(skipHidden).indexOf(this)
-    }
-
     // helper methods:
     loadChildren() {
         if (!this.options.getChildren) {
@@ -171,11 +167,6 @@ export class TreeNode {
                 if (children) {
                     this.setField('children', children)
                     this.initChildren()
-                    this.children.forEach((child) => {
-                        if (child.getField('isExpanded') && child.hasChildren) {
-                            child.expand()
-                        }
-                    })
                 }
             })
             .then(() => {

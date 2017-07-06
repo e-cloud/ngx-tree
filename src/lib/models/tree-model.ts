@@ -76,7 +76,7 @@ export class TreeModel {
     }
 
     subscribe(eventName: string, fn: Observer<TreeEvent>) {
-        this.events[eventName].subscribe(fn)
+        return this.events[eventName].subscribe(fn)
     }
 
     // getters
@@ -331,14 +331,19 @@ export class TreeModel {
         })
     }
 
-    private filterNode(ids: { [id: string]: boolean }, node: TreeNode, filterFn: (node) => boolean, autoShow: boolean) {
+    private filterNode(
+        ids: { [id: string]: boolean },
+        node: TreeNode,
+        filterFn: (node) => boolean,
+        autoExpand: boolean
+    ) {
         // if node passes function then it's visible
         let isVisible = filterFn(node)
 
         if (node.children) {
             // if one of node's children passes filter then this node is also visible
             node.children.forEach((child) => {
-                if (this.filterNode(ids, child, filterFn, autoShow)) {
+                if (this.filterNode(ids, child, filterFn, autoExpand)) {
                     isVisible = true
                 }
             })
@@ -350,7 +355,7 @@ export class TreeModel {
         }
 
         // auto expand parents to make sure the filtered nodes are visible
-        if (autoShow && isVisible) {
+        if (autoExpand && isVisible) {
             node.ensureVisible()
         }
 

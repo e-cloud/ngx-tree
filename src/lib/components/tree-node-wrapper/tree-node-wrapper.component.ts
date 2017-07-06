@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, HostBinding, Input } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, HostBinding, Input } from '@angular/core'
 import { TreeNode } from '../../models/tree-node'
+import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
 
 @Component({
     moduleId: module.id,
@@ -14,7 +15,7 @@ export class TreeNodeWrapperComponent implements AfterViewInit {
 
     @HostBinding('class.tree-node-wrapper') className = true
 
-    constructor() {
+    constructor(private virtualScroll: TreeVirtualScroll, private elementRef: ElementRef) {
     }
 
     @HostBinding('style.padding-left')
@@ -23,6 +24,7 @@ export class TreeNodeWrapperComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
+        this.virtualScroll.reportNodeHeight(this.elementRef.nativeElement.getBoundingClientRect().height)
     }
 
 }

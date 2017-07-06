@@ -193,6 +193,11 @@ export class TreeModel {
 
     setExpandedNode(node: TreeNode, isExpanded = true) {
         this.expandedNodeIds = Object.assign({}, this.expandedNodeIds, { [node.id]: isExpanded })
+        if (isExpanded) {
+            this.fireEvent({ eventName: TREE_EVENTS.expand, node })
+        } else {
+            this.fireEvent({ eventName: TREE_EVENTS.collapse, node })
+        }
         this.fireEvent({ eventName: TREE_EVENTS.toggleExpander, node, isExpanded })
     }
 

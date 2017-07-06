@@ -8,6 +8,7 @@ export class TreeNode {
     index: number
     position = 0
     height = 0
+    loadingChildren = false
 
     get isHidden() {
         return this.treeModel.isNodeHidden(this)
@@ -162,6 +163,8 @@ export class TreeNode {
             return Promise.resolve() // Not getChildren method - for using redux
         }
 
+        this.loadingChildren = true
+
         return Promise.resolve(this.options.getChildren(this))
             .then((children) => {
                 if (children) {
@@ -170,6 +173,7 @@ export class TreeNode {
                 }
             })
             .then(() => {
+                this.loadingChildren = false
                 this.fireEvent({
                     eventName: TREE_EVENTS.loadChildren,
                     node: this,

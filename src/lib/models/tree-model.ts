@@ -9,9 +9,9 @@ export class TreeModel {
     static focusedTree: TreeModel = null
 
     roots: TreeNode[]
-    expandedNodeIds: { [id: string]: boolean } = {}
-    activeNodeIds: { [id: string]: boolean } = {}
-    hiddenNodeIds: { [id: string]: boolean } = {}
+    expandedNodeIds: Map<string, boolean> = new Map()
+    activeNodeIds: Map<string, boolean> = new Map()
+    hiddenNodeIds: Map<string, boolean> = new Map()
     focusedNodeId: string = null
     virtualRoot: TreeNode
     nodeCache: Map<string, TreeNode> = new Map()
@@ -29,16 +29,16 @@ export class TreeModel {
     }
 
     get expandedNodes() {
-        const nodes = Object.keys(this.expandedNodeIds)
-            .filter((id) => this.expandedNodeIds[id])
+        const nodes = Array.from(this.expandedNodeIds.keys())
+            .filter((id) => this.expandedNodeIds.get(id))
             .map((id) => this.getNodeById(id))
 
         return compact(nodes)
     }
 
     get activeNodes() {
-        const nodes = Object.keys(this.activeNodeIds)
-            .filter((id) => this.activeNodeIds[id])
+        const nodes = Array.from(this.activeNodeIds.keys())
+            .filter((id) => this.activeNodeIds.get(id))
             .map((id) => this.nodeCache.get(id))
 
         return compact(nodes)
@@ -157,15 +157,15 @@ export class TreeModel {
     }
 
     isNodeExpanded(node: TreeNode) {
-        return this.expandedNodeIds[node.id]
+        return this.expandedNodeIds.get(node.id)
     }
 
     isNodeHidden(node: TreeNode) {
-        return this.hiddenNodeIds[node.id]
+        return this.hiddenNodeIds.get(node.id)
     }
 
     isNodeActive(node: TreeNode) {
-        return this.activeNodeIds[node.id]
+        return this.activeNodeIds.get(node.id)
     }
 
     isNodeFocused(node: TreeNode) {
@@ -188,11 +188,11 @@ export class TreeModel {
     }
 
     setExpandedNodeInPlace(node: TreeNode, isExpanded = true) {
-        this.expandedNodeIds[node.id] = isExpanded
+        this.expandedNodeIds.set(node.id, isExpanded)
     }
 
     setExpandedNode(node: TreeNode, isExpanded = true) {
-        this.expandedNodeIds = Object.assign({}, this.expandedNodeIds, { [node.id]: isExpanded })
+        this.expandedNodeIds.set(node.id, isExpanded)
         if (isExpanded) {
             this.fireEvent({ eventName: TREE_EVENTS.expand, node })
         } else {
@@ -202,7 +202,7 @@ export class TreeModel {
     }
 
     setHiddenNode(node: TreeNode, isHidden = true) {
-        this.hiddenNodeIds = Object.assign({}, this.hiddenNodeIds, { [node.id]: isHidden })
+        this.hiddenNodeIds.set(node.id, isHidden)
     }
 
     setFocusedNode(node: TreeNode) {
@@ -298,14 +298,14 @@ export class TreeModel {
             throw new TypeError(`Don't know what to do with filter: ${filter}. It should be either a string or function`)
         }
 
-        const ids = {}
+        const ids = new Map()
         this.roots.forEach((node) => this.filterNode(ids, node, filterFn, autoShow))
         this.hiddenNodeIds = ids
         this.fireEvent({ eventName: TREE_EVENTS.changeFilter })
     }
 
     clearFilter() {
-        this.hiddenNodeIds = {}
+        this.hiddenNodeIds = new Map()
         this.fireEvent({ eventName: TREE_EVENTS.changeFilter })
     }
 
@@ -337,10 +337,10 @@ export class TreeModel {
     }
 
     private filterNode(
-        ids: { [id: string]: boolean },
+        ids: Map<string, boolean>,
         node: TreeNode,
         filterFn: (node) => boolean,
-        autoExpand: boolean
+        autoExpand: boolean,
     ) {
         // if node passes function then it's visible
         let isVisible = filterFn(node)
@@ -356,7 +356,7 @@ export class TreeModel {
 
         // mark node as hidden
         if (!isVisible) {
-            ids[node.id] = true
+            ids.set(node.id, true)
         }
 
         // auto expand parents to make sure the filtered nodes are visible
@@ -376,14 +376,14 @@ export class TreeModel {
             })
 
         if (active) {
-            this.activeNodeIds = { [node.id]: true }
+            this.activeNodeIds = new Map([[node.id, true]])
         } else {
-            this.activeNodeIds = {}
+            this.activeNodeIds = new Map()
         }
     }
 
     private setMultiActiveNodes(node: TreeNode, active: boolean) {
-        this.activeNodeIds = Object.assign({}, this.activeNodeIds, { [node.id]: active })
+        this.activeNodeIds.set(node.id, active)
     }
 }
 

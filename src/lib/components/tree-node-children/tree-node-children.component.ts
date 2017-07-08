@@ -3,6 +3,7 @@ import { Component, HostBinding, Input, OnChanges, OnDestroy, OnInit } from '@an
 import { Subscription } from 'rxjs/Subscription'
 import { TreeNode } from '../../models/tree-node'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
+import { binarySearch } from '../../util'
 
 /** Time and timing curve for expansion panel animations. */
 export const EXPANSION_PANEL_ANIMATION_TIMING = '225ms cubic-bezier(0.4,0.0,0.2,1)'
@@ -25,7 +26,7 @@ export const EXPANSION_PANEL_ANIMATION_TIMING = '225ms cubic-bezier(0.4,0.0,0.2,
         ]),
     ],*/
 })
-export class TreeNodeChildrenComponent implements OnInit, OnDestroy, OnChanges {
+export class TreeNodeChildrenComponent implements OnInit, OnDestroy {
     @Input() node: TreeNode
     @Input() templates: any
 
@@ -51,19 +52,14 @@ export class TreeNodeChildrenComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnInit() {
+        this.viewportNodes = this.nodes
         this.scrollSub = this.virtualScroll.waitForCollection((metrics) => {
-            if (this.node.isExpanded || this.node.isRoot) {
+            if (this.node.isExpanded) {
                 this.viewportNodes = this.getViewportNodes(this.nodes, metrics)
                 this.marginTop = this.calcMarginTop()
                 // console.log(this.node.id, 'marginTop:', this.marginTop)
             }
         })
-    }
-
-    ngOnChanges(changes) {
-        if ('node' in changes && this.node) {
-            this.viewportNodes = this.nodes
-        }
     }
 
     ngOnDestroy() {
@@ -77,13 +73,14 @@ export class TreeNodeChildrenComponent implements OnInit, OnDestroy, OnChanges {
     calcMarginTop() {
         const firstNode = this.viewportNodes && this.viewportNodes.length && this.viewportNodes[0]
 
+        // condition on root node is because the virtual root's self height is 0
         return firstNode
             ? Math.max(0, firstNode.position - firstNode.parent.position -
                 (firstNode.parent.isRoot ? 0 : this.virtualScroll.averageNodeHeight))
             : 0
     }
 
-    getViewportNodes(nodes: TreeNode[], { startPos, endPos, avgHeight }) {
+    getViewportNodes(nodes: TreeNode[], { startPos, endPos }) {
         if (!nodes) {
             return []
         }
@@ -107,25 +104,4 @@ export class TreeNodeChildrenComponent implements OnInit, OnDestroy, OnChanges {
 
         return viewportNodes
     }
-}
-
-function binarySearch<T>(nodes: T[], condition: (item: T) => boolean, firstIndex = 0) {
-    let left = firstIndex
-    let right = nodes.length - 1
-
-    while (left !== right) {
-        const mid = Math.floor((left + right) / 2)
-
-        if (condition(nodes[mid])) {
-            right = mid
-        } else {
-            if (left === mid) {
-                left = right
-            } else {
-                left = mid
-            }
-        }
-    }
-
-    return left
 }

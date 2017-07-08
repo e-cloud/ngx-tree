@@ -1,6 +1,7 @@
 :host {
   display: block;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .toggle-children-wrapper-expanded .toggle-children {

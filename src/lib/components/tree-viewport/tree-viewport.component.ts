@@ -1,5 +1,4 @@
 import {
-    AfterViewChecked,
     AfterViewInit,
     Component,
     ElementRef,
@@ -22,7 +21,7 @@ import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
     styleUrls: ['./tree-viewport.component.scss'],
     providers: [TreeVirtualScroll],
 })
-export class TreeViewportComponent implements AfterViewInit, OnDestroy, OnChanges, AfterViewChecked {
+export class TreeViewportComponent implements AfterViewInit, OnDestroy, OnChanges {
     @Input() treeModel: TreeModel
 
     @HostBinding('class.tree-viewport') className = true
@@ -49,17 +48,6 @@ export class TreeViewportComponent implements AfterViewInit, OnDestroy, OnChange
         })
     }
 
-    ngAfterViewChecked() {
-        if (this.virtualScroll.needFixScroll) {
-            // console.log('before', this.lastScrollTop, 'current', this.elementRef.nativeElement.scrollTop)
-
-            // this.elementRef.nativeElement.scrollTop = this.lastScrollTop
-            this.virtualScroll.needFixScroll = false
-        }
-
-        // console.log('Checked', this.lastScrollTop, 'current', this.elementRef.nativeElement.scrollTop)
-    }
-
     ngOnDestroy() {
         if (this.structSub) {
             this.structSub.unsubscribe()
@@ -83,12 +71,14 @@ export class TreeViewportComponent implements AfterViewInit, OnDestroy, OnChange
     }
 
     @HostListener('scroll', ['$event'])
-    onScroll() {
+    onScroll(event) {
         const currentScrollTop = this.elementRef.nativeElement.scrollTop
         if (Math.abs(currentScrollTop - this.lastScrollTop) < this.virtualScroll.averageNodeHeight) {
-            return
+            return false
         }
+
         this.lastScrollTop = currentScrollTop
+
         if (!this.ticking) {
             window.requestAnimationFrame(() => {
 
@@ -96,10 +86,19 @@ export class TreeViewportComponent implements AfterViewInit, OnDestroy, OnChange
                 this.ticking = false
             })
         }
+
         this.ticking = true
+
+        event.preventDefault()
+        event.stopPropagation()
+
+        return false
     }
 
     setViewport() {
-        this.virtualScroll.adjustViewport(this.elementRef.nativeElement.getBoundingClientRect(), this.lastScrollTop)
+        this.virtualScroll.adjustViewport(
+            this.elementRef.nativeElement.getBoundingClientRect(),
+            this.lastScrollTop,
+        )
     }
 }

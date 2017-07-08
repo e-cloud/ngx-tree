@@ -56,6 +56,7 @@ export class TreeModel {
         }
 
         this.virtualRoot = new TreeNode(virtualRootConfig, null, this, 0)
+        this.setExpandedNodeInPlace(this.virtualRoot)
 
         this.roots = this.virtualRoot.children
     }

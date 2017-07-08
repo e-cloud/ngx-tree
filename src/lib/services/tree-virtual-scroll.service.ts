@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Subject } from 'rxjs/Subject'
+import { Subscription } from 'rxjs/Subscription'
 import { TreeModel } from '../models/tree-model'
 import { TreeNode } from '../models/tree-node'
 
@@ -34,18 +35,15 @@ export class TreeVirtualScroll {
         const startPos = scrollTop > Y_OFFSET ? scrollTop - Y_OFFSET : 0
         const endPos = viewport.height + scrollTop + Y_OFFSET
 
-        console.log('\n\nscrollTop: ', scrollTop, 'startPos: ', startPos, 'endPos: ', endPos)
+        // console.log('\n\nscrollTop: ', scrollTop, 'startPos: ', startPos, 'endPos: ', endPos)
 
         this.collectionMonitor$.next({
             startPos,
             endPos,
-            avgHeight: this.averageNodeHeight
         })
-
-        this.needFixScroll = true
     }
 
-    waitForCollection(observer) {
+    waitForCollection(observer): Subscription {
         return this.collectionMonitor$
             .filter(val => !!val)
             .subscribe(observer)

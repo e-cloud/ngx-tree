@@ -2,6 +2,7 @@ import { Component, HostBinding, Input, OnInit, TemplateRef } from '@angular/cor
 import { TreeNode } from '../../models/tree-node'
 
 @Component({
+    moduleId: module.id,
     selector: 'ngx-tree-loading',
     templateUrl: './tree-loading.component.html',
     styleUrls: ['./tree-loading.component.scss'],

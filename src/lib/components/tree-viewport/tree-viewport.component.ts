@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, HostBinding, HostListener, OnDestroy, OnInit } from '@angular/core'
 
 @Component({
+    moduleId: module.id,
     selector: 'ngx-tree-viewport',
     templateUrl: './tree-viewport.component.html',
     styleUrls: ['./tree-viewport.component.scss'],

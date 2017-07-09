@@ -2,6 +2,7 @@ import { AfterViewInit, Component, HostBinding, Input } from '@angular/core'
 import { TreeNode } from '../../models/tree-node'
 
 @Component({
+    moduleId: module.id,
     selector: 'ngx-tree-node-wrapper',
     templateUrl: './tree-node-wrapper.component.html',
     styleUrls: ['./tree-node-wrapper.component.scss'],

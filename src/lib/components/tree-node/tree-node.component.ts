@@ -5,6 +5,7 @@ import { TreeNode } from '../../models/tree-node'
 export const EXPANSION_PANEL_ANIMATION_TIMING = '500ms cubic-bezier(0.4,0.0,0.2,1)'
 
 @Component({
+    moduleId: module.id,
     selector: 'ngx-tree-node',
     templateUrl: './tree-node.component.html',
     styleUrls: ['./tree-node.component.scss'],

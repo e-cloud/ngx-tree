@@ -2,7 +2,6 @@ import { Component, HostBinding, Input, TemplateRef } from '@angular/core'
 import { TreeNode } from '../../models/tree-node'
 
 @Component({
-    moduleId: module.id,
     selector: 'ngx-tree-loading',
     templateUrl: './tree-loading.component.html',
     styleUrls: ['./tree-loading.component.scss'],

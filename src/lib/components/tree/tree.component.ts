@@ -18,7 +18,6 @@ import { TreeOptions } from '../../models/tree-options.model'
 import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
 
 @Component({
-    moduleId: module.id,
     selector: 'ngx-tree',
     templateUrl: './tree.component.html',
     styleUrls: ['./tree.component.scss'],

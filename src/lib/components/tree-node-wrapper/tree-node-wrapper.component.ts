@@ -3,7 +3,6 @@ import { TreeNode } from '../../models/tree-node'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
 
 @Component({
-    moduleId: module.id,
     selector: 'ngx-tree-node-wrapper',
     templateUrl: './tree-node-wrapper.component.html',
     styleUrls: ['./tree-node-wrapper.component.scss'],

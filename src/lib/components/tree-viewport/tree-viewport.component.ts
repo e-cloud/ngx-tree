@@ -16,7 +16,6 @@ import { TreeModel } from '../../models/tree-model'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
 
 @Component({
-    moduleId: module.id,
     selector: 'ngx-tree-viewport',
     templateUrl: './tree-viewport.component.html',
     styleUrls: ['./tree-viewport.component.scss'],

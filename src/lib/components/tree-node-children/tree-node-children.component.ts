@@ -8,7 +8,6 @@ import { binarySearch } from '../../util'
 export const EXPANSION_PANEL_ANIMATION_TIMING = '225ms cubic-bezier(0.4,0.0,0.2,1)'
 
 @Component({
-    moduleId: module.id,
     selector: 'ngx-tree-node-children',
     templateUrl: './tree-node-children.component.html',
     styleUrls: ['./tree-node-children.component.scss'],

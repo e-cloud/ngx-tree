@@ -32,6 +32,7 @@ Desktop.ini
 
 # Build files
 dist
+/demo
 
 yarn.lock
 yarn-error.log

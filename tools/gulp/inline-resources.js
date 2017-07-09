@@ -9,7 +9,7 @@ const sass = require('node-sass');
 const tildeImporter = require('node-sass-tilde-importer');
 
 // from https://github.com/angular/angular/blob/061475402c26759a2d7c0840b99507320c3dffc4/aio/tools/examples/shared/boilerplate/src/systemjs-angular-loader.js#L1
-const templateUrlRegex = /templateUrl\s*:(\s*['"`](.*?)['"`]\s*)/gm;
+const templateUrlRegex = /templateUrl\s*:(?:\s*['"`](.*?)['"`]\s*)/gm;
 
 /**
  * Simple Promiseify function that takes a Node API and return a version that supports promises.

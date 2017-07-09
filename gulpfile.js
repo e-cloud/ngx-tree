@@ -215,7 +215,9 @@ gulp.task('watch', function () {
 
 gulp.task('clean', ['clean:dist', 'clean:tmp', 'clean:build']);
 
-gulp.task('build', ['clean', 'compile']);
+gulp.task('build', function (cb) {
+  runSequence('clean', 'compile', cb)
+});
 gulp.task('build:watch', ['build', 'watch']);
 gulp.task('default', ['build:watch']);
 

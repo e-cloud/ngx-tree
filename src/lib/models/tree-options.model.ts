@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import { defaultsDeep } from 'lodash'
 import { NUMBER_KEYS } from '../constants/keys'
 import { ITreeOptions } from './index'
 import { TreeModel } from './tree-model'
@@ -65,7 +65,7 @@ export class TreeOptions {
     actionMapping: IActionMapping
 
     constructor(private options: ITreeOptions = {}) {
-        this.actionMapping = _.defaultsDeep({}, this.options.actionMapping, defaultActionMapping)
+        this.actionMapping = defaultsDeep({}, this.options.actionMapping, defaultActionMapping)
     }
 
     get childrenField(): string {

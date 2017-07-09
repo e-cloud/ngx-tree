@@ -2,6 +2,7 @@ import { first, last, pullAt } from 'lodash'
 import { TREE_EVENTS } from '../constants/events'
 import { TreeEvent } from './index'
 import { TreeModel } from './tree-model'
+import { TreeOptions } from './tree-options.model'
 
 export class TreeNode {
     children: TreeNode[]
@@ -52,7 +53,7 @@ export class TreeNode {
     }
 
     // proxy functions:
-    get options() {
+    get options(): TreeOptions {
         return this.treeModel.options
     }
 

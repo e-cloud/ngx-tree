@@ -18,6 +18,9 @@
     "paths": {
       "ngx-tree": [
         "./src/lib"
+      ],
+      "ngx-tree/*": [
+        "./src/lib/*"
       ]
     }
   }

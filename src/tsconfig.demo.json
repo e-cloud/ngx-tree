@@ -8,6 +8,9 @@
     "paths": {
       "ngx-tree": [
         "./lib"
+      ],
+      "ngx-tree/*": [
+        "./lib/*"
       ]
     }
   },

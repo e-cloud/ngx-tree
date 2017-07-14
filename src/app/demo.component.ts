@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { TreeOptions } from '../lib/models/tree-options.model'
+import { TreeOptions } from 'ngx-tree/models/tree-options.model'
 
 @Component({
     selector: 'demo-root',

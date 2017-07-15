@@ -1,4 +1,5 @@
 import {
+    AfterViewChecked,
     AfterViewInit,
     Component,
     ElementRef,
@@ -21,7 +22,7 @@ import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
     styleUrls: ['./tree-viewport.component.scss'],
     providers: [TreeVirtualScroll],
 })
-export class TreeViewportComponent implements AfterViewInit, OnDestroy, OnChanges {
+export class TreeViewportComponent implements AfterViewInit, OnDestroy, OnChanges, AfterViewChecked {
     @Input() treeModel: TreeModel
 
     @HostBinding('class.tree-viewport') className = true
@@ -46,6 +47,14 @@ export class TreeViewportComponent implements AfterViewInit, OnDestroy, OnChange
             this.setViewport()
             this.treeModel.fireEvent({ eventName: TREE_EVENTS.initialized })
         })
+    }
+
+    ngAfterViewChecked() {
+        const currentScrollTop = this.elementRef.nativeElement.scrollTop
+        console.log('viewChecked, lastScrollTop:', this.lastScrollTop, 'currentScrollTop:', currentScrollTop)
+        if (Math.abs(currentScrollTop - this.lastScrollTop) > this.virtualScroll.averageNodeHeight * 3) {
+            console.log('######### exceptional scrollTop change #########')
+        }
     }
 
     ngOnDestroy() {
@@ -73,11 +82,13 @@ export class TreeViewportComponent implements AfterViewInit, OnDestroy, OnChange
     @HostListener('scroll', ['$event'])
     onScroll(event) {
         const currentScrollTop = this.elementRef.nativeElement.scrollTop
+        console.log('scroll event, lastScrollTop:', this.lastScrollTop, 'currentScrollTop:', currentScrollTop)
         if (Math.abs(currentScrollTop - this.lastScrollTop) < this.virtualScroll.averageNodeHeight) {
             return false
         }
 
         this.lastScrollTop = currentScrollTop
+        console.log('update lastScrollTop to:', this.lastScrollTop)
 
         if (!this.ticking) {
             window.requestAnimationFrame(() => {

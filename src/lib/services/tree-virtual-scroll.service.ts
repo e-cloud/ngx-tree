@@ -27,6 +27,7 @@ export class TreeVirtualScroll {
     }
 
     adjustViewport(viewport: ClientRect, scrollTop: number) {
+        console.log('view start update, based on scrollTop:', scrollTop)
         this.lastScrollTop = scrollTop
         this.currentViewport = viewport
 

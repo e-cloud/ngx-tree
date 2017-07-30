@@ -29,6 +29,7 @@ export const EXPANSION_PANEL_ANIMATION_TIMING = '225ms cubic-bezier(0.4,0.0,0.2,
 export class TreeNodeChildrenComponent implements OnInit, OnDestroy {
     @Input() node: TreeNode
     @Input() templates: any
+    @Input() disableMarginTop = false
 
     @HostBinding('class.class.tree-children-no-padding')
     get noPadding() {
@@ -39,11 +40,15 @@ export class TreeNodeChildrenComponent implements OnInit, OnDestroy {
     expandAnimation = true*/
 
     @HostBinding('style.margin-top.px')
-    marginTop = 0
+    get marginTopAttr() {
+        return this.disableMarginTop ? 0 : this.marginTop
+    }
 
     get nodes() {
         return this.node.children
     }
+
+    marginTop = 0
 
     viewportNodes: TreeNode[] = []
     scrollSub: Subscription

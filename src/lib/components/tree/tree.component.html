@@ -1,6 +1,9 @@
 <ngx-tree-viewport [treeModel]="treeModel" #viewport>
-  <div class="tree-root" [style.height.px]="treeModel?.virtualRoot.height">
+  <div class="height-raiser" [style.height.px]="treeModel?.virtualRoot.height"></div>
+  <div class="tree-root" [style.transform]="'translateY(' + root.marginTop + 'px)'">
     <ngx-tree-node-children
+      #root
+      [disableMarginTop]="true"
       [node]="treeModel?.virtualRoot"
       [templates]="{
         loadingTemplate: loadingTemplate,

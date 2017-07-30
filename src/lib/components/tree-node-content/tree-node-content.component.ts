@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit, TemplateRef } from '@angular/core'
+import { Component, HostBinding, Input, TemplateRef } from '@angular/core'
 import { TreeNode } from '../../models/tree-node'
 
 @Component({
@@ -7,11 +7,10 @@ import { TreeNode } from '../../models/tree-node'
     templateUrl: './tree-node-content.component.html',
     styleUrls: ['./tree-node-content.component.scss'],
 })
-export class TreeNodeContentComponent implements OnInit {
+export class TreeNodeContentComponent {
     @Input() node: TreeNode
     @Input() index: number
     @Input() template: TemplateRef<any>
-
     @HostBinding('class.tree-node-content') className = true
 
     constructor() {
@@ -26,8 +25,4 @@ export class TreeNodeContentComponent implements OnInit {
     get focusClass() {
         return this.node.isFocused
     }
-
-    ngOnInit() {
-    }
-
 }

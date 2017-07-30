@@ -28,5 +28,4 @@ export class TreeNodeWrapperComponent implements AfterViewInit {
             this.virtualScroll.reportNodeHeight(this.elementRef.nativeElement.getBoundingClientRect().height)
         }
     }
-
 }

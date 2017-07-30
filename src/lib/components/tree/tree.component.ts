@@ -24,6 +24,9 @@ import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
     styleUrls: ['./tree.component.scss'],
 })
 export class TreeComponent implements OnChanges {
+    emitterMap: EventsMap
+    treeModel: TreeModel = null
+
     @Input() nodes: TreeNode[]
     @Input() options: TreeOptions
     @Input() focused
@@ -50,9 +53,6 @@ export class TreeComponent implements OnChanges {
     @ContentChild('treeNodeFullTemplate') treeNodeFullTemplate: TemplateRef<any>
 
     @ViewChild('viewport') viewportComponent: TreeViewportComponent
-
-    emitterMap: EventsMap
-    treeModel: TreeModel = null
 
     constructor() {
         this.emitterMap = Object.keys(TREE_EVENTS).reduce((map, name) => {

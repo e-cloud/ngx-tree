@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations'
-import { Component, HostBinding, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input } from '@angular/core'
 import { TreeNode } from '../../models/tree-node'
 
 export const EXPANSION_PANEL_ANIMATION_TIMING = '500ms cubic-bezier(0.4,0.0,0.2,1)'
@@ -22,7 +22,7 @@ export const EXPANSION_PANEL_ANIMATION_TIMING = '500ms cubic-bezier(0.4,0.0,0.2,
         ]),
     ],
 })
-export class TreeNodeComponent implements OnInit {
+export class TreeNodeComponent {
     @Input() node: TreeNode
     @Input() index: number
     @Input() templates: any
@@ -60,8 +60,5 @@ export class TreeNodeComponent implements OnInit {
     }
 
     constructor() {
-    }
-
-    ngOnInit() {
     }
 }

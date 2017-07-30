@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit, TemplateRef } from '@angular/core'
+import { Component, HostBinding, Input, TemplateRef } from '@angular/core'
 import { TreeNode } from '../../models/tree-node'
 
 @Component({
@@ -7,7 +7,7 @@ import { TreeNode } from '../../models/tree-node'
     templateUrl: './tree-loading.component.html',
     styleUrls: ['./tree-loading.component.scss'],
 })
-export class TreeLoadingComponent implements OnInit {
+export class TreeLoadingComponent {
     @Input() template: TemplateRef<any>
     @Input() node: TreeNode
 
@@ -15,8 +15,4 @@ export class TreeLoadingComponent implements OnInit {
 
     constructor() {
     }
-
-    ngOnInit() {
-    }
-
 }

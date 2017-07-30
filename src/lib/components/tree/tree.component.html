@@ -1,5 +1,6 @@
 <ngx-tree-viewport [treeModel]="treeModel" #viewport>
-  <div *ngIf="!viewport.virtualScroll.isDisabled()" class="height-raiser" [style.height.px]="treeModel?.virtualRoot.height"></div>
+  <div *ngIf="!viewport.virtualScroll.isDisabled()" class="height-raiser"
+       [style.height.px]="treeModel?.virtualRoot.height"></div>
   <div class="tree-root"
        [class.virtual-scroll-disabled]="viewport.virtualScroll.isDisabled()"
        [style.transform]="'translateY(' + root.marginTop + 'px)'">

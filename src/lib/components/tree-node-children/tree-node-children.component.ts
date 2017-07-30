@@ -1,5 +1,4 @@
-import { animate, style, transition, trigger } from '@angular/animations'
-import { Component, HostBinding, Input, OnChanges, OnDestroy, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subscription } from 'rxjs/Subscription'
 import { TreeNode } from '../../models/tree-node'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
@@ -27,17 +26,25 @@ export const EXPANSION_PANEL_ANIMATION_TIMING = '225ms cubic-bezier(0.4,0.0,0.2,
     ],*/
 })
 export class TreeNodeChildrenComponent implements OnInit, OnDestroy {
+    marginTop = 0
+
     @Input() node: TreeNode
     @Input() templates: any
     @Input() disableMarginTop = false
+
+    /*@HostBinding('@expandAnimation')
+    expandAnimation = true*/
+
+    private scrollSub: Subscription
+    private _viewportNodes: TreeNode[] = []
+
+    constructor(private virtualScroll: TreeVirtualScroll) {
+    }
 
     @HostBinding('class.class.tree-children-no-padding')
     get noPadding() {
         return this.node.options.levelPadding
     }
-
-    /*@HostBinding('@expandAnimation')
-    expandAnimation = true*/
 
     @HostBinding('style.margin-top.px')
     get marginTopAttr() {
@@ -48,21 +55,16 @@ export class TreeNodeChildrenComponent implements OnInit, OnDestroy {
         return this.node.children
     }
 
-    marginTop = 0
-
-    viewportNodes: TreeNode[] = []
-    scrollSub: Subscription
-
-    constructor(private virtualScroll: TreeVirtualScroll) {
+    get viewportNodes() {
+        return this.virtualScroll.isDisabled() ? this.nodes : this._viewportNodes
     }
 
     ngOnInit() {
-        this.viewportNodes = this.nodes
+        this._viewportNodes = this.nodes
         this.scrollSub = this.virtualScroll.waitForCollection((metrics) => {
             if (this.node.isExpanded) {
-                this.viewportNodes = this.getViewportNodes(this.nodes, metrics)
+                this._viewportNodes = this.getViewportNodes(this.nodes, metrics)
                 this.marginTop = this.calcMarginTop()
-                // console.log(this.node.id, 'marginTop:', this.marginTop)
             }
         })
     }

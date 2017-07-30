@@ -11,19 +11,18 @@ let id = 0
 @Injectable()
 export class TreeVirtualScroll {
     id: number
-    currentViewport
     averageNodeHeight = 0
-    lastScrollTop = 0
-    needFixScroll = false
+
+    private currentViewport
+    private lastScrollTop = 0
+    private disabled = false
 
     private collectionMonitor$ = new BehaviorSubject(null)
-    private childrenInitCollector$ = new Subject()
     private nodeHeightAnalytics$ = new Subject()
 
     constructor() {
         this.id = id++
         this.collectAverageNodeHeight()
-        // this.setupInitCollecting()
     }
 
     adjustViewport(viewport: ClientRect, scrollTop: number) {
@@ -34,8 +33,6 @@ export class TreeVirtualScroll {
 
         const startPos = scrollTop > Y_OFFSET ? scrollTop - Y_OFFSET : 0
         const endPos = viewport.height + scrollTop + Y_OFFSET
-
-        // console.log('\n\nscrollTop: ', scrollTop, 'startPos: ', startPos, 'endPos: ', endPos)
 
         this.collectionMonitor$.next({
             startPos,
@@ -49,16 +46,20 @@ export class TreeVirtualScroll {
             .subscribe(observer)
     }
 
-    reportInit(data) {
-        this.childrenInitCollector$.next(data)
-    }
-
     reportNodeHeight(data) {
         this.nodeHeightAnalytics$.next(data)
     }
 
     reCalcPositions(treeModel: TreeModel) {
         treeModel.virtualRoot.height = this.getPositionAfter(treeModel.getVisibleRoots(), 0)
+    }
+
+    setDisabled(isDisabled) {
+        this.disabled = isDisabled
+    }
+
+    isDisabled() {
+        return this.disabled
     }
 
     private getPositionAfter(nodes: TreeNode[], startPos: number) {
@@ -85,13 +86,6 @@ export class TreeVirtualScroll {
         node.height = position - startPos + (node.loadingChildren ? this.averageNodeHeight : 0)
 
         return position
-    }
-
-    private setupInitCollecting() {
-        this.childrenInitCollector$
-            .subscribe(() => {
-                this.needFixScroll = true
-            })
     }
 
     private collectAverageNodeHeight() {

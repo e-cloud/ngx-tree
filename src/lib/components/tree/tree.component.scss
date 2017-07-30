@@ -17,3 +17,7 @@ ngx-tree-viewport {
   position: absolute;
   user-select: none;
 }
+
+.tree-root.virtual-scroll-disabled {
+  position: static;
+}

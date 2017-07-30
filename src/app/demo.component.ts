@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { TreeNode } from 'ngx-tree/models/tree-node'
 import { TreeOptions } from 'ngx-tree/models/tree-options.model'
 
 @Component({
@@ -153,12 +154,12 @@ export class DemoComponent {
             },
         ]
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 20; i++) {
             this.nodes.push({
                 expanded: i === 0,
                 name: `root Dynamic${i}`,
                 subTitle: `root created dynamically ${i}`,
-                children: new Array((i + 1) * 100).fill(null).map((item, n) => ({
+                children: new Array((i + 1) * 500).fill(null).map((item, n) => ({
                     name: `child Dynamic${i}.${n}`,
                     subTitle: `child created dynamically ${i}`,
                     hasChildren: false,
@@ -175,6 +176,10 @@ export class DemoComponent {
                 })
             })), 1000)
         })
+    }
+
+    childrenCount(node: TreeNode): string {
+        return node && node.children ? `(${node.children.length})` : ''
     }
 
     log($event) {

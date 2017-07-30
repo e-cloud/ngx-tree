@@ -12,6 +12,11 @@
   (focus)="log($event)"
   (blur)="log($event)"
   (initialized)="log($event)"
-  (loadChildren)="log($event)"
-></ngx-tree>
+  (loadChildren)="log($event)">
+  <ng-template #treeNodeTemplate let-node>
+    <span title="{{node.data.subTitle}}">{{ node.data.name }}</span>
+    <span class="pull-right">{{ childrenCount(node) }}</span>
+  </ng-template>
+  <ng-template #loadingTemplate>Loading, please hold....</ng-template>
+</ngx-tree>
 

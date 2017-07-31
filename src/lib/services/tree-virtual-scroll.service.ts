@@ -1,170 +1,108 @@
 import { Injectable } from '@angular/core'
-import { TREE_EVENTS } from '../constants/events'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { Subject } from 'rxjs/Subject'
+import { Subscription } from 'rxjs/Subscription'
 import { TreeModel } from '../models/tree-model'
 import { TreeNode } from '../models/tree-node'
 
-const Y_OFFSET = 300 // Extra pixels outside the viewport, in each direction, to render nodes in
-const Y_EPSILON = 50 // Minimum pixel change required to recalculate the rendered nodes
+const Y_OFFSET_NODE_SIZE = 3
+let id = 0
 
 @Injectable()
 export class TreeVirtualScroll {
+    id: number
+    averageNodeHeight = 0
 
-    yBlocks = 0
-    x = 0
-    viewportHeight = null
-    viewport = null
+    private currentViewport
+    private lastScrollTop = 0
+    private disabled = false
 
-    constructor(private treeModel: TreeModel) {
-        // treeModel.virtualScroll = this
+    private collectionMonitor$ = new BehaviorSubject(null)
+    private nodeHeightAnalytics$ = new Subject()
+
+    constructor() {
+        this.id = id++
+        this.collectAverageNodeHeight()
     }
 
-    get y() {
-        return this.yBlocks * Y_EPSILON
-    }
+    adjustViewport(viewport: ClientRect, scrollTop: number) {
+        this.lastScrollTop = scrollTop
+        this.currentViewport = viewport
 
-    get totalHeight() {
-        return this.treeModel.virtualRoot ? this.treeModel.virtualRoot.height : 0
-    }
+        const Y_OFFSET = this.averageNodeHeight * Y_OFFSET_NODE_SIZE
 
-    fireEvent(event) {
-        this.treeModel.fireEvent(event)
-    }
+        const startPos = scrollTop > Y_OFFSET ? scrollTop - Y_OFFSET : 0
+        const endPos = viewport.height + scrollTop + Y_OFFSET
 
-    clear() {
-    }
-
-    init() {
-        const fn = this.recalcPositions.bind(this)
-
-        fn()
-
-        this.treeModel.subscribe(TREE_EVENTS.loadChildren, fn)
-    }
-
-    isEnabled() {
-        return this.treeModel.options.useVirtualScroll
-    }
-
-
-    recalcPositions() {
-        this.treeModel.virtualRoot.height = this._getPositionAfter(this.treeModel.getVisibleRoots(), 0)
-    }
-
-
-    setViewport(viewport) {
-        Object.assign(this, {
-            viewport,
-            x: viewport.scrollLeft,
-            yBlocks: Math.round(viewport.scrollTop / Y_EPSILON),
-            viewportHeight: viewport.getBoundingClientRect().height,
+        this.collectionMonitor$.next({
+            startPos,
+            endPos,
         })
     }
 
-
-    scrollIntoView(node, force, scrollToMiddle = true) {
-        if (force || // force scroll to node
-            node.position < this.y || // node is above viewport
-            node.position + node.getSelfHeight() > this.y + this.viewportHeight) { // node is below viewport
-            this.viewport.scrollTop = scrollToMiddle ?
-                node.position - this.viewportHeight / 2 : // scroll to middle
-                node.position // scroll to start
-
-            this._setYBlocks(Math.floor(this.viewport.scrollTop / Y_EPSILON))
-        }
+    waitForCollection(observer): Subscription {
+        return this.collectionMonitor$
+            .filter(val => !!val)
+            .subscribe(observer)
     }
 
-    getViewportNodes(nodes) {
-        if (!nodes) {
-            return []
-        }
-
-        const visibleNodes = nodes.filter((node) => !node.isNodeHidden)
-
-        if (!this.isEnabled()) {
-            return visibleNodes
-        }
-
-        if (!this.viewportHeight || !visibleNodes.length) {
-            return []
-        }
-
-        // Search for first node in the viewport using binary search
-        // Look for first node that starts after the beginning of the viewport (with buffer)
-        // Or that ends after the beginning of the viewport
-        const firstIndex = binarySearch(visibleNodes, (node) => {
-            return (node.position + Y_OFFSET > this.y) ||
-                (node.position + node.height > this.y)
-        })
-
-        // Search for last node in the viewport using binary search
-        // Look for first node that starts after the end of the viewport (with buffer)
-        const lastIndex = binarySearch(visibleNodes, (node) => {
-            return node.position - Y_OFFSET > this.y + this.viewportHeight
-        }, firstIndex)
-
-        const viewportNodes = []
-        for (let i = firstIndex; i <= lastIndex; i++) {
-            viewportNodes.push(visibleNodes[i])
-        }
-
-        return viewportNodes
+    reportNodeHeight(data) {
+        this.nodeHeightAnalytics$.next(data)
     }
 
-    fixScroll() {
-        const maxY = Math.max(0, this.totalHeight - this.viewportHeight)
-
-        if (this.y < 0) {
-            this._setYBlocks(0)
-        }
-        if (this.y > maxY) {
-            this._setYBlocks(maxY / Y_EPSILON)
-        }
+    reCalcPositions(treeModel: TreeModel) {
+        treeModel.virtualRoot.height = this.getPositionAfter(treeModel.getVisibleRoots(), 0)
     }
 
-    private _setYBlocks(value) {
-        this.yBlocks = value
+    setDisabled(isDisabled) {
+        this.disabled = isDisabled
     }
 
-    private _getPositionAfter(nodes: TreeNode[], startPos) {
+    isDisabled() {
+        return this.disabled
+    }
+
+    private getPositionAfter(nodes: TreeNode[], startPos: number) {
         let position = startPos
 
         nodes.forEach((node) => {
             node.position = position
-            position = this._getPositionAfterNode(node, position)
+            // as node is hidden, it should play as a shadow node for it next sibling node for
+            // the proper position splitting
+            position = this.getPositionAfterNode(node, node.position, node.isHidden)
         })
 
         return position
     }
 
-    private _getPositionAfterNode(node, startPos) {
-        let position = node.getSelfHeight() + startPos
+    private getPositionAfterNode(node: TreeNode, startPos: number, isPrevShadow = false) {
+        let position = isPrevShadow ? startPos : this.averageNodeHeight + startPos
 
-        if (node.children && node.isNodeExpanded) { // TBD: consider loading component as well
-            position = this._getPositionAfter(node.visibleChildren, position)
+        if (node.children && node.isExpanded) { // TBD: consider loading component as well
+            position = this.getPositionAfter(node.visibleChildren, position)
         }
-        node.height = position - startPos
+
+        // todo: here we assume the loading component's height is the same as averageNodeHeight
+        node.height = position - startPos + (node.loadingChildren ? this.averageNodeHeight : 0)
 
         return position
     }
-}
 
-function binarySearch(nodes, condition, firstIndex = 0) {
-    let index = firstIndex
-    let toIndex = nodes.length - 1
+    private collectAverageNodeHeight() {
+        this.nodeHeightAnalytics$
+            .scan((acc, cur) => {
+                const lastAvg = acc[0] / acc[1]
+                const sum = cur + acc[0]
+                const count = acc[1] + 1
+                const avg = sum / count
+                if (avg / lastAvg > 1.5 || lastAvg / avg > 1.5) {
+                    return [cur, 1]
+                }
 
-    while (index !== toIndex) {
-        const midIndex = Math.floor((index + toIndex) / 2)
-
-        if (condition(nodes[midIndex])) {
-            toIndex = midIndex
-        } else {
-            if (index === midIndex) {
-                index = toIndex
-            } else {
-                index = midIndex
-            }
-        }
+                return [sum, count]
+            }, [0, 0])
+            .subscribe(pair => {
+                this.averageNodeHeight = pair[0] / pair[1]
+            })
     }
-
-    return index
 }

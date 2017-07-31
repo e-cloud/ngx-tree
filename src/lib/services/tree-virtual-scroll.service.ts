@@ -61,6 +61,19 @@ export class TreeVirtualScroll {
         return this.disabled
     }
 
+    scrollIntoView(node: TreeNode, force: boolean, scrollToMiddle = true) {
+        if (force || // force scroll to node
+            node.position < this.lastScrollTop || // node is above viewport
+            node.position + this.averageNodeHeight > this.lastScrollTop + this.currentViewport.height) { // node is below viewport
+
+            return scrollToMiddle ?
+                node.position - this.currentViewport.height / 2 + this.averageNodeHeight : // scroll to middle
+                node.position // scroll to start
+        }
+
+        return null
+    }
+
     private getPositionAfter(nodes: TreeNode[], startPos: number) {
         let position = startPos
 

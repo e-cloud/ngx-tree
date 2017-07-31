@@ -26,6 +26,7 @@ export class DemoComponent {
         // displayField: 'subTitle',
         isExpandedField: 'expanded',
         idField: 'uuid',
+        useVirtualScroll: false,
         getChildren: this.getChildren.bind(this),
         allowDrag: (node) => {
             // console.log('allowDrag?');

@@ -7,19 +7,27 @@ import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
     templateUrl: './tree-node-wrapper.component.html',
     styleUrls: ['./tree-node-wrapper.component.scss'],
 })
-export class TreeNodeWrapperComponent implements AfterViewInit {
+export class TreeNodeWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() node: TreeNode
     @Input() index: number
     @Input() templates: any
 
     @HostBinding('class.tree-node-wrapper') className = true
 
-    constructor(private virtualScroll: TreeVirtualScroll, private elementRef: ElementRef) {
-    }
-
     @HostBinding('style.padding-left')
     get leftPadding() {
         return this.node.getNodePadding()
+    }
+
+    constructor(private virtualScroll: TreeVirtualScroll, private elementRef: ElementRef) {
+    }
+
+    ngOnInit() {
+        this.node.elementRef = this.elementRef
+    }
+
+    ngOnDestroy() {
+        this.node.elementRef = null
     }
 
     ngAfterViewInit() {

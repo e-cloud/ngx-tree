@@ -111,7 +111,7 @@ export class DemoComponent {
                                     {
                                         name: 'child2.1',
                                         subTitle: 'new and improved',
-                                        uuid: '11',
+                                        uuid: '111',
                                         hasChildren: false,
                                     },
                                     {
@@ -120,7 +120,7 @@ export class DemoComponent {
                                         subTitle: 'new and improved2',
                                         children: [
                                             {
-                                                uuid: 1001,
+                                                uuid: 10011,
                                                 name: 'subsub',
                                                 subTitle: 'subsub',
                                                 hasChildren: false,
@@ -137,7 +137,7 @@ export class DemoComponent {
                                     {
                                         name: 'child2.1',
                                         subTitle: 'new and improved',
-                                        uuid: '11',
+                                        uuid: '112',
                                         hasChildren: false,
                                     },
                                     {
@@ -146,7 +146,7 @@ export class DemoComponent {
                                         subTitle: 'new and improved2',
                                         children: [
                                             {
-                                                uuid: 1001,
+                                                uuid: 10012,
                                                 name: 'subsub',
                                                 subTitle: 'subsub',
                                                 hasChildren: false,

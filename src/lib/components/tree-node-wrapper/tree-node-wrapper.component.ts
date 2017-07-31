@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, Input } from '@angular/core'
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input } from '@angular/core'
 import { TreeNode } from '../../models/tree-node'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
 

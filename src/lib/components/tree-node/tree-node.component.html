@@ -1,3 +1,7 @@
+<ngx-tree-node-drop-slot *ngIf="index === 0"
+                         [dropIndex]="node.index"
+                         [node]="node.parent"></ngx-tree-node-drop-slot>
+
 <ngx-tree-node-wrapper
   [node]="node"
   [index]="index"
@@ -7,3 +11,6 @@
   *ngIf="node.isExpanded"
   [node]="node"
   [templates]="templates"></ngx-tree-node-children>
+
+<ngx-tree-node-drop-slot [dropIndex]="node.index + 1"
+                         [node]="node.parent"></ngx-tree-node-drop-slot>

@@ -1,15 +1,15 @@
 import { inject, TestBed } from '@angular/core/testing'
 
-import { TreeDraggingTarget } from './tree-dragging-target.service'
+import { TreeDraggingTargetService } from './tree-dragging-target.service'
 
 describe('TreeDraggingTargetService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [TreeDraggingTarget],
+            providers: [TreeDraggingTargetService],
         })
     })
 
-    it('should be created', inject([TreeDraggingTarget], (service: TreeDraggingTarget) => {
+    it('should be created', inject([TreeDraggingTargetService], (service: TreeDraggingTargetService) => {
         expect(service).toBeTruthy()
     }))
 })

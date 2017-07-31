@@ -310,7 +310,7 @@ export class TreeModel {
         this.fireEvent({ eventName: TREE_EVENTS.changeFilter })
     }
 
-    moveNode(node: TreeNode, to: { parent: TreeNode, index: number }) {
+    moveNode(node: TreeNode, to: { parent: TreeNode, index: number, dropOnNode: boolean }) {
         const fromIndex = node.index
         const fromParent = node.parent
 
@@ -318,17 +318,16 @@ export class TreeModel {
             return
         }
 
-        // If node doesn't have children - create children array
-        if (!to.parent.getField('children')) {
-            to.parent.setField('children', [])
-        }
-
         node.remove()
 
         // Compensate for index if already removed from parent:
         const toIndex = (fromParent === to.parent && to.index > fromIndex) ? to.index - 1 : to.index
 
-        to.parent.addChild(node.data, toIndex)
+        if (to.dropOnNode) {
+            to.parent.appendChild(node.data)
+        } else {
+            to.parent.addChild(node.data, toIndex)
+        }
 
         this.fireEvent({
             eventName: TREE_EVENTS.moveNode,

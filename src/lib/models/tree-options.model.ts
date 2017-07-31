@@ -25,7 +25,7 @@ export const TREE_ACTIONS = {
         tree: TreeModel,
         node: TreeNode,
         $event: any,
-        { from, to }: { from: TreeNode; to: { parent: TreeNode; index: number } },
+        { from, to }: { from: TreeNode; to: { parent: TreeNode; index: number, dropOnNode: boolean } },
     ) => {
         // default action assumes from = node, to = {parent, index}
         tree.moveNode(from, to)
@@ -38,6 +38,7 @@ const defaultActionMapping: IActionMapping = {
         dblClick: null,
         contextMenu: null,
         expanderClick: TREE_ACTIONS.TOGGLE_EXPANDED,
+        drop: TREE_ACTIONS.MOVE_NODE
     },
     keys: {
         [NUMBER_KEYS.RIGHT]: TREE_ACTIONS.DRILL_DOWN,
@@ -55,6 +56,13 @@ export interface IActionMapping {
         dblClick?: IActionHandler,
         contextMenu?: IActionHandler,
         expanderClick?: IActionHandler,
+        dragStart?: IActionHandler,
+        drag?: IActionHandler,
+        dragEnd?: IActionHandler,
+        dragOver?: IActionHandler,
+        dragLeave?: IActionHandler,
+        dragEnter?: IActionHandler,
+        drop?: IActionHandler,
     };
     keys?: {
         [key: number]: IActionHandler
@@ -100,6 +108,14 @@ export class TreeOptions {
         return this.options.useVirtualScroll
     }
 
+    get dropSlotHeight(): number {
+        return this.options.dropSlotHeight || 2
+    }
+
+    get enableDragAndDrop(): boolean {
+        return this.options.enableDragAndDrop
+    }
+
     nodeClass(node: TreeNode): string {
         return this.options.nodeClass ? this.options.nodeClass(node) : ''
     }
@@ -117,5 +133,21 @@ export class TreeOptions {
 
         // account for drop slots:
         return nodeHeight + (node.index === 0 ? 2 : 1)
+    }
+
+    allowDrop(element, to, $event?): boolean {
+        if (this.options.allowDrop instanceof Function) {
+            return this.options.allowDrop(element, to, $event)
+        } else {
+            return this.options.allowDrop === undefined ? true : this.options.allowDrop
+        }
+    }
+
+    allowDrag(node: TreeNode): boolean {
+        if (this.options.allowDrag instanceof Function) {
+            return this.options.allowDrag(node)
+        } else {
+            return this.options.allowDrag
+        }
     }
 }

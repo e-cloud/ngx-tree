@@ -10,7 +10,7 @@ import { DemoComponent } from './demo.component'
     ],
     imports: [
         BrowserModule,
-        NgxTreeModule,
+        NgxTreeModule.forRoot(),
     ],
     providers: [],
     bootstrap: [DemoComponent],

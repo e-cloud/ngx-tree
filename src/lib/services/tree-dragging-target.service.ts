@@ -3,14 +3,14 @@ import { Subject } from 'rxjs/Subject'
 import { TreeNode } from '../models/tree-node'
 
 @Injectable()
-export class TreeDraggingTarget extends Subject<TreeNode> {
-    _draggedElement: any = null
+export class TreeDraggingTargetService extends Subject<TreeNode> {
+    _draggedElement: TreeNode = null
 
-    set(draggedElement: any) {
+    set(draggedElement: TreeNode) {
         this._draggedElement = draggedElement
     }
 
-    get(): any {
+    get() {
         return this._draggedElement
     }
 

@@ -1,4 +1,4 @@
-import { first, last, pullAt } from 'lodash'
+import { first, last, pullAt, without } from 'lodash-es'
 import { TREE_EVENTS } from '../constants/events'
 import { TreeEvent } from './index'
 import { TreeModel } from './tree-model'
@@ -104,6 +104,21 @@ export class TreeNode {
 
     setField(key: string, value) {
         this.data[this.options[`${key}Field`]] = value
+    }
+
+    onDrop($event) {
+        this.mouseAction('drop', $event.event, {
+            from: $event.element,
+            to: { parent: this, index: 0, dropOnNode: true },
+        })
+    }
+
+    allowDrop(element, $event?) {
+        return this.options.allowDrop(element, { parent: this, index: 0 }, $event)
+    }
+
+    allowDrag() {
+        return this.options.allowDrag(this)
     }
 
     // traversing:
@@ -295,14 +310,29 @@ export class TreeNode {
     }
 
     addChild(data: any, index: number) {
-        const node = new TreeNode(data, this, this.treeModel, null)
+        const node = new TreeNode(data, this, this.treeModel, index)
 
-        this.children.splice(index, 0, node)
-        this.children = this.children.slice()
+        // If node doesn't have children - create children array
+        if (!this.getField('children')) {
+            this.setField('children', [])
+        }
+
+        if (this.children) {
+            this.getField('children').splice(index, 0, data)
+            this.children.splice(index, 0, node)
+            this.children = this.children.slice()
+        } else {
+            this.getField('children').push(data)
+            this.children = [node]
+        }
 
         this.reCalcChildrenIndices(index)
 
         this.fireEvent({ eventName: TREE_EVENTS.addNode, node })
+    }
+
+    appendChild(data) {
+        this.addChild(data, this.children ? this.children.length : 0)
     }
 
     remove() {
@@ -311,7 +341,7 @@ export class TreeNode {
 
     removeChild(node: TreeNode) {
         pullAt(this.getField('children'), node.index)
-        this.children = pullAt(this.children, node.index).slice()
+        this.children = without(this.children, node)
 
         this.reCalcChildrenIndices(0)
 
@@ -341,7 +371,7 @@ export class TreeNode {
     }
 
     private reCalcChildrenIndices(offset) {
-        this.children.slice(this.index).forEach((child, index) => {
+        this.children.slice(offset).forEach((child, index) => {
             child.index = index + offset
         })
     }

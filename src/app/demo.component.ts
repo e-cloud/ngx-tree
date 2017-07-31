@@ -28,6 +28,15 @@ export class DemoComponent {
         isExpandedField: 'expanded',
         idField: 'uuid',
         getChildren: this.getChildren.bind(this),
+        enableDragAndDrop: true,
+        allowDrag: (node) => {
+            // console.log('allowDrag?');
+            return true
+        },
+        allowDrop: (node) => {
+            // console.log('allowDrop?');
+            return true
+        },
     })
 
     constructor() {

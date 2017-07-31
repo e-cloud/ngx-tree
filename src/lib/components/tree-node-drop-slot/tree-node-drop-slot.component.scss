@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+.tree-node-drop-slot {
+  display: block;
+  height: 2px;
+
+  &.is-dragging-over {
+    background: #dfe;
+    height: 20px;
+    border: 2px dotted #888;
+  }
+}

@@ -3,6 +3,10 @@
  */
 import { TreeNode } from './tree-node'
 
+export type IAllowDropFn = (element: any, to: { parent: TreeNode, index: number }, $event?: any) => boolean
+
+export type IAllowDragFn = (node: TreeNode) => boolean
+
 export type INodeHeightFn = (node: TreeNode) => number
 
 /**
@@ -50,6 +54,45 @@ export interface ITreeOptions {
      * Default is 22
      */
     nodeHeight?: number | INodeHeightFn;
+    enableDragAndDrop?: boolean;
+    /**
+     * Specify if dragging tree nodes is allowed.
+     * This could be a boolean, or a function that receives a TreeNode and returns a boolean
+     *
+     * **Default value: false**
+     *
+     * Example:
+     * ```
+     * options = {
+     *   allowDrag: true
+     * }
+     * ```
+     */
+    allowDrag?: boolean | IAllowDragFn;
+    /**
+     * Specify whether dropping inside the tree is allowed. Optional types:
+     *  - boolean
+     *  - (element:any, to:{parent:ITreeNode, index:number}):boolean
+     * A function that receives the dragged element, and the drop location (parent node and index inside the parent),
+     * and returns true or false.
+     *
+     * **Default Value: true**
+     *
+     * example:
+     * ```
+     * options = {
+     *  allowDrop: (element, {parent, index}) => parent.isLeaf
+     * }
+     * ```
+     */
+    allowDrop?: boolean | IAllowDropFn;
+    /**
+     * For use with `useVirtualScroll` option.
+     * Specify a height for drop slots (located between nodes) in pixels
+     *
+     * **Default Value: 2**
+     */
+    dropSlotHeight?: number;
 
     /**
      * Supply function for getting fields asynchronously. Should return a Promise

@@ -2,6 +2,7 @@
   <div *ngIf="!viewport.virtualScroll.isDisabled()" class="height-raiser"
        [style.height.px]="treeModel?.virtualRoot.height"></div>
   <div class="tree-root"
+       [class.node-dragging]="treeDraggingTargetService.isDragging()"
        [class.virtual-scroll-disabled]="viewport.virtualScroll.isDisabled()"
        [style.transform]="'translateY(' + root.marginTop + 'px)'">
     <ngx-tree-node-children
@@ -15,5 +16,11 @@
         treeNodeFullTemplate: treeNodeFullTemplate
       }">
     </ngx-tree-node-children>
+
+    <ngx-tree-node-drop-slot
+      class="empty-tree-drop-slot"
+      *ngIf="treeModel?.isEmptyTree"
+      [dropIndex]="0"
+      [node]="treeModel?.virtualRoot"></ngx-tree-node-drop-slot>
   </div>
 </ngx-tree-viewport>

@@ -16,6 +16,7 @@ import { TreeModel } from '../../models/tree-model'
 import { TreeNode } from '../../models/tree-node'
 import { TreeOptions } from '../../models/tree-options.model'
 import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
+import { TreeDraggingTargetService } from 'ngx-tree/services/tree-dragging-target.service'
 
 @Component({
     selector: 'ngx-tree',
@@ -53,7 +54,7 @@ export class TreeComponent implements OnChanges {
 
     @ViewChild('viewport') viewportComponent: TreeViewportComponent
 
-    constructor() {
+    constructor(public treeDraggingTargetService: TreeDraggingTargetService) {
         this.emitterMap = Object.keys(TREE_EVENTS).reduce((map, name) => {
             if (!this.hasOwnProperty(name)) {
                 throw new TypeError(`Unmatched events: [${name}]`)

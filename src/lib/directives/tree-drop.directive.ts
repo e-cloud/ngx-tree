@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output, Renderer2 } from '@angular/core'
-import { TreeNode } from 'ngx-tree/models/tree-node'
-import { TreeDraggingTargetService } from 'ngx-tree/services/tree-dragging-target.service'
+import { TreeNode } from '../models'
+import { TreeDraggingTargetService } from '../services/tree-dragging-target.service'
 
 const DRAG_OVER_CLASS = 'is-dragging-over'
 const DRAG_DISABLED_CLASS = 'is-dragging-over-disabled'

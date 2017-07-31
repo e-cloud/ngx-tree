@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostListener, Input, OnChanges, Renderer2 } from '@angular/core'
-import { TreeNode } from 'ngx-tree/models/tree-node'
+import { TreeNode } from '../models'
 import { TreeDraggingTargetService } from '../services/tree-dragging-target.service'
 
 @Directive({
@@ -24,9 +24,9 @@ export class TreeDragDirective implements OnChanges {
         if (this.draggingTarget.mouseAction) {
             this.draggingTarget.mouseAction('dragStart', ev)
         }
-    }/*
+    }
 
-    @HostListener('drag', ['$event'])
+    /*@HostListener('drag', ['$event'])
     onDrag(ev) {
         if (this.draggingTarget.mouseAction) {
             this.draggingTarget.mouseAction('drag', ev)

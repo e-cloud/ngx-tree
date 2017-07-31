@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subscription } from 'rxjs/Subscription'
-import { TreeNode } from '../../models/tree-node'
+import { TreeNode } from '../../models'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
 import { binarySearch } from '../../util'
 

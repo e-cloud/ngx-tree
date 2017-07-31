@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef } from '@angular/core'
-import { TreeNode } from '../../models/tree-node'
+import { TreeNode } from '../../models'
 
 @Component({
     selector: 'ngx-tree-node-content',

@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Subject } from 'rxjs/Subject'
 import { Subscription } from 'rxjs/Subscription'
-import { TreeModel } from '../models/tree-model'
-import { TreeNode } from '../models/tree-node'
+import { TreeModel, TreeNode } from '../models'
 
 const Y_OFFSET_NODE_SIZE = 3
 let id = 0
@@ -13,7 +12,7 @@ export class TreeVirtualScroll {
     id: number
     averageNodeHeight = 0
 
-    private currentViewport
+    private currentViewport: ClientRect
     private lastScrollTop = 0
     private disabled = false
 

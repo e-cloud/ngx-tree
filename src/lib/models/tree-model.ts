@@ -1,33 +1,51 @@
-import { compact, find, first, isFunction, isString, last } from 'lodash'
+import { compact, find, first, isFunction, isString, last } from 'lodash-es'
 import { Observer } from 'rxjs/Observer'
+import { Subject } from 'rxjs/Subject'
 import { EventsMap, TREE_EVENTS } from '../constants/events'
-import { TreeEvent } from './'
+import { TreeEvent } from './events'
 import { TreeNode } from './tree-node'
-import { TreeOptions } from './tree-options.model'
+import { TreeOptions } from './tree-options'
+
+export interface ScrollIntoViewTarget {
+    node: TreeNode
+    force: boolean
+    scrollToMiddle: boolean
+}
 
 export class TreeModel {
     static focusedTree: TreeModel = null
 
+    /**
+     * All root nodes
+     */
     roots: TreeNode[]
-    expandedNodeIds: Map<string, boolean> = new Map()
-    activeNodeIds: Map<string, boolean> = new Map()
-    hiddenNodeIds: Map<string, boolean> = new Map()
-    focusedNodeId: string = null
     virtualRoot: TreeNode
-    nodeCache: Map<string, TreeNode> = new Map()
+    scrollIntoView$: Subject<ScrollIntoViewTarget> = new Subject()
 
+    /**
+     * Is the tree currently focused
+     */
     get isFocused() {
         return TreeModel.focusedTree === this
     }
 
+    /**
+     * @returns      true if the tree is empty
+     */
     get isEmptyTree() {
         return this.roots && this.roots.length === 0
     }
 
+    /**
+     * Current focused node
+     */
     get focusedNode() {
         return this.focusedNodeId ? this.getNodeById(this.focusedNodeId) : null
     }
 
+    /**
+     * @returns Current expanded nodes
+     */
     get expandedNodes() {
         const nodes = Array.from(this.expandedNodeIds.keys())
             .filter((id) => this.expandedNodeIds.get(id))
@@ -36,6 +54,9 @@ export class TreeModel {
         return compact(nodes)
     }
 
+    /**
+     * @returns Current active (selected) nodes
+     */
     get activeNodes() {
         const nodes = Array.from(this.activeNodeIds.keys())
             .filter((id) => this.activeNodeIds.get(id))
@@ -44,9 +65,18 @@ export class TreeModel {
         return compact(nodes)
     }
 
+    private focusedNodeId: string = null
+    private expandedNodeIds: Map<string, boolean> = new Map()
+    private activeNodeIds: Map<string, boolean> = new Map()
+    private hiddenNodeIds: Map<string, boolean> = new Map()
+    private nodeCache: Map<string, TreeNode> = new Map()
+
     constructor(
         private nodes: any[],
         public events: EventsMap,
+        /**
+         * Options that are passed to the tree component
+         */
         public options: TreeOptions = new TreeOptions(),
     ) {
         const virtualRootConfig = {
@@ -81,31 +111,42 @@ export class TreeModel {
     }
 
     // getters
-    getFocusedNode(): TreeNode {
-        return this.focusedNode
-    }
-
+    /**
+     * @returns Current active (selected) node. If multiple nodes are active - returns the first one.
+     */
     getActiveNode(): TreeNode {
         return this.activeNodes[0]
     }
 
-    getActiveNodes(): TreeNode[] {
-        return this.activeNodes
-    }
-
+    /**
+     * @returns All root nodes that pass the current filter
+     */
     getVisibleRoots() {
         return this.virtualRoot.visibleChildren
     }
 
+    /**
+     * @param skipHidden  true or false - whether to skip hidden nodes
+     * @returns      first root of the tree
+     */
     getFirstRoot(skipHidden = false) {
         return first(skipHidden ? this.getVisibleRoots() : this.roots)
     }
 
+    /**
+     * @param skipHidden  true or false - whether to skip hidden nodes
+     * @returns      last root of the tree
+     */
     getLastRoot(skipHidden = false) {
         return last(skipHidden ? this.getVisibleRoots() : this.roots)
     }
 
     // locating nodes
+    /**
+     * @param     path  array of node IDs to be traversed respectively
+     * @param     startNode  optional. Which node to start traversing from
+     * @returns   The node, if found - null otherwise
+     */
     getNodeByPath(path: (string | number)[], startNode: TreeNode = null): TreeNode {
         if (!path) {
             return null
@@ -131,10 +172,20 @@ export class TreeModel {
         return this.getNodeByPath(path, childNode)
     }
 
-    getNodeById(id) {
+    /**
+     * @param     id  node ID to find
+     * @returns   The node, if found - null otherwise
+     */
+    getNodeById(id: string) {
         return this.nodeCache.get(id)
     }
 
+    /**
+     * @param     predicate - either an object or a function, used as a test condition on all nodes.
+     *            Could be every predicate that's supported by lodash's `find` method
+     * @param     startNode  optional. Which node to start traversing from
+     * @returns   First node that matches the predicate, if found - null otherwise
+     */
     getNodeBy(predicate: (node: TreeNode) => boolean, startNode: TreeNode = null) {
         // todo: refactor to a loop
         startNode = startNode || this.virtualRoot
@@ -206,10 +257,18 @@ export class TreeModel {
         this.hiddenNodeIds.set(node.id, isHidden)
     }
 
+    /**
+     * Set focus on a node
+     * @param node
+     */
     setFocusedNode(node: TreeNode) {
         this.focusedNodeId = node ? node.id : null
     }
 
+    /**
+     * Focuses or blurs the tree
+     * @param value  true or false - whether to set focus or blur.
+     */
     setFocus(value: boolean) {
         TreeModel.focusedTree = value ? this : null
     }
@@ -218,24 +277,33 @@ export class TreeModel {
         this.roots.forEach((root) => root.traverse(fn))
     }
 
+    /**
+     * Focuses on the next node in the tree (same as down arrow)
+     */
     focusNextNode() {
-        const previousNode = this.getFocusedNode()
+        const previousNode = this.focusedNode
         const nextNode = previousNode ? previousNode.findNextNode(true, true) : this.getFirstRoot(true)
         if (nextNode) {
             nextNode.focus()
         }
     }
 
+    /**
+     * Focuses on the previous node in the tree (same as up arrow)
+     */
     focusPreviousNode() {
-        const previousNode = this.getFocusedNode()
+        const previousNode = this.focusedNode
         const nextNode = previousNode ? previousNode.findPreviousNode(true) : this.getLastRoot(true)
         if (nextNode) {
             nextNode.focus()
         }
     }
 
+    /**
+     * Focuses on the inner child of the current focused node (same as right arrow on an expanded node)
+     */
     focusDrillDown() {
-        const previousNode = this.getFocusedNode()
+        const previousNode = this.focusedNode
         if (previousNode && previousNode.isCollapsed && previousNode.hasChildren) {
             previousNode.toggleExpanded()
         } else {
@@ -246,8 +314,11 @@ export class TreeModel {
         }
     }
 
+    /**
+     * Focuses on the parent of the current focused node (same as left arrow on a collapsed node)
+     */
     focusDrillUp() {
-        const previousNode = this.getFocusedNode()
+        const previousNode = this.focusedNode
         if (!previousNode) {
             return
         }
@@ -262,10 +333,16 @@ export class TreeModel {
         }
     }
 
+    /**
+     * expand all nodes
+     */
     expandAll() {
         this.roots.forEach((root) => root.expandAll())
     }
 
+    /**
+     * collapse all nodes
+     */
     collapseAll() {
         this.roots.forEach((root) => root.collapseAll())
     }
@@ -283,6 +360,14 @@ export class TreeModel {
         }
     }
 
+    /**
+     * Marks isHidden field in all nodes recursively according to the filter param.
+     * If a node is marked visible, all of its ancestors will be marked visible as well.
+     * @param filter  either a string or a function.
+     *   In case it's a string, it will be searched case insensitively in the node's display attribute
+     *   In case it's a function, it will be passed the node, and should return true if the node should be visible, false otherwise
+     * @param autoShow  if true, make sure all nodes that passed the filter are visible
+     */
     filterNodes(filter: string | ((node: TreeNode) => boolean), autoShow = true) {
         let filterFn
 
@@ -305,11 +390,20 @@ export class TreeModel {
         this.fireEvent({ eventName: TREE_EVENTS.changeFilter })
     }
 
+    /**
+     * Marks all nodes isHidden = false
+     */
     clearFilter() {
         this.hiddenNodeIds = new Map()
         this.fireEvent({ eventName: TREE_EVENTS.changeFilter })
     }
 
+    /**
+     * moves a node from one location in the tree to another
+     * @param node location has a from and a to attributes, each has a node and index attributes.
+     * The combination of node + index tells which node needs to be moved, and to where
+     * @param to
+     */
     moveNode(node: TreeNode, to: { parent: TreeNode, index: number, dropOnNode: boolean }) {
         const fromIndex = node.index
         const fromParent = node.parent
@@ -336,10 +430,16 @@ export class TreeModel {
         })
     }
 
+    scrollIntoView(node: TreeNode, force: boolean, scrollToMiddle: boolean) {
+        this.scrollIntoView$.next({
+            node, force, scrollToMiddle,
+        })
+    }
+
     private filterNode(
         ids: Map<string, boolean>,
         node: TreeNode,
-        filterFn: (node) => boolean,
+        filterFn: (node: TreeNode) => boolean,
         autoExpand: boolean,
     ) {
         // if node passes function then it's visible

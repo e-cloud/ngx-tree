@@ -1,6 +1,5 @@
 import { Component } from '@angular/core'
-import { TreeNode } from 'ngx-tree/models/tree-node'
-import { TreeOptions } from 'ngx-tree/models/tree-options.model'
+import { TreeNode, TreeOptions } from 'ngx-tree/models'
 
 @Component({
     selector: 'demo-root',
@@ -23,12 +22,11 @@ export class DemoComponent {
         },
     ]
 
-    customTemplateStringOptions = new TreeOptions({
+    customTemplateStringOptions = {
         // displayField: 'subTitle',
         isExpandedField: 'expanded',
         idField: 'uuid',
         getChildren: this.getChildren.bind(this),
-        enableDragAndDrop: true,
         allowDrag: (node) => {
             // console.log('allowDrag?');
             return true
@@ -37,7 +35,7 @@ export class DemoComponent {
             // console.log('allowDrop?');
             return true
         },
-    })
+    }
 
     constructor() {
         this.generateData()

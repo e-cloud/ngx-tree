@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations'
 import { Component, HostBinding, Input } from '@angular/core'
-import { TreeNode } from '../../models/tree-node'
+import { TreeNode } from '../../models'
 
 export const EXPANSION_PANEL_ANIMATION_TIMING = '500ms cubic-bezier(0.4,0.0,0.2,1)'
 

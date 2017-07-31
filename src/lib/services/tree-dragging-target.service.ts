@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs/Subject'
-import { TreeNode } from '../models/tree-node'
+import { TreeNode } from '../models'
 
 @Injectable()
 export class TreeDraggingTargetService extends Subject<TreeNode> {

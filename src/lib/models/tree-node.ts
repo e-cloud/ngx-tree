@@ -1,15 +1,28 @@
+import { ElementRef } from '@angular/core'
 import { first, last, pullAt, without } from 'lodash-es'
 import { TREE_EVENTS } from '../constants/events'
-import { TreeEvent } from './index'
+import { TreeEvent } from './events'
 import { TreeModel } from './tree-model'
-import { TreeOptions } from './tree-options.model'
+import { TreeOptions } from './tree-options'
 
 export class TreeNode {
+    /**
+     * The children of the node.
+     * By default is determined by 'node.data.children', unless stated otherwise in the options
+     */
     children: TreeNode[]
-    index: number
+    /**
+     * top edge position relative to the top edge of scroll area
+     * @type {number}
+     */
     position = 0
+    /**
+     * the visual height of the node
+     * @type {number}
+     */
     height = 0
     loadingChildren = false
+    elementRef: ElementRef
 
     get isHidden() {
         return this.treeModel.isNodeHidden(this)
@@ -39,10 +52,16 @@ export class TreeNode {
         return this.parent === null
     }
 
+    /**
+     * Level in the tree (starts from 1).
+     */
     get level() {
         return this.parent ? this.parent.level + 1 : 0
     }
 
+    /**
+     * Path in the tree: Array of IDs.
+     */
     get path(): string[] {
         return this.parent ? [...this.parent.path, this.id] : []
     }
@@ -58,10 +77,18 @@ export class TreeNode {
     }
 
     // field accessors:
+    /**
+     * The value of the node's field that is used for displaying its content.
+     * By default 'name', unless stated otherwise in the options
+     */
     get displayField() {
         return this.getField('display')
     }
 
+    /**
+     * A unique key of this node among its siblings.
+     * By default it's the 'id' of the original node, unless stated otherwise in options.idField
+     */
     get id() {
         return this.getField('id')
     }
@@ -74,15 +101,32 @@ export class TreeNode {
         return (this.children || []).filter((node) => !node.isHidden)
     }
 
+    /**
+     * @returns      in case nodeClass option is supplied, returns the current node's class
+     */
     get cssClass() {
         return [this.options.nodeClass(this), `tree-node-level-${ this.level }`].join(' ')
     }
 
-    constructor(public data: any, public parent: TreeNode, public treeModel: TreeModel, index: number) {
+    constructor(
+        /**
+         * Pointer to the original data.
+         */
+        public data: any,
+        /**
+         * Parent node
+         */
+        public parent: TreeNode,
+        public treeModel: TreeModel,
+        /**
+         * index of the node inside its parent's children
+         */
+        public index: number,
+    ) {
+        // Make sure there's a unique id without overriding existing ids to work with immutable data structures
         if (this.id === undefined || this.id === null) {
             this.id = uuid()
-        } // Make sure there's a unique id without overriding existing ids to work with immutable data structures
-        this.index = index
+        }
 
         treeModel.addCache(this)
         if (data[this.options.isExpandedField]) {
@@ -94,6 +138,9 @@ export class TreeNode {
         }
     }
 
+    /**
+     * Fire an event to the renderer of the tree (if it was registered)
+     */
     fireEvent(event: TreeEvent) {
         this.treeModel.fireEvent(event)
     }
@@ -126,32 +173,59 @@ export class TreeNode {
         return this.getParentChildren(skipHidden)[this.index + steps]
     }
 
+    /**
+     * @param skipHidden whether to skip hidden nodes
+     * @returns next sibling (or null)
+     */
     findNextSibling(skipHidden = false) {
         return this.findAdjacentSibling(+1, skipHidden)
     }
 
+    /**
+     * @param skipHidden whether to skip hidden nodes
+     * @returns previous sibling (or null)
+     */
     findPreviousSibling(skipHidden = false) {
         return this.findAdjacentSibling(-1, skipHidden)
     }
 
+    /**
+     * @param skipHidden whether to skip hidden nodes
+     * @returns first child (or null)
+     */
     getFirstChild(skipHidden = false) {
         const children = skipHidden ? this.visibleChildren : this.children
 
         return first(children || [])
     }
 
+    /**
+     * @param skipHidden whether to skip hidden nodes
+     * @returns last child (or null)
+     */
     getLastChild(skipHidden = false) {
         const children = skipHidden ? this.visibleChildren : this.children
 
         return last(children || [])
     }
 
+    /**
+     * Finds the visually next node in the tree.
+     * @param goInside whether to look for children or just siblings
+     * @param skipHidden
+     * @returns next node.
+     */
     findNextNode(goInside = true, skipHidden = false) {
         return goInside && this.isExpanded && this.getFirstChild(skipHidden) ||
             this.findNextSibling(skipHidden) ||
             this.parent && this.parent.findNextNode(false, skipHidden)
     }
 
+    /**
+     * Finds the visually previous node in the tree.
+     * @param skipHidden whether to skip hidden nodes
+     * @returns previous node.
+     */
     findPreviousNode(skipHidden = false) {
         const previousSibling = this.findPreviousSibling(skipHidden)
         if (!previousSibling) {
@@ -161,6 +235,9 @@ export class TreeNode {
         return previousSibling.getLastOpenDescendant(skipHidden)
     }
 
+    /**
+     * @returns      true if this node is a descendant of the parameter node
+     */
     isDescendantOf(node: TreeNode) {
         if (this === node) {
             return true
@@ -169,6 +246,9 @@ export class TreeNode {
         }
     }
 
+    /**
+     * @returns      in case levelPadding option is supplied, returns the current node's padding
+     */
     getNodePadding() {
         return this.options.levelPadding * (this.level - 1) + 'px'
     }
@@ -197,6 +277,9 @@ export class TreeNode {
             })
     }
 
+    /**
+     * Expands the node
+     */
     expand() {
         if (!this.isExpanded) {
             return this.toggleExpanded()
@@ -205,6 +288,9 @@ export class TreeNode {
         return Promise.resolve()
     }
 
+    /**
+     * Collapses the node
+     */
     collapse() {
         if (this.isExpanded) {
             this.toggleExpanded()
@@ -213,6 +299,10 @@ export class TreeNode {
         return this
     }
 
+    /**
+     * Invokes a method for every node under this one - depth first
+     * @param fn  a function that receives the node
+     */
     traverse(fn: (node: TreeNode) => any) {
         Promise.resolve(fn(this)).then(() => {
             if (this.children) {
@@ -221,14 +311,23 @@ export class TreeNode {
         })
     }
 
+    /**
+     * expand all nodes under this one
+     */
     expandAll() {
         this.traverse((node) => node.expand())
     }
 
+    /**
+     * collapse all nodes under this one
+     */
     collapseAll() {
         this.traverse((node) => node.collapse())
     }
 
+    /**
+     * Expands / Collapses the node
+     */
     toggleExpanded(isExpanded = !this.isExpanded) {
         if (this.hasChildren) {
             this.treeModel.setExpandedNode(this, isExpanded)
@@ -243,19 +342,22 @@ export class TreeNode {
 
     setActive(isActive = true, isMulti = false) {
         this.treeModel.setActiveNode(this, isActive, isMulti)
-        if (isActive) {
-            this.focus()
-        }
 
         return this
     }
 
+    /**
+     * @param isHidden  if true makes the node hidden, otherwise visible
+     */
     setHidden(isHidden = true) {
         this.treeModel.setHiddenNode(this, isHidden)
 
         return this
     }
 
+    /**
+     * Activates / Deactivates the node (selects / deselects)
+     */
     toggleActivated(isMulti = false) {
         this.setActive(!this.isActive, isMulti)
 
@@ -263,10 +365,17 @@ export class TreeNode {
     }
 
     setActiveAndVisible(isMulti = false) {
-        return this.setActive(true, isMulti)
+        this.setActive(true, isMulti)
             .ensureVisible()
+
+        this.scrollIntoView()
+
+        return this
     }
 
+    /**
+     * Expands all ancestors of the node
+     */
     ensureVisible() {
         if (this.parent) {
             this.parent.expand()
@@ -276,9 +385,19 @@ export class TreeNode {
         return this
     }
 
-    focus() {
-        const previousNode = this.treeModel.getFocusedNode()
+    scrollIntoView(force = false, scrollToMiddle?: boolean) {
+        this.treeModel.scrollIntoView(this, force, scrollToMiddle)
+    }
+
+    /**
+     * Focus on the node
+     */
+    focus(scroll = true) {
+        const previousNode = this.treeModel.focusedNode
         this.treeModel.setFocusedNode(this)
+        if (scroll) {
+            this.scrollIntoView()
+        }
         if (previousNode) {
             this.fireEvent({ eventName: TREE_EVENTS.blur, node: previousNode })
         }
@@ -287,8 +406,11 @@ export class TreeNode {
         return this
     }
 
+    /**
+     * Blur (unfocus) the node
+     */
     blur() {
-        const previousNode = this.treeModel.getFocusedNode()
+        const previousNode = this.treeModel.focusedNode
         this.treeModel.setFocusedNode(null)
         if (previousNode) {
             this.fireEvent({ eventName: TREE_EVENTS.blur, node: this })
@@ -297,12 +419,18 @@ export class TreeNode {
         return this
     }
 
+    /**
+     * Hides the node
+     */
     hide() {
         this.setHidden(true)
 
         return this
     }
 
+    /**
+     * Makes the node visible
+     */
     show() {
         this.setHidden(false)
 

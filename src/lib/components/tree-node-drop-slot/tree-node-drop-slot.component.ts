@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
-import { TreeNode } from 'ngx-tree/models/tree-node'
+import { TreeNode } from '../../models'
 
 @Component({
     selector: 'ngx-tree-node-drop-slot',

@@ -7,16 +7,15 @@ import {
     Input,
     OnChanges,
     Output,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
 } from '@angular/core'
 import 'element-closest'
 import { EventsMap, TREE_EVENTS } from '../../constants/events'
-import { TreeModel } from '../../models/tree-model'
-import { TreeNode } from '../../models/tree-node'
-import { TreeOptions } from '../../models/tree-options.model'
+import { RawTreeOptions, TreeModel, TreeNode, TreeOptions } from '../../models'
+import { TreeDraggingTargetService } from '../../services/tree-dragging-target.service'
 import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
-import { TreeDraggingTargetService } from 'ngx-tree/services/tree-dragging-target.service'
 
 @Component({
     selector: 'ngx-tree',
@@ -28,7 +27,7 @@ export class TreeComponent implements OnChanges {
     treeModel: TreeModel = null
 
     @Input() nodes: TreeNode[]
-    @Input() options: TreeOptions
+    @Input() options: RawTreeOptions
     @Input() focused
 
     @Output() expand: EventEmitter<any> = null
@@ -76,7 +75,7 @@ export class TreeComponent implements OnChanges {
             return
         }
 
-        const focusedNode = this.treeModel.getFocusedNode()
+        const focusedNode = this.treeModel.focusedNode
 
         this.treeModel.performKeyAction(focusedNode, $event)
     }
@@ -90,9 +89,9 @@ export class TreeComponent implements OnChanges {
         }
     }
 
-    ngOnChanges(changes) {
+    ngOnChanges(changes: SimpleChanges) {
         if (changes.nodes && changes.nodes.currentValue) {
-            this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, this.options)
+            this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, new TreeOptions(this.options))
         } else if (changes.options && changes.options.currentValue && this.treeModel) {
             this.treeModel.updateOptions(changes.options.currentValue)
         }

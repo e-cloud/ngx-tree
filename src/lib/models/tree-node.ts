@@ -485,6 +485,7 @@ export class TreeNode {
         }
 
         node.treeModel = null
+        node.elementRef = null
     }
 
     mouseAction(actionName: string, $event: MouseEvent, data: any = null) {

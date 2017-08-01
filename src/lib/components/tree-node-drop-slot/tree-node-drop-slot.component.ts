@@ -14,7 +14,10 @@ export class TreeNodeDropSlotComponent {
     constructor() {
     }
 
-    allowDrop = (element, $event) => this.node.options.allowDrop(element, { parent: this.node, index: this.dropIndex }, $event)
+    allowDrop = (element, $event) => this.node.options.allowDrop(element, {
+        parent: this.node,
+        index: this.dropIndex,
+    }, $event)
 
     onDrop($event) {
         this.node.mouseAction('drop', $event.event, {

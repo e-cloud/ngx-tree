@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
     HostBinding,
@@ -20,6 +21,7 @@ import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
     templateUrl: './tree-viewport.component.html',
     styleUrls: ['./tree-viewport.component.scss'],
     providers: [TreeVirtualScroll],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
     lastScrollTop = 0

@@ -6,11 +6,11 @@ import { TreeNode } from '../models'
 export class TreeDraggingTargetService extends Subject<TreeNode> {
     _draggedElement: TreeNode = null
 
-    set(draggedElement: TreeNode) {
+    set (draggedElement: TreeNode) {
         this._draggedElement = draggedElement
     }
 
-    get() {
+    get () {
         return this._draggedElement
     }
 

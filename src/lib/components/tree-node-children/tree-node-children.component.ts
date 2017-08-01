@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, } from '@angular/core'
 import { Subscription } from 'rxjs/Subscription'
 import { TreeNode } from '../../models'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
@@ -24,18 +24,19 @@ export const EXPANSION_PANEL_ANIMATION_TIMING = '225ms cubic-bezier(0.4,0.0,0.2,
         ]),
     ],*/
 })
-export class TreeNodeChildrenComponent implements OnInit, OnDestroy {
+export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
     marginTop = 0
+    viewportNodes: TreeNode[] = []
 
     @Input() node: TreeNode
     @Input() templates: any
     @Input() disableMarginTop = false
+    @Input() children: TreeNode[]
 
     /*@HostBinding('@expandAnimation')
     expandAnimation = true*/
 
     private scrollSub: Subscription
-    private _viewportNodes: TreeNode[] = []
 
     constructor(private virtualScroll: TreeVirtualScroll) {
     }
@@ -50,22 +51,20 @@ export class TreeNodeChildrenComponent implements OnInit, OnDestroy {
         return this.disableMarginTop ? 0 : this.marginTop
     }
 
-    get nodes() {
-        return this.node.children
-    }
-
-    get viewportNodes() {
-        return this.virtualScroll.isDisabled() ? this.nodes : this._viewportNodes
-    }
-
     ngOnInit() {
-        this._viewportNodes = this.nodes
+        this.viewportNodes = this.children
         this.scrollSub = this.virtualScroll.waitForCollection((metrics) => {
-            if (this.node.isExpanded) {
-                this._viewportNodes = this.getViewportNodes(this.nodes, metrics)
+            if (this.node.treeModel && this.node.isExpanded) {
+                this.viewportNodes = this.getViewportNodes(this.node.children, metrics)
                 this.marginTop = this.calcMarginTop()
             }
         })
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if ('children' in changes && changes.children.currentValue) {
+            this.viewportNodes = this.virtualScroll.isDisabled() ? this.children : this.viewportNodes
+        }
     }
 
     ngOnDestroy() {
@@ -87,7 +86,7 @@ export class TreeNodeChildrenComponent implements OnInit, OnDestroy {
     }
 
     getViewportNodes(nodes: TreeNode[], { startPos, endPos }) {
-        if (!nodes) {
+        if (!nodes || !nodes.length) {
             return []
         }
 

@@ -3,6 +3,7 @@
                          [node]="node.parent"></ngx-tree-node-drop-slot>
 
 <ngx-tree-node-wrapper
+  [style.padding-left]="node.getNodePadding()"
   [node]="node"
   [index]="index"
   [templates]="templates"></ngx-tree-node-wrapper>

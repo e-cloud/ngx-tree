@@ -1,5 +1,11 @@
 <ngx-tree-node
   *ngFor="let child of viewportNodes; let i = index; trackBy: trackNode"
+  [class]="child.cssClass"
+  [class.tree-node-expanded]="child.isExpanded"
+  [class.tree-node-collapsed]="child.isCollapsed"
+  [class.tree-node-leaf]="child.isLeaf"
+  [class.tree-node-active]="child.isActive"
+  [class.tree-node-focused]="child.isFocused"
   [node]="child"
   [index]="i"
   [templates]="templates">

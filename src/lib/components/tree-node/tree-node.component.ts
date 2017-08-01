@@ -27,37 +27,4 @@ export class TreeNodeComponent {
     @Input() templates: any
 
     @HostBinding('class.tree-node') className = true
-
-    @HostBinding('class')
-    get nodeClass() {
-        return this.node.cssClass
-    }
-
-    @HostBinding('class.tree-node-expanded')
-    get expandClass() {
-        return this.node.isExpanded
-    }
-
-    @HostBinding('class.tree-node-collapsed')
-    get collapseClass() {
-        return this.node.isCollapsed
-    }
-
-    @HostBinding('class.tree-node-leaf')
-    get leafClass() {
-        return this.node.isLeaf
-    }
-
-    @HostBinding('class.tree-node-active')
-    get activeClass() {
-        return this.node.isActive
-    }
-
-    @HostBinding('class.tree-node-focused')
-    get focuseClass() {
-        return this.node.isFocused
-    }
-
-    constructor() {
-    }
 }

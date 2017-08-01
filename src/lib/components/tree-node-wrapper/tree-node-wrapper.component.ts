@@ -14,11 +14,6 @@ export class TreeNodeWrapperComponent implements OnInit, OnDestroy, AfterViewIni
 
     @HostBinding('class.tree-node-wrapper') className = true
 
-    @HostBinding('style.padding-left')
-    get leftPadding() {
-        return this.node.getNodePadding()
-    }
-
     constructor(private virtualScroll: TreeVirtualScroll, private elementRef: ElementRef) {
     }
 

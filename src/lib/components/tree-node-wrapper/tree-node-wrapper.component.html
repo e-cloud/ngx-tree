@@ -5,6 +5,8 @@
     [node]="node"
     [index]="index"
     [template]="templates.treeNodeTemplate"
+    [class.tree-node-content-active]="node.isActive"
+    [class.tree-node-content-focused]="node.isFocused"
     (click)="node.mouseAction('click', $event)"
     (dblclick)="node.mouseAction('dblClick', $event)"
     (contextmenu)="node.mouseAction('contextMenu', $event)"

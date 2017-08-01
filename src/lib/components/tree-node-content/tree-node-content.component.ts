@@ -12,17 +12,4 @@ export class TreeNodeContentComponent {
     @Input() index: number
     @Input() template: TemplateRef<any>
     @HostBinding('class.tree-node-content') className = true
-
-    constructor() {
-    }
-
-    @HostBinding('class.tree-node-content-active')
-    get activeClass() {
-        return this.node.isActive
-    }
-
-    @HostBinding('class.tree-node-content-focused')
-    get focusClass() {
-        return this.node.isFocused
-    }
 }

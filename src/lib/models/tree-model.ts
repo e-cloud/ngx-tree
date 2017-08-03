@@ -1,4 +1,9 @@
-import { compact, find, first, isFunction, isString, last } from 'lodash-es'
+import compact from 'lodash-es/compact'
+import find from 'lodash-es/find'
+import first from 'lodash-es/first'
+import isFunction from 'lodash-es/isFunction'
+import isString from 'lodash-es/isString'
+import last from 'lodash-es/last'
 import { Observer } from 'rxjs/Observer'
 import { Subject } from 'rxjs/Subject'
 import { EventsMap, TREE_EVENTS } from '../constants/events'
@@ -365,7 +370,8 @@ export class TreeModel {
      * If a node is marked visible, all of its ancestors will be marked visible as well.
      * @param filter  either a string or a function.
      *   In case it's a string, it will be searched case insensitively in the node's display attribute
-     *   In case it's a function, it will be passed the node, and should return true if the node should be visible, false otherwise
+     *   In case it's a function, it will be passed the node, and should return true if the node should be visible,
+     *     false otherwise
      * @param autoShow  if true, make sure all nodes that passed the filter are visible
      */
     filterNodes(filter: string | ((node: TreeNode) => boolean), autoShow = true) {

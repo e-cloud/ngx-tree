@@ -1,4 +1,4 @@
-import { defaultsDeep } from 'lodash'
+import defaultsDeep from 'lodash-es/defaultsDeep'
 import { defaultActionMapping } from './defaults'
 import { TreeModel } from './tree-model'
 import { TreeNode } from './tree-node'

@@ -11,9 +11,6 @@ export class TreeNodeDropSlotComponent {
     @Input() node: TreeNode
     @Input() dropIndex: number
 
-    constructor() {
-    }
-
     allowDrop = (element, $event) => this.node.options.allowDrop(element, {
         parent: this.node,
         index: this.dropIndex,

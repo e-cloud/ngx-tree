@@ -10,7 +10,4 @@ export class TreeNodeExpanderComponent {
     @Input() node: TreeNode
 
     @HostBinding('class.tree-node-expander') className = true
-
-    constructor() {
-    }
 }

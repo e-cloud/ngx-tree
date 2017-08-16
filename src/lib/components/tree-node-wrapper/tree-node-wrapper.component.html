@@ -1,26 +1,24 @@
 <ng-template [ngIf]="!templates.treeNodeWrapperTemplate">
   <ngx-tree-node-expander [node]="node"></ngx-tree-node-expander>
 
-  <ngx-tree-node-content
-    [node]="node"
-    [index]="index"
-    [template]="templates.treeNodeTemplate"
-    [class.tree-node-content-active]="node.isActive"
-    [class.tree-node-content-focused]="node.isFocused"
-    (click)="node.mouseAction('click', $event)"
-    (dblclick)="node.mouseAction('dblClick', $event)"
-    (contextmenu)="node.mouseAction('contextMenu', $event)"
-    (ngxTreeDrop)="node.onDrop($event)"
-    (treeDropDragOver)="node.mouseAction('dragOver', $event)"
-    (treeDropDragLeave)="node.mouseAction('dragLeave', $event)"
-    (treeDropDragEnter)="node.mouseAction('dragEnter', $event)"
-    [treeAllowDrop]="node.allowDrop.bind(node)"
-    [ngxTreeDrag]="node"
-    [treeDragEnabled]="node.allowDrag()">
+  <ngx-tree-node-content [node]="node"
+                         [index]="index"
+                         [template]="templates.treeNodeTemplate"
+                         [class.tree-node-content-active]="node.isActive"
+                         [class.tree-node-content-focused]="node.isFocused"
+                         (click)="node.mouseAction('click', $event)"
+                         (dblclick)="node.mouseAction('dblClick', $event)"
+                         (contextmenu)="node.mouseAction('contextMenu', $event)"
+                         (ngxTreeDrop)="node.onDrop($event)"
+                         (treeDropDragOver)="node.mouseAction('dragOver', $event)"
+                         (treeDropDragLeave)="node.mouseAction('dragLeave', $event)"
+                         (treeDropDragEnter)="node.mouseAction('dragEnter', $event)"
+                         [treeAllowDrop]="node.allowDrop.bind(node)"
+                         [ngxTreeDrag]="node"
+                         [treeDragEnabled]="node.allowDrag(node)">
   </ngx-tree-node-content>
 </ng-template>
 
-<ng-container
-  [ngTemplateOutlet]="templates.treeNodeWrapperTemplate"
-  [ngOutletContext]="{ $implicit: node, node: node, index: index }">
+<ng-container [ngTemplateOutlet]="templates.treeNodeWrapperTemplate"
+              [ngOutletContext]="{ $implicit: node, node: node, index: index }">
 </ng-container>

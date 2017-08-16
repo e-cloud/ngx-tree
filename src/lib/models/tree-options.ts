@@ -116,7 +116,7 @@ export interface RawTreeOptions {
     /**
      * Supply function for getting fields asynchronously. Should return a Promise
      */
-    getChildren? (node: TreeNode): any;
+    getChildren?(node: TreeNode): any;
 
     /**
      * Supply function for getting a custom class for the node component

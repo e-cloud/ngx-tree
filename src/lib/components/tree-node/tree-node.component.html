@@ -1,12 +1,10 @@
+<ngx-tree-node-wrapper [style.padding-left]="node.getNodePadding()"
+                       [node]="node"
+                       [index]="index"
+                       [templates]="templates">
+</ngx-tree-node-wrapper>
 
-<ngx-tree-node-wrapper
-  [style.padding-left]="node.getNodePadding()"
-  [node]="node"
-  [index]="index"
-  [templates]="templates"></ngx-tree-node-wrapper>
-
-<ngx-tree-node-children
-  *ngIf="node.isExpanded"
-  [node]="node"
-  [children]="node.children"
-  [templates]="templates"></ngx-tree-node-children>
+<ngx-tree-node-children *ngIf="node.isExpanded"
+                        [node]="node"
+                        [children]="node.children"
+                        [templates]="templates"></ngx-tree-node-children>

@@ -1,21 +1,22 @@
-<ngx-tree-viewport [treeModel]="treeModel" #viewport>
-  <div *ngIf="!viewport.virtualScroll.isDisabled()" class="height-raiser"
+<ngx-tree-viewport [treeModel]="treeModel"
+                   #viewport>
+  <div *ngIf="!viewport.virtualScroll.isDisabled()"
+       class="height-raiser"
        [style.height.px]="treeModel?.virtualRoot.height"></div>
   <div class="tree-root"
        [class.node-dragging]="treeDraggingTargetService.isDragging()"
        [class.virtual-scroll-disabled]="viewport.virtualScroll.isDisabled()"
        [style.transform]="'translateY(' + root.marginTop + 'px)'">
-    <ngx-tree-node-children
-      #root
-      [disableMarginTop]="true"
-      [node]="treeModel?.virtualRoot"
-      [children]="treeModel?.roots"
-      [templates]="{
-        loadingTemplate: loadingTemplate,
-        treeNodeTemplate: treeNodeTemplate,
-        treeNodeWrapperTemplate: treeNodeWrapperTemplate,
-        treeNodeFullTemplate: treeNodeFullTemplate
-      }">
+    <ngx-tree-node-children #root
+                            [disableMarginTop]="true"
+                            [node]="treeModel?.virtualRoot"
+                            [children]="treeModel?.roots"
+                            [templates]="{
+                              loadingTemplate: loadingTemplate,
+                              treeNodeTemplate: treeNodeTemplate,
+                              treeNodeWrapperTemplate: treeNodeWrapperTemplate,
+                              treeNodeFullTemplate: treeNodeFullTemplate
+                            }">
     </ngx-tree-node-children>
   </div>
 </ngx-tree-viewport>

@@ -12,7 +12,4 @@ export class TreeLoadingComponent {
     @Input() node: TreeNode
 
     @HostBinding('class.tree-loading') className = true
-
-    constructor() {
-    }
 }

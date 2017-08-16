@@ -1,5 +1,8 @@
 ngx-tree-viewport {
-  position: relative;
+    position: relative;
+    &.disable-events-on-scroll .tree-root /deep/ * {
+        pointer-events: none;
+    }
 }
 
 .tree-children {
@@ -20,4 +23,8 @@ ngx-tree-viewport {
 
 .tree-root.virtual-scroll-disabled {
   position: static;
+}
+
+/deep/ .ngx-tree-dragging-target * {
+    pointer-events: none;
 }

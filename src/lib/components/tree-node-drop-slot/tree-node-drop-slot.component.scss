@@ -1,14 +1,24 @@
 :host {
-  display: block;
+    display: block;
+    width: 100%;
+    z-index: 1;
+    //position: absolute;
+    &.prev-drop-slot {
+        top: 0;
+        //transform: translateY(-50%);
+    }
+    &.next-drop-slot {
+        bottom: 0;
+        //transform: translateY(50%);
+    }
 }
 
 .tree-node-drop-slot {
-  display: block;
-  height: 2px;
-
-  &.is-dragging-over {
-    background: #dfe;
-    height: 20px;
-    border: 2px dotted #888;
-  }
+    display: block;
+    height: 4px;
+    background-color: lightcoral;
+    &.is-dragging-over {
+        background: #dfe;
+        outline: 2px dashed #888;
+    }
 }

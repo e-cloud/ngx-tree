@@ -2,6 +2,8 @@ import { Directive, ElementRef, HostListener, Input, OnChanges, Renderer2 } from
 import { TreeNode } from '../models'
 import { TreeDraggingTargetService } from '../services/tree-dragging-target.service'
 
+const DRAGGING_TARGET_CLASS = 'ngx-tree-dragging-target'
+
 @Directive({
     selector: '[ngxTreeDrag]',
 })
@@ -19,7 +21,10 @@ export class TreeDragDirective implements OnChanges {
     @HostListener('dragstart', ['$event'])
     onDragStart(ev) {
         // setting the data is required by firefox
-        ev.dataTransfer.setData('text', ev.target.id)
+        ev.dataTransfer.setData('text', this.draggingTarget.id)
+        ev.dataTransfer.dropEffect = 'move'
+        this.renderer.addClass(this.el.nativeElement, DRAGGING_TARGET_CLASS)
+
         this.treeDraggingTargetService.set(this.draggingTarget)
         if (this.draggingTarget.mouseAction) {
             this.draggingTarget.mouseAction('dragStart', ev)
@@ -41,8 +46,9 @@ export class TreeDragDirective implements OnChanges {
             this.draggingTarget.mouseAction('dragEnd', event)
         }
 
-        this.treeDraggingTargetService.set(null)
+        this.renderer.removeClass(this.el.nativeElement, DRAGGING_TARGET_CLASS)
 
+        this.treeDraggingTargetService.set(null)
     }
 
     ngOnChanges(changes) {

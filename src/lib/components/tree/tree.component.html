@@ -17,11 +17,5 @@
         treeNodeFullTemplate: treeNodeFullTemplate
       }">
     </ngx-tree-node-children>
-
-    <ngx-tree-node-drop-slot
-      class="empty-tree-drop-slot"
-      *ngIf="treeModel?.isEmptyTree"
-      [dropIndex]="0"
-      [node]="treeModel?.virtualRoot"></ngx-tree-node-drop-slot>
   </div>
 </ngx-tree-viewport>

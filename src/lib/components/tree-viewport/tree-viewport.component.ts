@@ -9,12 +9,15 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
+    Renderer2,
 } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import { TREE_EVENTS } from '../../constants/events'
 import { ScrollIntoViewTarget, TreeModel } from '../../models'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
+
+const DISABLE_ON_SCROLL_CLASS = 'disable-events-on-scroll'
 
 @Component({
     selector: 'ngx-tree-viewport',
@@ -35,12 +38,14 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
     private lastScrollIntoViewTarget: ScrollIntoViewTarget
     private structureChangeSub: Subscription
     private scrollIntoViewSub: Subscription
+    private scrollTimer: number
 
-    constructor(public virtualScroll: TreeVirtualScroll, private elementRef: ElementRef) {
+    constructor(public virtualScroll: TreeVirtualScroll, private elementRef: ElementRef, private renderer: Renderer2) {
     }
 
     @HostListener('scroll', ['$event'])
     onScroll(event) {
+        this.disableEventsWhenScrolling()
         if (this.virtualScroll.isDisabled()) {
             return
         }
@@ -148,7 +153,7 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
             this.treeModel.events.changeFilter,
             this.treeModel.events.addNode,
             this.treeModel.events.removeNode,
-            )
+        )
             .subscribe(() => {
                 this.virtualScroll.reCalcPositions(this.treeModel)
                 this.setViewport()
@@ -164,5 +169,19 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
             this.elementRef.nativeElement.getBoundingClientRect(),
             this.lastScrollTop,
         )
+    }
+
+    private disableEventsWhenScrolling() {
+        if (this.scrollTimer) {
+            clearTimeout(this.scrollTimer)
+        } else {
+            this.renderer.addClass(this.elementRef.nativeElement, DISABLE_ON_SCROLL_CLASS)
+        }
+
+        this.scrollTimer = setTimeout(() => {
+            this.renderer.removeClass(this.elementRef.nativeElement, DISABLE_ON_SCROLL_CLASS)
+
+            this.scrollTimer = null
+        }, 120)
     }
 }

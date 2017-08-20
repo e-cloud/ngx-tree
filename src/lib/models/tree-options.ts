@@ -57,10 +57,6 @@ export interface RawTreeOptions {
      */
     isExpandedField?: string;
     /**
-     * Override isHidden field. Default: 'isHidden'
-     */
-    isHiddenField?: string;
-    /**
      * Change the default mouse and key actions on the tree
      */
     actionMapping?: any;
@@ -130,7 +126,6 @@ export class TreeOptions {
     getChildren: (node: TreeNode) => any[]
     dropSlotHeight: number
     useVirtualScroll: boolean
-    isHiddenField: string
     levelPadding: number
     isExpandedField: string
     idField: string
@@ -143,7 +138,6 @@ export class TreeOptions {
         this.displayField = this.options.displayField || 'name'
         this.idField = this.options.idField || 'id'
         this.isExpandedField = this.options.isExpandedField || 'isExpanded'
-        this.isHiddenField = this.options.isHiddenField || 'isHidden'
         this.getChildren = this.options.getChildren
         this.levelPadding = this.options.levelPadding || 0
         this.useVirtualScroll = this.options.useVirtualScroll

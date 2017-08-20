@@ -1,4 +1,5 @@
-<ngx-tree-viewport [treeModel]="treeModel"
+<ngx-tree-viewport [@.disabled]="!enableAnimation || viewport.isScrolling"
+                   [treeModel]="treeModel"
                    #viewport>
   <div *ngIf="!viewport.virtualScroll.isDisabled()"
        class="height-raiser"

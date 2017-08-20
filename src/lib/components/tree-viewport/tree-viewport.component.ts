@@ -28,6 +28,7 @@ const DISABLE_ON_SCROLL_CLASS = 'disable-events-on-scroll'
 })
 export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
     lastScrollTop = 0
+    isScrolling = false
 
     @Input() treeModel: TreeModel
 
@@ -175,10 +176,12 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
         if (this.scrollTimer) {
             clearTimeout(this.scrollTimer)
         } else {
+            this.isScrolling = true
             this.renderer.addClass(this.elementRef.nativeElement, DISABLE_ON_SCROLL_CLASS)
         }
 
         this.scrollTimer = setTimeout(() => {
+            this.isScrolling = false
             this.renderer.removeClass(this.elementRef.nativeElement, DISABLE_ON_SCROLL_CLASS)
 
             this.scrollTimer = null

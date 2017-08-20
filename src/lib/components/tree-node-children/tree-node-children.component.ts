@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations'
 import { Component, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, } from '@angular/core'
 import { Subscription } from 'rxjs/Subscription'
 import { TreeNode } from '../../models'
@@ -11,7 +12,7 @@ export const EXPANSION_PANEL_ANIMATION_TIMING = '225ms cubic-bezier(0.4,0.0,0.2,
     selector: 'ngx-tree-node-children',
     templateUrl: './tree-node-children.component.html',
     styleUrls: ['./tree-node-children.component.scss'],
-    /*animations: [
+    animations: [
         trigger('expandAnimation', [
             transition(':enter', [
                 style({ height: 0, overflow: 'hidden' }),
@@ -22,7 +23,7 @@ export const EXPANSION_PANEL_ANIMATION_TIMING = '225ms cubic-bezier(0.4,0.0,0.2,
                 animate(EXPANSION_PANEL_ANIMATION_TIMING, style({ height: 0 })),
             ]),
         ]),
-    ],*/
+    ],
 })
 export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
     marginTop = 0
@@ -33,8 +34,8 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
     @Input() disableMarginTop = false
     @Input() children: TreeNode[]
 
-    /*@HostBinding('@expandAnimation')
-    expandAnimation = true*/
+    @HostBinding('@expandAnimation')
+    expandAnimation = true
 
     private scrollSub: Subscription
 

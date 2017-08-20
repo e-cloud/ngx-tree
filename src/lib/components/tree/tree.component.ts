@@ -29,6 +29,7 @@ export class TreeComponent implements OnChanges {
     @Input() nodes: TreeNode[]
     @Input() options: RawTreeOptions
     @Input() focused
+    @Input() enableAnimation = true
 
     @Output() expand: EventEmitter<any> = null
     @Output() collapse: EventEmitter<any> = null

@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations'
 import { Component, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, } from '@angular/core'
 import { Subscription } from 'rxjs/Subscription'
-import { TreeNode } from '../../models'
+import { TreeNode, TreeUIOptions } from '../../models'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
 import { binarySearch } from '../../util'
 
@@ -29,6 +29,7 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
     marginTop = 0
     viewportNodes: TreeNode[] = []
 
+    @Input() options: TreeUIOptions
     @Input() node: TreeNode
     @Input() templates: any
     @Input() disableMarginTop = false
@@ -42,9 +43,9 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
     constructor(private virtualScroll: TreeVirtualScroll) {
     }
 
-    @HostBinding('class.class.tree-children-no-padding')
+    @HostBinding('class.tree-children-no-padding')
     get noPadding() {
-        return this.node.options.levelPadding
+        return !this.options.levelPadding
     }
 
     @HostBinding('style.margin-top.px')

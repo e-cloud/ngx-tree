@@ -1,4 +1,5 @@
 <ngx-tree-viewport [@.disabled]="!enableAnimation || viewport.isScrolling"
+                   [enable]="useVirtualScroll"
                    [treeModel]="treeModel"
                    #viewport>
   <div *ngIf="!viewport.virtualScroll.isDisabled()"
@@ -9,6 +10,7 @@
        [class.virtual-scroll-disabled]="viewport.virtualScroll.isDisabled()"
        [style.transform]="'translateY(' + root.marginTop + 'px)'">
     <ngx-tree-node-children #root
+                            [options]="UIOptions"
                             [disableMarginTop]="true"
                             [node]="treeModel?.virtualRoot"
                             [children]="treeModel?.roots"

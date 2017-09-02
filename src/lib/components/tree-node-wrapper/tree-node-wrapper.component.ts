@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostBinding, Input, OnDestroy, OnInit, } from '@angular/core'
-import { TreeNode } from '../../models'
+import isFunction from 'lodash-es/isFunction'
+import { TreeNode, TreeUIOptions } from '../../models'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
 
 @Component({
@@ -9,6 +10,7 @@ import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
 })
 export class TreeNodeWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() node: TreeNode
+    @Input() options: TreeUIOptions
     @Input() index: number
     @Input() templates: any
 
@@ -29,5 +31,15 @@ export class TreeNodeWrapperComponent implements OnInit, OnDestroy, AfterViewIni
         if (!this.virtualScroll.isDisabled()) {
             this.virtualScroll.reportNodeHeight(this.elementRef.nativeElement.getBoundingClientRect().height)
         }
+    }
+
+    allowDrag(node: TreeNode) {
+        return isFunction(this.options.allowDrag) ? this.options.allowDrag(node) : this.options.allowDrag
+    }
+
+    allowDrop(node: TreeNode, $event?: DragEvent) {
+        return isFunction(this.options.allowDrop)
+            ? this.options.allowDrop(node, { parent: this.node, index: node.index }, $event)
+            : this.options.allowDrop
     }
 }

@@ -1,4 +1,5 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output, Renderer2 } from '@angular/core'
+import isFunction from 'lodash-es/isFunction'
 import { TreeNode } from '../models'
 import { TreeDraggingTargetService } from '../services/tree-dragging-target.service'
 
@@ -18,11 +19,11 @@ export class TreeDropDirective {
 
     @Input()
     set treeAllowDrop(allowDrop: boolean | AllowDropPredicate) {
-        if (allowDrop instanceof Function) {
-            this._allowDrop = allowDrop
-        } else {
-            this._allowDrop = (element, $event) => allowDrop
-        }
+        this._allowDrop = isFunction(allowDrop) ? allowDrop : (element, $event) => allowDrop
+    }
+
+    get treeAllowDrop() {
+        return this._allowDrop
     }
 
     private dragOverClassAdded: boolean

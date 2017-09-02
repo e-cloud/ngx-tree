@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef } from '@angular/core'
-import { TreeNode } from '../../models'
+import { TreeNode, TreeUIOptions } from '../../models'
 
 @Component({
     selector: 'ngx-tree-node-content',
@@ -8,6 +8,7 @@ import { TreeNode } from '../../models'
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeNodeContentComponent {
+    @Input() options: TreeUIOptions
     @Input() node: TreeNode
     @Input() index: number
     @Input() template: TemplateRef<any>

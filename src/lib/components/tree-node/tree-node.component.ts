@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations'
 import { Component, HostBinding, Input } from '@angular/core'
-import { TreeNode } from '../../models'
+import { TreeNode, TreeUIOptions } from '../../models'
 
 export const EXPANSION_PANEL_ANIMATION_TIMING = '500ms cubic-bezier(0.4,0.0,0.2,1)'
 
@@ -23,6 +23,7 @@ export const EXPANSION_PANEL_ANIMATION_TIMING = '500ms cubic-bezier(0.4,0.0,0.2,
 })
 export class TreeNodeComponent {
     @Input() node: TreeNode
+    @Input() options: TreeUIOptions
     @Input() index: number
     @Input() templates: any
 

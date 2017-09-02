@@ -9,7 +9,7 @@ import { Subject } from 'rxjs/Subject'
 import { EventsMap, TREE_EVENTS } from '../constants/events'
 import { TreeEvent } from './events'
 import { TreeNode } from './tree-node'
-import { TreeOptions } from './tree-options'
+import { createTreeDataOptions, TreeDataOptions } from './tree-options'
 
 export interface ScrollIntoViewTarget {
     node: TreeNode
@@ -82,8 +82,9 @@ export class TreeModel {
         /**
          * Options that are passed to the tree component
          */
-        public options: TreeOptions = new TreeOptions(),
+        public options: TreeDataOptions,
     ) {
+        this.options = createTreeDataOptions(options)
         const virtualRootConfig = {
             virtual: true,
             // todo: determine to use fixed children field later
@@ -100,7 +101,7 @@ export class TreeModel {
         this.nodeCache.set(node.id, node)
     }
 
-    updateOptions(options: TreeOptions) {
+    updateOptions(options: TreeDataOptions) {
         this.options = options
     }
 

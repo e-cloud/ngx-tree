@@ -1,10 +1,12 @@
-<ngx-tree-node-wrapper [style.padding-left]="node.getNodePadding()"
+<ngx-tree-node-wrapper [style.padding-left]="options.levelPadding * (node.level - 1) + 'px'"
                        [node]="node"
+                       [options]="options"
                        [index]="index"
                        [templates]="templates">
 </ngx-tree-node-wrapper>
 
 <ngx-tree-node-children *ngIf="node.isExpanded"
                         [node]="node"
+                        [options]="options"
                         [children]="node.children"
                         [templates]="templates"></ngx-tree-node-children>

@@ -30,6 +30,8 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
     lastScrollTop = 0
     isScrolling = false
 
+    @Input() enable: boolean
+
     @Input() treeModel: TreeModel
 
     @HostBinding('class.tree-viewport') className = true
@@ -92,7 +94,7 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
 
     ngOnChanges(changes) {
         if ('treeModel' in changes) {
-            this.virtualScroll.setDisabled(!this.treeModel.options.useVirtualScroll)
+            this.virtualScroll.setDisabled(!this.enable)
             if (this.virtualScroll.isDisabled()) {
                 return
             }
@@ -180,7 +182,7 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
             this.renderer.addClass(this.elementRef.nativeElement, DISABLE_ON_SCROLL_CLASS)
         }
 
-        this.scrollTimer = setTimeout(() => {
+        this.scrollTimer = <any>setTimeout(() => {
             this.isScrolling = false
             this.renderer.removeClass(this.elementRef.nativeElement, DISABLE_ON_SCROLL_CLASS)
 

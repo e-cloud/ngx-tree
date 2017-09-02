@@ -13,7 +13,15 @@ import {
 } from '@angular/core'
 import 'element-closest'
 import { EventsMap, TREE_EVENTS } from '../../constants/events'
-import { RawTreeOptions, TreeModel, TreeNode, TreeOptions } from '../../models'
+import {
+    createTreeUIOptions,
+    IAllowDragFn,
+    IAllowDropFn,
+    TreeDataOptions,
+    TreeModel,
+    TreeNode,
+    TreeUIOptions
+} from '../../models'
 import { TreeDraggingTargetService } from '../../services/tree-dragging-target.service'
 import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
 
@@ -25,10 +33,17 @@ import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
 export class TreeComponent implements OnChanges {
     emitterMap: EventsMap
     treeModel: TreeModel = null
+    UIOptions: TreeUIOptions
 
     @Input() nodes: TreeNode[]
-    @Input() options: RawTreeOptions
     @Input() focused
+    @Input() dataOptions: TreeDataOptions
+
+    @Input() allowDrag: boolean | IAllowDragFn
+    @Input() allowDrop: boolean | IAllowDropFn
+    @Input() levelPadding: number
+    @Input() useVirtualScroll: boolean
+    @Input() nodeClass: (node: TreeNode) => string
     @Input() enableAnimation = true
 
     @Output() expand: EventEmitter<any> = null
@@ -54,7 +69,9 @@ export class TreeComponent implements OnChanges {
 
     @ViewChild('viewport') viewportComponent: TreeViewportComponent
 
-    constructor(public treeDraggingTargetService: TreeDraggingTargetService) {
+    constructor(
+        public treeDraggingTargetService: TreeDraggingTargetService
+    ) {
         this.emitterMap = Object.keys(TREE_EVENTS).reduce((map, name) => {
             if (!this.hasOwnProperty(name)) {
                 throw new TypeError(`Unmatched events: [${name}]`)
@@ -92,9 +109,23 @@ export class TreeComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.nodes && changes.nodes.currentValue) {
-            this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, new TreeOptions(this.options))
-        } else if (changes.options && changes.options.currentValue && this.treeModel) {
-            this.treeModel.updateOptions(changes.options.currentValue)
+            this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, this.dataOptions)
+        } else if (changes.dataOptions && changes.dataOptions.currentValue && this.treeModel) {
+            this.treeModel.updateOptions(changes.dataOptions.currentValue)
+        }
+
+        if (changes.allowDrag
+            || changes.allowDrop
+            || changes.levelPadding
+            || changes.useVirtualScroll
+            || changes.nodeClass) {
+            this.UIOptions = createTreeUIOptions({
+                allowDrag: this.allowDrag,
+                allowDrop: this.allowDrop,
+                levelPadding: this.levelPadding,
+                useVirtualScroll: this.useVirtualScroll,
+                nodeClass: this.nodeClass,
+            })
         }
     }
 

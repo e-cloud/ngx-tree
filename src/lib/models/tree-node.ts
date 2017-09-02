@@ -6,7 +6,7 @@ import without from 'lodash-es/without'
 import { TREE_EVENTS } from '../constants/events'
 import { TreeEvent } from './events'
 import { TreeModel } from './tree-model'
-import { TreeOptions } from './tree-options'
+import { TreeDataOptions } from './tree-options'
 
 export class TreeNode {
     /**
@@ -75,7 +75,7 @@ export class TreeNode {
     }
 
     // proxy functions:
-    get options(): TreeOptions {
+    get options(): TreeDataOptions {
         return this.treeModel.options
     }
 
@@ -102,13 +102,6 @@ export class TreeNode {
 
     get visibleChildren() {
         return (this.children || []).filter((node) => !node.isHidden)
-    }
-
-    /**
-     * @returns      in case nodeClass option is supplied, returns the current node's class
-     */
-    get cssClass() {
-        return [this.options.nodeClass(this), `tree-node-level-${ this.level }`].join(' ')
     }
 
     constructor(
@@ -161,14 +154,6 @@ export class TreeNode {
             from: $event.element,
             to: { parent: this, index: 0, dropOnNode: true },
         })
-    }
-
-    allowDrop(element, $event?) {
-        return this.options.allowDrop(element, { parent: this, index: 0 }, $event)
-    }
-
-    allowDrag() {
-        return this.options.allowDrag(this)
     }
 
     // traversing:
@@ -247,13 +232,6 @@ export class TreeNode {
         } else {
             return this.parent && this.parent.isDescendantOf(node)
         }
-    }
-
-    /**
-     * @returns      in case levelPadding option is supplied, returns the current node's padding
-     */
-    getNodePadding() {
-        return this.options.levelPadding * (this.level - 1) + 'px'
     }
 
     // helper methods:

@@ -50,7 +50,9 @@ export class NgxTreeModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: NgxTreeModule,
-            providers: [TreeDraggingTargetService],
+            providers: [
+                TreeDraggingTargetService,
+            ],
         }
     }
 }

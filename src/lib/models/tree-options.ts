@@ -1,5 +1,6 @@
+import defaults from 'lodash-es/defaults'
 import defaultsDeep from 'lodash-es/defaultsDeep'
-import { defaultActionMapping } from './defaults'
+import { defaultActionMapping } from './actions'
 import { TreeModel } from './tree-model'
 import { TreeNode } from './tree-node'
 
@@ -35,41 +36,24 @@ export type IAllowDropFn = (element: TreeNode, to: DropTarget, $event?: DragEven
 
 export type IAllowDragFn = (node: TreeNode) => boolean
 
-/**
- * This is the interface of the options input of the tree.
- * See docs for more detailed explanations
- */
-export interface RawTreeOptions {
-    /**
-     * Override children field. Default: 'children'
-     */
-    childrenField?: string;
-    /**
-     * Override display field. Default: 'name'
-     */
-    displayField?: string;
-    /**
-     * Override id field. Default: 'id'
-     */
-    idField?: string;
-    /**
-     * Override isExpanded field. Default: 'isExpanded'
-     */
-    isExpandedField?: string;
-    /**
-     * Change the default mouse and key actions on the tree
-     */
-    actionMapping?: any;
-    /**
-     * Specify padding per node instead of children padding (to allow full row select for example)
-     */
-    levelPadding?: number;
-    /**
-     * Boolean whether virtual scroll should be used.
-     * Increases performance for large trees
-     * Default is false
-     */
-    useVirtualScroll?: boolean;
+export const defaultUIOptions: TreeUIOptions = {
+    allowDrag: false,
+    allowDrop: false,
+    levelPadding: 0,
+    useVirtualScroll: false,
+    nodeClass: () => '',
+}
+
+export const defaultDataOptions: TreeDataOptions = {
+    childrenField: 'children',
+    displayField: 'name',
+    idField: 'id',
+    isExpandedField: 'isExpanded',
+    actionMapping: defaultActionMapping,
+    getChildren: (node) => null,
+}
+
+export interface TreeUIOptions {
     /**
      * Specify if dragging tree nodes is allowed.
      * This could be a boolean, or a function that receives a TreeNode and returns a boolean
@@ -102,17 +86,15 @@ export interface RawTreeOptions {
      */
     allowDrop?: boolean | IAllowDropFn;
     /**
-     * For use with `useVirtualScroll` option.
-     * Specify a height for drop slots (located between nodes) in pixels
-     *
-     * **Default Value: 2**
+     * Specify padding per node instead of children padding (to allow full row select for example)
      */
-    dropSlotHeight?: number;
-
+    levelPadding?: number;
     /**
-     * Supply function for getting fields asynchronously. Should return a Promise
+     * Boolean whether virtual scroll should be used.
+     * Increases performance for large trees
+     * Default is false
      */
-    getChildren?(node: TreeNode): any;
+    useVirtualScroll?: boolean;
 
     /**
      * Supply function for getting a custom class for the node component
@@ -120,47 +102,40 @@ export interface RawTreeOptions {
     nodeClass?(node: TreeNode): string;
 }
 
-export class TreeOptions {
-    displayField: string
-    childrenField: string
-    getChildren: (node: TreeNode) => any[]
-    dropSlotHeight: number
-    useVirtualScroll: boolean
-    levelPadding: number
-    isExpandedField: string
-    idField: string
-    actionMapping: ActionMapping
-
-    constructor(private options: RawTreeOptions = {}) {
-        this.actionMapping = defaultsDeep({}, this.options.actionMapping, defaultActionMapping)
-
-        this.childrenField = this.options.childrenField || 'children'
-        this.displayField = this.options.displayField || 'name'
-        this.idField = this.options.idField || 'id'
-        this.isExpandedField = this.options.isExpandedField || 'isExpanded'
-        this.getChildren = this.options.getChildren
-        this.levelPadding = this.options.levelPadding || 0
-        this.useVirtualScroll = this.options.useVirtualScroll
-        this.dropSlotHeight = this.options.dropSlotHeight || 2
-    }
-
-    nodeClass(node: TreeNode): string {
-        return this.options.nodeClass ? this.options.nodeClass(node) : ''
-    }
-
-    allowDrop(element: TreeNode, to: DropTarget, $event?: DragEvent): boolean {
-        if (this.options.allowDrop instanceof Function) {
-            return this.options.allowDrop(element, to, $event)
-        } else {
-            return this.options.allowDrop === undefined ? true : this.options.allowDrop
-        }
-    }
-
-    allowDrag(node: TreeNode): boolean {
-        if (this.options.allowDrag instanceof Function) {
-            return this.options.allowDrag(node)
-        } else {
-            return this.options.allowDrag
-        }
-    }
+export function createTreeUIOptions(rawOpts?: TreeUIOptions) {
+    return defaults({}, rawOpts, defaultUIOptions)
 }
+
+export interface TreeDataOptions {
+    /**
+     * Override children field. Default: 'children'
+     */
+    childrenField?: string;
+    /**
+     * Override display field. Default: 'name'
+     */
+    displayField?: string;
+    /**
+     * Override id field. Default: 'id'
+     */
+    idField?: string;
+    /**
+     * Override isExpanded field. Default: 'isExpanded'
+     */
+    isExpandedField?: string;
+    /**
+     * Change the default mouse and key actions on the tree
+     */
+    actionMapping?: any;
+
+    /**
+     * Supply function for getting fields asynchronously. Should return a Promise
+     */
+    getChildren?(node: TreeNode): Promise<any[]>;
+}
+
+export function createTreeDataOptions(rawOpts?: TreeDataOptions) {
+    return defaultsDeep({}, rawOpts, defaultDataOptions)
+}
+
+// export const TREE_DATA_OPTIONS = new InjectionToken('TREE_DATA_OPTIONS')

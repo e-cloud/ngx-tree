@@ -36,7 +36,7 @@ export class TreeComponent implements OnChanges {
     UIOptions: TreeUIOptions
 
     @Input() nodes: TreeNode[]
-    @Input() focused
+    @Input() focusedNode: string
     @Input() dataOptions: TreeDataOptions
 
     @Input() allowDrag: boolean | IAllowDragFn
@@ -112,6 +112,10 @@ export class TreeComponent implements OnChanges {
             this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, this.dataOptions)
         } else if (changes.dataOptions && changes.dataOptions.currentValue && this.treeModel) {
             this.treeModel.updateOptions(changes.dataOptions.currentValue)
+        }
+
+        if (changes.focusedNode && changes.focusedNode.currentValue && this.treeModel) {
+            this.treeModel.focusNode(this.focusedNode)
         }
 
         if (changes.allowDrag

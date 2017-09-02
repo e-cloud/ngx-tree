@@ -283,6 +283,13 @@ export class TreeModel {
         this.roots.forEach((root) => root.traverse(fn))
     }
 
+    focusNode(id: string) {
+        const target = this.getNodeById(id)
+        if (target) {
+            target.focus()
+        }
+    }
+
     /**
      * Focuses on the next node in the tree (same as down arrow)
      */

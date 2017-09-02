@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { TreeNode, TreeOptions } from 'ngx-tree/models'
+import { TreeNode } from 'ngx-tree/models'
 
 @Component({
     selector: 'demo-root',
@@ -22,18 +22,22 @@ export class DemoComponent {
         },
     ]
 
-    customTemplateStringOptions = {
+    customOptions = {
         // displayField: 'subTitle',
         isExpandedField: 'expanded',
         idField: 'uuid',
-        useVirtualScroll: false,
         getChildren: this.getChildren.bind(this),
+        useVirtualScroll: true,
         allowDrag: (node) => {
             // console.log('allowDrag?');
             return true
         },
-        allowDrop: (node) => {
+        allowDrop: (node, to) => {
             // console.log('allowDrop?');
+            if (node.id === to.parent.id || node.parent === to.parent) {
+                return false
+            }
+
             return true
         },
     }
@@ -191,6 +195,6 @@ export class DemoComponent {
     }
 
     log($event) {
-        // console.log($event)
+        console.log($event)
     }
 }

@@ -1,6 +1,44 @@
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
+import { TreeModel, TreeNode, TreeUIOptions } from '../../models'
+import { TreeDraggingTargetService } from '../../services/tree-dragging-target.service'
 import { TreeComponent } from './tree.component'
+
+@Component({
+    selector: 'ngx-tree-node-children',
+    template: '',
+})
+export class FakeTreeNodeChildrenComponent {
+
+    @Input() options: TreeUIOptions
+    @Input() node: TreeNode
+    @Input() templates: any
+    @Input() disableMarginTop = false
+    @Input() children: TreeNode[]
+
+    constructor() {
+    }
+}
+
+@Component({
+    selector: 'ngx-tree-viewport',
+    template: '',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class FakeTreeViewportComponent {
+    @Input() enable: boolean
+
+    @Input() treeModel: TreeModel
+
+    virtualScroll = {
+        isDisabled() {return false}
+    }
+
+    constructor() {
+    }
+}
 
 describe('TreeComponent', () => {
     let component: TreeComponent
@@ -8,7 +46,17 @@ describe('TreeComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-                declarations: [TreeComponent],
+                imports: [
+                    NoopAnimationsModule,
+                ],
+                declarations: [
+                    TreeComponent,
+                    FakeTreeNodeChildrenComponent,
+                    FakeTreeViewportComponent,
+                ],
+                providers: [
+                    TreeDraggingTargetService,
+                ]
             })
             .compileComponents()
     }))

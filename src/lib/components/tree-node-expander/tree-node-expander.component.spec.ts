@@ -16,6 +16,7 @@ describe('TreeNodeExpanderComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TreeNodeExpanderComponent)
         component = fixture.componentInstance
+        component.node = { } as any
         fixture.detectChanges()
     })
 

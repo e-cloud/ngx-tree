@@ -2,7 +2,19 @@
                        [node]="node"
                        [options]="options"
                        [index]="index"
-                       [templates]="templates">
+                       [templates]="templates"
+                       [class.tree-node-wrapper-active]="node.isActive"
+                       [class.tree-node-wrapper-focused]="node.isFocused"
+                       (click)="node.mouseAction('click', $event)"
+                       (dblclick)="node.mouseAction('dblClick', $event)"
+                       (contextmenu)="node.mouseAction('contextMenu', $event)"
+                       (ngxTreeDrop)="node.onDrop($event)"
+                       (treeDropDragOver)="node.mouseAction('dragOver', $event)"
+                       (treeDropDragLeave)="node.mouseAction('dragLeave', $event)"
+                       (treeDropDragEnter)="node.mouseAction('dragEnter', $event)"
+                       [treeAllowDrop]="allowDrop.bind(this)"
+                       [ngxTreeDrag]="node"
+                       [treeDragEnabled]="allowDrag(node)">
 </ngx-tree-node-wrapper>
 
 <ngx-tree-node-children *ngIf="node.isExpanded"

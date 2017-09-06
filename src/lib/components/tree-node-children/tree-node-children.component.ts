@@ -38,6 +38,8 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
     @HostBinding('@expandAnimation')
     expandAnimation = true
 
+    @HostBinding('class.tree-node-children') className = true
+
     private scrollSub: Subscription
 
     constructor(private virtualScroll: TreeVirtualScroll) {

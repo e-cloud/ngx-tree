@@ -4,16 +4,16 @@
   white-space: nowrap;
 }
 
-.toggle-children-wrapper-expanded .toggle-children {
+.toggle-children-expanded .toggle-children {
   transform: rotate(90deg)
 }
 
-.toggle-children-wrapper-collapsed .toggle-children {
+.toggle-children-collapsed .toggle-children {
   transform: rotate(0);
 }
 
 .toggle-children-wrapper {
-  padding: 2px 3px 5px 1px;
+  padding: 2px 3px 5px 3px;
 }
 
 .toggle-children {
@@ -31,7 +31,7 @@
 .toggle-children-placeholder {
   display: inline-block;
   height: 10px;
-  width: 10px;
+  width: 12px;
   position: relative;
   top: 1px;
   padding-right: 3px;

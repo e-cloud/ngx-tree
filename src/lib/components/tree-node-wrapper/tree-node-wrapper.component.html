@@ -4,19 +4,7 @@
   <ngx-tree-node-content [node]="node"
                          [index]="index"
                          [options]="options"
-                         [template]="templates.treeNodeTemplate"
-                         [class.tree-node-content-active]="node.isActive"
-                         [class.tree-node-content-focused]="node.isFocused"
-                         (click)="node.mouseAction('click', $event)"
-                         (dblclick)="node.mouseAction('dblClick', $event)"
-                         (contextmenu)="node.mouseAction('contextMenu', $event)"
-                         (ngxTreeDrop)="node.onDrop($event)"
-                         (treeDropDragOver)="node.mouseAction('dragOver', $event)"
-                         (treeDropDragLeave)="node.mouseAction('dragLeave', $event)"
-                         (treeDropDragEnter)="node.mouseAction('dragEnter', $event)"
-                         [treeAllowDrop]="allowDrop.bind(this)"
-                         [ngxTreeDrag]="node"
-                         [treeDragEnabled]="allowDrag(node)">
+                         [template]="templates.treeNodeTemplate">
   </ngx-tree-node-content>
 </ng-template>
 

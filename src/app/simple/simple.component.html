@@ -1,0 +1,26 @@
+<ngx-tree
+  [enableAnimation]="false"
+  [nodes]="nodes"
+  [dataOptions]="customOptions"
+  [useVirtualScroll]="customOptions.useVirtualScroll"
+  [allowDrag]="customOptions.allowDrag"
+  [allowDrop]="customOptions.allowDrop"
+  (expand)="log($event)"
+  (collapse)="log($event)"
+  (changeFilter)="log($event)"
+  (toggleExpander)="log($event)"
+  (moveNode)="log($event)"
+  (addNode)="log($event)"
+  (removeNode)="log($event)"
+  (activate)="log($event)"
+  (deactivate)="log($event)"
+  (focus)="log($event)"
+  (blur)="log($event)"
+  (initialized)="log($event)"
+  (loadChildren)="log($event)">
+  <ng-template #treeNodeTemplate let-node>
+    <span title="{{node.data.subTitle}}">{{ node.data.name }}</span>
+    <span class="pull-right">{{ childrenCount(node) }}</span>
+  </ng-template>
+  <ng-template #loadingTemplate>Loading, please hold....</ng-template>
+</ngx-tree>

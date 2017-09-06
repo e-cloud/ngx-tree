@@ -1,0 +1,12 @@
+<ngx-tree
+  [enableAnimation]="true"
+  [nodes]="nodes"
+  [dataOptions]="customOptions"
+  [useVirtualScroll]="customOptions.useVirtualScroll"
+  [allowDrag]="customOptions.allowDrag"
+  [allowDrop]="customOptions.allowDrop"
+  [levelPadding]="customOptions.levelPadding">
+  <ng-template #treeNodeTemplate let-node>
+    <span title="{{node.data.subTitle}}">{{ node.data.name }}</span>
+  </ng-template>
+</ngx-tree>

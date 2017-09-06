@@ -1,0 +1,53 @@
+:host ::ng-deep {
+  /* style reset start */
+  .tree-node-children {
+    padding-left: 0;
+  }
+
+  .tree-node-wrapper.tree-node-wrapper-active {
+    .tree-node-content,
+    .tree-node-content:hover,
+    &.tree-node-wrapper-focused .tree-node-content {
+      background-color: transparent;
+    }
+  }
+
+  .tree-node-wrapper.tree-node-wrapper-focused {
+    .tree-node-content {
+      background-color: transparent
+    }
+  }
+
+  .tree-node-wrapper .tree-node-content:hover {
+    background-color: transparent
+  }
+
+  .tree-node-wrapper.tree-node-wrapper-active .tree-node-content,
+  .tree-node-wrapper.tree-node-wrapper-focused .tree-node-content,
+  .tree-node-wrapper .tree-node-content:hover {
+    box-shadow: none;
+  }
+  /* style reset end */
+
+  /* style overwrite start */
+
+  .tree-node-wrapper-active,
+  .tree-node-wrapper.tree-node-wrapper-active:hover,
+  .tree-node-wrapper-active.tree-node-wrapper-focused {
+    background-color: #beebff;
+  }
+
+  .tree-node-wrapper-focused {
+    background-color: #e7f4f9
+  }
+
+  .tree-node-wrapper:hover {
+    background-color: #f7fbff
+  }
+
+  .tree-node-wrapper-active,
+  .tree-node-wrapper-focused,
+  .tree-node-wrapper:hover {
+    box-shadow: inset 0 0 1px #999;
+  }
+}

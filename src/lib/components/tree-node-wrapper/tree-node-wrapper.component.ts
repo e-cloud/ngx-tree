@@ -28,7 +28,7 @@ export class TreeNodeWrapperComponent implements OnInit, OnDestroy, AfterViewIni
     }
 
     ngAfterViewInit() {
-        if (!this.virtualScroll.isDisabled()) {
+        if (!this.virtualScroll.isDisabled() && !this.virtualScroll.hasEnoughNodeHeight) {
             this.virtualScroll.reportNodeHeight(this.elementRef.nativeElement.getBoundingClientRect().height)
         }
     }

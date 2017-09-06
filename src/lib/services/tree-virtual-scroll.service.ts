@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Inject, Injectable, InjectionToken } from '@angular/core'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Subject } from 'rxjs/Subject'
 import { Subscription } from 'rxjs/Subscription'
@@ -7,10 +7,13 @@ import { TreeModel, TreeNode } from '../models'
 const Y_OFFSET_NODE_SIZE = 3
 let id = 0
 
+export const VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA = new InjectionToken('VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA')
+
 @Injectable()
 export class TreeVirtualScroll {
     id: number
     averageNodeHeight = 0
+    hasEnoughNodeHeight = false
 
     private currentViewport: ClientRect
     private lastScrollTop = 0
@@ -19,7 +22,7 @@ export class TreeVirtualScroll {
     private collectionMonitor$ = new BehaviorSubject(null)
     private nodeHeightAnalytics$ = new Subject()
 
-    constructor() {
+    constructor(@Inject(VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA) private quota: number) {
         this.id = id++
         this.collectAverageNodeHeight()
     }
@@ -115,6 +118,9 @@ export class TreeVirtualScroll {
             }, [0, 0])
             .subscribe(pair => {
                 this.averageNodeHeight = pair[0] / pair[1]
+                if (pair[1] >= this.quota) {
+                    this.hasEnoughNodeHeight = true
+                }
             })
     }
 }

@@ -17,10 +17,11 @@ import {
     createTreeUIOptions,
     IAllowDragFn,
     IAllowDropFn,
+    ILevelPaddingFn,
     TreeDataOptions,
     TreeModel,
     TreeNode,
-    TreeUIOptions
+    TreeUIOptions,
 } from '../../models'
 import { TreeDraggingTargetService } from '../../services/tree-dragging-target.service'
 import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
@@ -41,7 +42,7 @@ export class TreeComponent implements OnChanges {
 
     @Input() allowDrag: boolean | IAllowDragFn
     @Input() allowDrop: boolean | IAllowDropFn
-    @Input() levelPadding: number
+    @Input() levelPadding: number | ILevelPaddingFn
     @Input() useVirtualScroll: boolean
     @Input() nodeClass: (node: TreeNode) => string
     @Input() enableAnimation = true
@@ -70,7 +71,7 @@ export class TreeComponent implements OnChanges {
     @ViewChild('viewport') viewportComponent: TreeViewportComponent
 
     constructor(
-        public treeDraggingTargetService: TreeDraggingTargetService
+        public treeDraggingTargetService: TreeDraggingTargetService,
     ) {
         this.emitterMap = Object.keys(TREE_EVENTS).reduce((map, name) => {
             if (!this.hasOwnProperty(name)) {

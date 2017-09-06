@@ -1,5 +1,6 @@
 import defaults from 'lodash-es/defaults'
 import defaultsDeep from 'lodash-es/defaultsDeep'
+import isNumber from 'lodash-es/isNumber'
 import { defaultActionMapping } from './actions'
 import { TreeModel } from './tree-model'
 import { TreeNode } from './tree-node'
@@ -36,10 +37,12 @@ export type IAllowDropFn = (element: TreeNode, to: DropTarget, $event?: DragEven
 
 export type IAllowDragFn = (node: TreeNode) => boolean
 
+export type ILevelPaddingFn = (node: TreeNode) => string
+
 export const defaultUIOptions: TreeUIOptions = {
     allowDrag: false,
     allowDrop: false,
-    levelPadding: 0,
+    levelPadding: () => '0px',
     useVirtualScroll: false,
     nodeClass: () => '',
 }
@@ -88,7 +91,7 @@ export interface TreeUIOptions {
     /**
      * Specify padding per node instead of children padding (to allow full row select for example)
      */
-    levelPadding?: number;
+    levelPadding?: ILevelPaddingFn;
     /**
      * Boolean whether virtual scroll should be used.
      * Increases performance for large trees
@@ -102,7 +105,22 @@ export interface TreeUIOptions {
     nodeClass?(node: TreeNode): string;
 }
 
-export function createTreeUIOptions(rawOpts?: TreeUIOptions) {
+export interface RawTreeUIOptions {
+    allowDrag?: boolean | IAllowDragFn;
+    allowDrop?: boolean | IAllowDropFn;
+    levelPadding?: number | ILevelPaddingFn;
+    useVirtualScroll?: boolean;
+    nodeClass?(node: TreeNode): string;
+}
+
+export function createTreeUIOptions(rawOpts?: RawTreeUIOptions) {
+    const levelPaddingOpt = rawOpts.levelPadding
+    if (isNumber(levelPaddingOpt)) {
+        rawOpts.levelPadding = function (node: TreeNode) {
+            return (levelPaddingOpt + levelPaddingOpt * (node.level - 1)) + 'px'
+        }
+    }
+
     return defaults({}, rawOpts, defaultUIOptions)
 }
 

@@ -1,4 +1,4 @@
-<ngx-tree-node-wrapper [style.padding-left]="options.levelPadding * (node.level - 1) + 'px'"
+<ngx-tree-node-wrapper [style.padding-left]="options.levelPadding(node)"
                        [node]="node"
                        [options]="options"
                        [index]="index"

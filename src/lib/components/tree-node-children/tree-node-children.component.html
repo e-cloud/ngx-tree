@@ -12,6 +12,6 @@
 </ngx-tree-node>
 
 <ngx-tree-loading *ngIf="!node.children"
-                  [style.padding-left]="options.levelPadding * (node.level - 1) + 'px'"
+                  [style.padding-left]="options.levelPadding(node)"
                   [template]="templates.loadingTemplate"
                   [node]="node"></ngx-tree-loading>

@@ -2,9 +2,13 @@ import { Component, Input } from '@angular/core'
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { BrowserTestingModule } from '@angular/platform-browser/testing'
 
-import { createTreeDataOptions, TreeNode, TreeUIOptions } from '../../models'
+import { createTreeUIOptions, TreeNode, TreeUIOptions } from '../../models'
 import { FakeTreeNodeChildrenComponent } from '../tree/tree.component.spec'
 import { TreeNodeComponent } from './tree-node.component'
+import {
+    FakeTreeDragDirective,
+    FakeTreeDropDirective
+} from 'ngx-tree/components/tree-node-drop-slot/tree-node-drop-slot.component.spec'
 
 @Component({
     selector: 'ngx-tree-node-wrapper',
@@ -33,6 +37,8 @@ describe('TreeNodeComponent', () => {
                     TreeNodeComponent,
                     FakeTreeNodeWrapperComponent,
                     FakeTreeNodeChildrenComponent,
+                    FakeTreeDropDirective,
+                    FakeTreeDragDirective,
                 ],
             })
             .compileComponents()
@@ -41,7 +47,7 @@ describe('TreeNodeComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TreeNodeComponent)
         component = fixture.componentInstance
-        component.options = createTreeDataOptions()
+        component.options = createTreeUIOptions()
         component.node = {} as any
         fixture.detectChanges()
     })

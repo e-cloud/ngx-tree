@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, Input, TemplateRef } from '@angular
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
-import { createTreeDataOptions, TreeNode, TreeUIOptions } from '../../models'
-import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
+import { createTreeUIOptions, TreeNode, TreeUIOptions } from '../../models'
+import { TreeVirtualScroll, VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA } from '../../services/tree-virtual-scroll.service'
 import { TreeNodeChildrenComponent } from './tree-node-children.component'
 
 @Component({
@@ -43,6 +43,10 @@ describe('TreeNodeChildrenComponent', () => {
                 ],
                 providers: [
                     TreeVirtualScroll,
+                    {
+                        provide: VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA,
+                        useValue: 5,
+                    },
                 ]
             })
             .compileComponents()
@@ -51,7 +55,7 @@ describe('TreeNodeChildrenComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TreeNodeChildrenComponent)
         component = fixture.componentInstance
-        component.options = createTreeDataOptions()
+        component.options = createTreeUIOptions()
         component.node = {} as any
         component.templates = {}
         fixture.detectChanges()

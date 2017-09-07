@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { BrowserTestingModule } from '@angular/platform-browser/testing'
 import { Observable } from 'rxjs/Observable'
 
-import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
+import { TreeVirtualScroll, VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA } from '../../services/tree-virtual-scroll.service'
 import { TreeViewportComponent } from './tree-viewport.component'
 
 describe('TreeViewportComponent', () => {
@@ -17,6 +17,10 @@ describe('TreeViewportComponent', () => {
                 declarations: [TreeViewportComponent],
                 providers: [
                     TreeVirtualScroll,
+                    {
+                        provide: VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA,
+                        useValue: 5,
+                    },
                 ]
             })
             .compileComponents()

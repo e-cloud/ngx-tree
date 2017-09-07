@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, Component, Input, TemplateRef } from '@angular
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { BrowserTestingModule } from '@angular/platform-browser/testing'
 
-import { createTreeDataOptions, TreeNode, TreeUIOptions } from '../../models'
-import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
-import { FakeTreeDragDirective, FakeTreeDropDirective } from '../tree-node-drop-slot/tree-node-drop-slot.component.spec'
+import { createTreeUIOptions, TreeNode, TreeUIOptions } from '../../models'
+import { TreeVirtualScroll, VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA } from '../../services/tree-virtual-scroll.service'
 import { TreeNodeWrapperComponent } from './tree-node-wrapper.component'
 
 @Component({
@@ -40,11 +39,13 @@ describe('TreeNodeWrapperComponent', () => {
                     TreeNodeWrapperComponent,
                     FakeTreeNodeExpanderComponent,
                     FakeTreeNodeContentComponent,
-                    FakeTreeDropDirective,
-                    FakeTreeDragDirective,
                 ],
                 providers: [
                     TreeVirtualScroll,
+                    {
+                        provide: VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA,
+                        useValue: 5,
+                    },
                 ]
             })
             .compileComponents()
@@ -53,7 +54,7 @@ describe('TreeNodeWrapperComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TreeNodeWrapperComponent)
         component = fixture.componentInstance
-        component.options = createTreeDataOptions()
+        component.options = createTreeUIOptions()
         component.node = {} as any
         component.templates = {}
         fixture.detectChanges()

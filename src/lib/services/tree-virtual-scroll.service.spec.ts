@@ -1,11 +1,17 @@
 import { inject, TestBed } from '@angular/core/testing'
 
-import { TreeVirtualScroll } from './tree-virtual-scroll.service'
+import { TreeVirtualScroll, VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA } from './tree-virtual-scroll.service'
 
 describe('TreeVirtualScrollService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [TreeVirtualScroll],
+            providers: [
+                TreeVirtualScroll,
+                {
+                    provide: VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA,
+                    useValue: 5,
+                },
+            ],
         })
     })
 

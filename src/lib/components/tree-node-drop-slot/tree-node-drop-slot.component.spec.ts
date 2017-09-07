@@ -2,7 +2,7 @@ import { Directive, EventEmitter, Input, Output } from '@angular/core'
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { BrowserTestingModule } from '@angular/platform-browser/testing'
 
-import { createTreeDataOptions, TreeNode } from '../../models'
+import { createTreeUIOptions, TreeNode } from '../../models'
 import { TreeNodeDropSlotComponent } from './tree-node-drop-slot.component'
 
 @Directive({
@@ -49,7 +49,7 @@ describe('TreeNodeDropSlotComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TreeNodeDropSlotComponent)
         component = fixture.componentInstance
-        component.options = createTreeDataOptions()
+        component.options = createTreeUIOptions()
         fixture.detectChanges()
     })
 

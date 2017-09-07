@@ -7,10 +7,10 @@
     "types": [],
     "paths": {
       "ngx-tree": [
-        "./lib"
+        "./ngx-tree"
       ],
       "ngx-tree/*": [
-        "./lib/*"
+        "./ngx-tree/*"
       ]
     }
   },

@@ -17,7 +17,7 @@
     "url": "https://github.com/username/repo/issues"
   },
   "main": "index.ts",
-  "module": "ngx-tree.js",
+  "module": "index.js",
   "typings": "ngx-tree.d.ts",
   "peerDependencies": {
     "@angular/core": "^4.0.0",

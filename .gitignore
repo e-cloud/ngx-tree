@@ -6,9 +6,9 @@ npm-debug.log
 src/*.js
 src/*.map
 src/*.d.ts
-lib/*.js
-lib/*.map
-lib/*.d.ts
+src/ngx-tree/*.js
+src/ngx-tree/*.map
+src/ngx-tree/*.d.ts
 
 # JetBrains
 .idea

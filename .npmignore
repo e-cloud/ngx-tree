@@ -31,5 +31,5 @@ Desktop.ini
 
 # Library files
 src/*
-lib/*
+src/ngx-tree/*
 build/*

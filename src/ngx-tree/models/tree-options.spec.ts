@@ -1,4 +1,4 @@
-import { createTreeUIOptions, defaultUIOptions } from 'ngx-tree/models/tree-options'
+import { createTreeUIOptions, defaultUIOptions } from '../models/tree-options'
 
 describe('TreeDraggingTargetService', () => {
     let defaultRawOption

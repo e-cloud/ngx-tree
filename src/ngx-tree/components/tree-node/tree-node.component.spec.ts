@@ -3,12 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { BrowserTestingModule } from '@angular/platform-browser/testing'
 
 import { createTreeUIOptions, TreeNode, TreeUIOptions } from '../../models'
+import { FakeTreeDragDirective, FakeTreeDropDirective } from '../tree-node-drop-slot/tree-node-drop-slot.component.spec'
 import { FakeTreeNodeChildrenComponent } from '../tree/tree.component.spec'
 import { TreeNodeComponent } from './tree-node.component'
-import {
-    FakeTreeDragDirective,
-    FakeTreeDropDirective
-} from 'ngx-tree/components/tree-node-drop-slot/tree-node-drop-slot.component.spec'
 
 @Component({
     selector: 'ngx-tree-node-wrapper',

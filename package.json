@@ -1,5 +1,5 @@
 {
-  "name": "ngx-tree",
+  "name": "@e-cloud/ngx-tree",
   "version": "0.1.0",
   "description": "A derived version of angular-tree-component without mobx. Much Better performance.",
   "scripts": {

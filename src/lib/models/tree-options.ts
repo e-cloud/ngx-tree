@@ -110,10 +110,11 @@ export interface RawTreeUIOptions {
     allowDrop?: boolean | IAllowDropFn;
     levelPadding?: number | ILevelPaddingFn;
     useVirtualScroll?: boolean;
+
     nodeClass?(node: TreeNode): string;
 }
 
-export function createTreeUIOptions(rawOpts?: RawTreeUIOptions) {
+export function createTreeUIOptions(rawOpts: RawTreeUIOptions = {}) {
     const levelPaddingOpt = rawOpts.levelPadding
     if (isNumber(levelPaddingOpt)) {
         rawOpts.levelPadding = function (node: TreeNode) {

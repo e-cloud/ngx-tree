@@ -1,20 +1,25 @@
 {
   "name": "ngx-tree",
   "version": "0.1.0",
+  "description": "A derived version of angular-tree-component without mobx. Much Better performance.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/repo"
+    "url": "https://github.com/e-cloud/ngx-tree"
   },
   "author": {
     "name": "e-cloud",
     "email": "saintscott119@gmail.com"
   },
   "keywords": [
-    "angular"
+    "Angular",
+    "tree",
+    "tree-view",
+    "virtual-scroll",
+    "drag&drop"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/username/repo/issues"
+    "url": "https://github.com/e-cloud/ngx-tree/issues"
   },
   "main": "index.ts",
   "module": "index.js",

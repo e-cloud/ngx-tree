@@ -9,7 +9,11 @@ export const TREE_ACTIONS = {
     SELECT: (tree: TreeModel, node: TreeNode, $event: any) => node.setActive(true),
     DESELECT: (tree: TreeModel, node: TreeNode, $event: any) => node.setActive(false),
     FOCUS: (tree: TreeModel, node: TreeNode, $event: any) => node.focus(),
-    TOGGLE_EXPANDED: (tree: TreeModel, node: TreeNode, $event: any) => node.hasChildren && node.toggleExpanded(),
+    TOGGLE_EXPANDED: (tree: TreeModel, node: TreeNode, $event: any) => {
+        $event.stopPropagation()
+
+        return node.hasChildren && node.toggleExpanded()
+    },
     EXPAND: (tree: TreeModel, node: TreeNode, $event: any) => node.expand(),
     COLLAPSE: (tree: TreeModel, node: TreeNode, $event: any) => node.collapse(),
     DRILL_DOWN: (tree: TreeModel, node: TreeNode, $event: any) => tree.focusDrillDown(),

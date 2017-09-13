@@ -15,13 +15,15 @@ export class TreeNodeComponent {
 
     @HostBinding('class.tree-node') className = true
 
-    allowDrag(node: TreeNode) {
-        return isFunction(this.options.allowDrag) ? this.options.allowDrag(node) : this.options.allowDrag
+    get allowDrop() {
+        return (node: TreeNode, $event?: DragEvent) => {
+            return isFunction(this.options.allowDrop)
+                ? this.options.allowDrop(node, { parent: this.node, index: node.index }, $event)
+                : this.options.allowDrop
+        }
     }
 
-    allowDrop(node: TreeNode, $event?: DragEvent) {
-        return isFunction(this.options.allowDrop)
-            ? this.options.allowDrop(node, { parent: this.node, index: node.index }, $event)
-            : this.options.allowDrop
+    allowDrag(node: TreeNode) {
+        return isFunction(this.options.allowDrag) ? this.options.allowDrag(node) : this.options.allowDrag
     }
 }

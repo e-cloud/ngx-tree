@@ -12,7 +12,7 @@
                        (treeDropDragOver)="node.mouseAction('dragOver', $event)"
                        (treeDropDragLeave)="node.mouseAction('dragLeave', $event)"
                        (treeDropDragEnter)="node.mouseAction('dragEnter', $event)"
-                       [treeAllowDrop]="allowDrop.bind(this)"
+                       [treeAllowDrop]="allowDrop"
                        [ngxTreeDrag]="node"
                        [treeDragEnabled]="allowDrag(node)">
 </ngx-tree-node-wrapper>

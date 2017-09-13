@@ -72,7 +72,7 @@ gulp.task('rollup:fesm', function () {
 
       // Bundle's entry point
       // See https://github.com/rollup/rollup/wiki/JavaScript-API#entry
-      entry: `${buildFolder}/index.js`,
+      input: `${buildFolder}/index.js`,
 
       // Allow mixing of hypothetical and actual files. "Actual" files can be files
       // accessed by Rollup or produced by plugins further down the chain.
@@ -84,12 +84,18 @@ gulp.task('rollup:fesm', function () {
       // See https://github.com/rollup/rollup/wiki/JavaScript-API#external
       external: [
         '@angular/core',
-        '@angular/common'
+        '@angular/common',
+        '@angular/platform-browser',
+        '@angular/animations',
+        'rxjs',
+        'lodash-es'
       ],
 
       // Format of generated bundle
       // See https://github.com/rollup/rollup/wiki/JavaScript-API#format
-      format: 'es'
+      format: 'es',
+
+      sourcemap: true
     }))
     .pipe(gulp.dest(distFolder));
 });
@@ -105,7 +111,7 @@ gulp.task('rollup:umd', function () {
 
       // Bundle's entry point
       // See https://github.com/rollup/rollup/wiki/JavaScript-API#entry
-      entry: `${buildFolder}/index.js`,
+      input: `${buildFolder}/index.js`,
 
       // Allow mixing of hypothetical and actual files. "Actual" files can be files
       // accessed by Rollup or produced by plugins further down the chain.
@@ -117,7 +123,11 @@ gulp.task('rollup:umd', function () {
       // See https://github.com/rollup/rollup/wiki/JavaScript-API#external
       external: [
         '@angular/core',
-        '@angular/common'
+        '@angular/common',
+        '@angular/platform-browser',
+        '@angular/animations',
+        'rxjs',
+        'lodash-es'
       ],
 
       // Format of generated bundle
@@ -131,13 +141,14 @@ gulp.task('rollup:umd', function () {
       // The name to use for the module for UMD/IIFE bundles
       // (required for bundles with exports)
       // See https://github.com/rollup/rollup/wiki/JavaScript-API#modulename
-      moduleName: 'ngx-tree',
+      name: 'ngx-tree',
 
       // See https://github.com/rollup/rollup/wiki/JavaScript-API#globals
       globals: {
         typescript: 'ts'
-      }
+      },
 
+      sourcemap: true
     }))
     .pipe(rename('ngx-tree.umd.js'))
     .pipe(gulp.dest(distFolder));
@@ -165,7 +176,7 @@ gulp.task('copy:manifest', function () {
  * 9. Copy README.md from / to /dist
  */
 gulp.task('copy:readme', function () {
-  return gulp.src([path.join(rootFolder, 'README.MD')])
+  return gulp.src([path.join(rootFolder, 'README.{MD,md}')])
     .pipe(gulp.dest(distFolder));
 });
 

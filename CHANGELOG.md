@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/e-cloud/ngx-tree/compare/v0.1.0...v0.2.0) (2017-09-14)
+
+
+### Features
+
+* **exports:** export most module for external reference ([677284d](https://github.com/e-cloud/ngx-tree/commit/677284d))
+
+
+### Performance Improvements
+
+* **tree-node:** avoid usage of function bind ([abe0775](https://github.com/e-cloud/ngx-tree/commit/abe0775))
+
+
+
 <a name="0.1.0"></a>
 # 0.1.0 (2017-09-07)
 

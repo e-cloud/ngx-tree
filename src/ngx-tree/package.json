@@ -24,6 +24,9 @@
   "main": "index.ts",
   "module": "index.js",
   "typings": "ngx-tree.d.ts",
+  "dependencies": {
+    "element-closest": "^2.0.2"
+  },
   "peerDependencies": {
     "@angular/core": "^4.0.0",
     "@angular/animations": "^4.0.0",

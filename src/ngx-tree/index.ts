@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common'
 import { ModuleWithProviders, NgModule } from '@angular/core'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { TreeLoadingComponent } from './components/tree-loading/tree-loading.component'
 import { TreeNodeChildrenComponent } from './components/tree-node-children/tree-node-children.component'
@@ -21,7 +20,6 @@ import './rxjs-imports'
 @NgModule({
     imports: [
         CommonModule,
-        BrowserAnimationsModule,
     ],
     declarations: [
         TreeLoadingComponent,

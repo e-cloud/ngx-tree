@@ -21,8 +21,9 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
+    "generateCodeForLibraries": true,
     "flatModuleOutFile": "ngx-tree.js",
-    "flatModuleId": "ngx-tree"
+    "flatModuleId": "@e-cloud/ngx-tree"
   },
   "files": [
     "./index.ts"

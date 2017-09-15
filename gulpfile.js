@@ -2,8 +2,8 @@
 const gulp = require('gulp')
 const path = require('path')
 const ngc = require('@angular/compiler-cli/src/main').main
-const rollup = require('gulp-rollup')
-const rename = require('gulp-rename')
+const rollup = require('rollup')
+const sourcemaps = require('rollup-plugin-sourcemaps');
 const del = require('del')
 const runSequence = require('run-sequence')
 const inlineResources = require('./tools/gulp/inline-resources')
@@ -13,6 +13,33 @@ const srcFolder = path.join(rootFolder, 'src/ngx-tree');
 const tmpFolder = path.join(rootFolder, '.tmp');
 const buildFolder = path.join(rootFolder, 'build');
 const distFolder = path.join(rootFolder, 'dist');
+
+const libName = 'ngx-tree'
+
+const rollupBaseConfig = {
+  // Bundle's entry point
+  // See https://github.com/rollup/rollup/wiki/JavaScript-API#entry
+  input: `${buildFolder}/index.js`,
+
+  name: libName,
+
+  sourcemap: true,
+
+  external: [
+    // A list of IDs of modules that should remain external to the bundle
+    // See https://github.com/rollup/rollup/wiki/JavaScript-API#external
+    '@angular/core',
+    '@angular/common',
+    '@angular/platform-browser',
+    '@angular/animations',
+    'rxjs',
+    'lodash-es'
+  ],
+
+  plugins: [
+    sourcemaps()
+  ]
+};
 
 /**
  * 1. Delete /dist folder
@@ -65,93 +92,48 @@ gulp.task('ngc', function () {
  * 5. Run rollup inside the /build folder to generate our Flat ES module and place the
  *    generated file into the /dist folder
  */
-gulp.task('rollup:fesm', function () {
-  return gulp.src(`${buildFolder}/**/*.js`)
-  // transform the files here.
-    .pipe(rollup({
+gulp.task('rollup:fesm', async function () {
+  const config = Object.assign({}, rollupBaseConfig, {
+    // Format of generated bundle
+    // See https://github.com/rollup/rollup/wiki/JavaScript-API#format
+    format: 'es',
 
-      // Bundle's entry point
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#entry
-      input: `${buildFolder}/index.js`,
+    file: path.join(distFolder, `${libName}.js`),
 
-      // Allow mixing of hypothetical and actual files. "Actual" files can be files
-      // accessed by Rollup or produced by plugins further down the chain.
-      // This prevents errors like: 'path/file' does not exist in the hypothetical file system
-      // when subdirectories are used in the `src` directory.
-      allowRealFiles: true,
+    sourcemapFile: path.join(buildFolder, `${libName}.js`),
+  })
+  const bundle = await rollup.rollup(config)
 
-      // A list of IDs of modules that should remain external to the bundle
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#external
-      external: [
-        '@angular/core',
-        '@angular/common',
-        '@angular/platform-browser',
-        '@angular/animations',
-        'rxjs',
-        'lodash-es'
-      ],
-
-      // Format of generated bundle
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#format
-      format: 'es',
-
-      sourcemap: true
-    }))
-    .pipe(gulp.dest(distFolder));
+  await bundle.write(config);
 });
 
 /**
  * 6. Run rollup inside the /build folder to generate our UMD module and place the
  *    generated file into the /dist folder
  */
-gulp.task('rollup:umd', function () {
-  return gulp.src(`${buildFolder}/**/*.js`)
-  // transform the files here.
-    .pipe(rollup({
+gulp.task('rollup:umd', async function () {
+  const config = Object.assign({}, rollupBaseConfig, {
 
-      // Bundle's entry point
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#entry
-      input: `${buildFolder}/index.js`,
+    // Format of generated bundle
+    // See https://github.com/rollup/rollup/wiki/JavaScript-API#format
+    format: 'umd',
 
-      // Allow mixing of hypothetical and actual files. "Actual" files can be files
-      // accessed by Rollup or produced by plugins further down the chain.
-      // This prevents errors like: 'path/file' does not exist in the hypothetical file system
-      // when subdirectories are used in the `src` directory.
-      allowRealFiles: true,
+    // Export mode to use
+    // See https://github.com/rollup/rollup/wiki/JavaScript-API#exports
+    exports: 'named',
 
-      // A list of IDs of modules that should remain external to the bundle
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#external
-      external: [
-        '@angular/core',
-        '@angular/common',
-        '@angular/platform-browser',
-        '@angular/animations',
-        'rxjs',
-        'lodash-es'
-      ],
+    // See https://github.com/rollup/rollup/wiki/JavaScript-API#globals
+    globals: {
+      typescript: 'ts'
+    },
 
-      // Format of generated bundle
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#format
-      format: 'umd',
+    file: path.join(distFolder, `${libName}.umd.js`),
+    sourcemapFile: path.join(buildFolder, `${libName}.umd.js`),
+  })
 
-      // Export mode to use
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#exports
-      exports: 'named',
+  const bundle = await rollup.rollup(config)
 
-      // The name to use for the module for UMD/IIFE bundles
-      // (required for bundles with exports)
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#modulename
-      name: 'ngx-tree',
-
-      // See https://github.com/rollup/rollup/wiki/JavaScript-API#globals
-      globals: {
-        typescript: 'ts'
-      },
-
-      sourcemap: true
-    }))
-    .pipe(rename('ngx-tree.umd.js'))
-    .pipe(gulp.dest(distFolder));
+  await bundle.write(config);
 });
 
 /**
@@ -229,7 +211,9 @@ gulp.task('clean', ['clean:dist', 'clean:tmp', 'clean:build']);
 gulp.task('build', function (cb) {
   runSequence('clean', 'compile', cb)
 });
+
 gulp.task('build:watch', ['build', 'watch']);
+
 gulp.task('default', ['build:watch']);
 
 /**

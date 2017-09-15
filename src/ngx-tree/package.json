@@ -21,8 +21,11 @@
   "bugs": {
     "url": "https://github.com/e-cloud/ngx-tree/issues"
   },
-  "main": "index.ts",
-  "module": "index.js",
+  "main": "ngx-tree.js",
+  "module": "ngx-tree.js",
+  "jsnext:main": "ngx-tree.js",
+  "es2015": "ngx-tree.js",
+  "bundle": "ngx-tree.umd.js",
   "typings": "ngx-tree.d.ts",
   "dependencies": {
     "element-closest": "^2.0.2"

@@ -80,6 +80,6 @@ export {
     VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA
 }
 
-export * from './models'
+export * from './models/index'
 export * from './constants/events'
 export * from './constants/keys'

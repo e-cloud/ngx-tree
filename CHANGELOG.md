@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/e-cloud/ngx-tree/compare/v0.3.1...v0.3.2) (2017-09-15)
+
+
+### Bug Fixes
+
+* **tree:** use correct modifier for template ([a16b4cb](https://github.com/e-cloud/ngx-tree/commit/a16b4cb))
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/e-cloud/ngx-tree/compare/v0.3.0...v0.3.1) (2017-09-15)
 

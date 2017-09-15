@@ -12,6 +12,7 @@ import {
     ViewChild,
 } from '@angular/core'
 import 'element-closest'
+import { TreeDraggingTargetService } from 'ngx-tree'
 import { EventsMap, TREE_EVENTS } from '../../constants/events'
 import {
     createTreeUIOptions,
@@ -69,7 +70,7 @@ export class TreeComponent implements OnChanges {
 
     @ViewChild('viewport') viewportComponent: TreeViewportComponent
 
-    constructor() {
+    constructor(private treeDraggingTargetService: TreeDraggingTargetService) {
         this.emitterMap = Object.keys(TREE_EVENTS).reduce((map, name) => {
             if (!this.hasOwnProperty(name)) {
                 throw new TypeError(`Unmatched events: [${name}]`)

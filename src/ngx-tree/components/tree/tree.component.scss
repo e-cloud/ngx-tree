@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 ngx-tree-viewport {
     position: relative;
     &.disable-events-on-scroll .tree-root /deep/ * {

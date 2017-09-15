@@ -9,5 +9,5 @@
 </ng-template>
 
 <ng-container [ngTemplateOutlet]="templates.treeNodeWrapperTemplate"
-              [ngOutletContext]="{ $implicit: node, node: node, index: index, options: options }">
+              [ngOutletContext]="{ $implicit: node, node: node, index: index, options: options, templates: templates }">
 </ng-container>

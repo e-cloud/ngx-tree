@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/e-cloud/ngx-tree/compare/v0.2.2...v0.3.0) (2017-09-15)
+
+
+### Bug Fixes
+
+* **exports:** use direct import for correct aot ([06bd7a9](https://github.com/e-cloud/ngx-tree/commit/06bd7a9))
+
+
+### Features
+
+* **tree-node:** support tree-node-full-template ([4debcf5](https://github.com/e-cloud/ngx-tree/commit/4debcf5))
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/e-cloud/ngx-tree/compare/v0.2.1...v0.2.2) (2017-09-14)
 

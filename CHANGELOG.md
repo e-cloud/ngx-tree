@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.4"></a>
+## [0.3.4](https://github.com/e-cloud/ngx-tree/compare/v0.3.3...v0.3.4) (2017-09-15)
+
+
+### Bug Fixes
+
+* **ngOutlet:** add missing field for ngOutletContext ([7023a8e](https://github.com/e-cloud/ngx-tree/commit/7023a8e))
+
+
+
 <a name="0.3.3"></a>
 ## [0.3.3](https://github.com/e-cloud/ngx-tree/compare/v0.3.2...v0.3.3) (2017-09-15)
 

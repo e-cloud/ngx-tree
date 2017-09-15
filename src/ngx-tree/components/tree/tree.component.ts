@@ -70,7 +70,7 @@ export class TreeComponent implements OnChanges {
 
     @ViewChild('viewport') viewportComponent: TreeViewportComponent
 
-    constructor(private treeDraggingTargetService: TreeDraggingTargetService) {
+    constructor(public treeDraggingTargetService: TreeDraggingTargetService) {
         this.emitterMap = Object.keys(TREE_EVENTS).reduce((map, name) => {
             if (!this.hasOwnProperty(name)) {
                 throw new TypeError(`Unmatched events: [${name}]`)

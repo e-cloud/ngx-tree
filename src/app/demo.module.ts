@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgxTreeModule } from 'ngx-tree'
 
 import { DemoComponent } from './demo.component'
@@ -14,7 +14,7 @@ import { SimpleComponent } from './simple/simple.component'
         FullWidthItemComponent,
     ],
     imports: [
-        BrowserModule,
+        BrowserAnimationsModule,
         DemoRoutingModule,
         NgxTreeModule.forRoot(),
     ],

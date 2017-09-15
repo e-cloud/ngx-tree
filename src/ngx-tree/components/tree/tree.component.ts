@@ -12,7 +12,6 @@ import {
     ViewChild,
 } from '@angular/core'
 import 'element-closest'
-import { TreeDraggingTargetService } from 'ngx-tree'
 import { EventsMap, TREE_EVENTS } from '../../constants/events'
 import {
     createTreeUIOptions,
@@ -24,6 +23,7 @@ import {
     TreeNode,
     TreeUIOptions,
 } from '../../models'
+import { TreeDraggingTargetService } from '../../services/tree-dragging-target.service'
 import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
 
 @Component({

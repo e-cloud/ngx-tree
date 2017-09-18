@@ -1,5 +1,5 @@
-import { Component, HostBinding, Input } from '@angular/core'
-import { TreeNode } from '../../models'
+import { Component, HostBinding, Input, TemplateRef } from '@angular/core'
+import { TreeNode, TreeUIOptions } from '../../models'
 
 @Component({
     selector: 'ngx-tree-node-expander',
@@ -7,7 +7,10 @@ import { TreeNode } from '../../models'
     styleUrls: ['./tree-node-expander.component.scss'],
 })
 export class TreeNodeExpanderComponent {
+    @Input() options: TreeUIOptions
     @Input() node: TreeNode
+    @Input() index: number
+    @Input() template: TemplateRef<any>
 
     @HostBinding('class.tree-node-expander') className = true
 }

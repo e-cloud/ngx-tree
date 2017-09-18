@@ -64,6 +64,7 @@ export class TreeComponent implements OnChanges {
     @HostBinding('class.ngx-tree') className = true
 
     @ContentChild('loadingTemplate') loadingTemplate: TemplateRef<any>
+    @ContentChild('expanderTemplate') expanderTemplate: TemplateRef<any>
     @ContentChild('treeNodeTemplate') treeNodeTemplate: TemplateRef<any>
     @ContentChild('treeNodeWrapperTemplate') treeNodeWrapperTemplate: TemplateRef<any>
     @ContentChild('treeNodeFullTemplate') treeNodeFullTemplate: TemplateRef<any>

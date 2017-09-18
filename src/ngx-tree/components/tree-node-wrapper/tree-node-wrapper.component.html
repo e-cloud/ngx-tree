@@ -1,5 +1,8 @@
 <ng-template [ngIf]="!templates.treeNodeWrapperTemplate">
-  <ngx-tree-node-expander [node]="node"></ngx-tree-node-expander>
+  <ngx-tree-node-expander [node]="node"
+                          [index]="index"
+                          [options]="options"
+                          [template]="templates.expanderTemplate"></ngx-tree-node-expander>
 
   <ngx-tree-node-content [node]="node"
                          [index]="index"

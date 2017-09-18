@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output, Renderer2 } from '@angular/core'
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output, Renderer2 } from '@angular/core'
 import isFunction from 'lodash-es/isFunction'
 import { TreeNode } from '../models'
 import { TreeDraggingTargetService } from '../services/tree-dragging-target.service'
@@ -11,7 +11,7 @@ export type AllowDropPredicate = (element: TreeNode, $event: MouseEvent) => bool
 @Directive({
     selector: '[ngxTreeDrop]',
 })
-export class TreeDropDirective {
+export class TreeDropDirective implements OnDestroy {
     @Output('ngxTreeDrop') onDrop$ = new EventEmitter()
     @Output('treeDropDragOver') onDragOver$ = new EventEmitter()
     @Output('treeDropDragLeave') onDragLeave$ = new EventEmitter()
@@ -34,6 +34,13 @@ export class TreeDropDirective {
         private renderer: Renderer2,
         private treeDraggedElement: TreeDraggingTargetService,
     ) {
+    }
+
+    ngOnDestroy() {
+        this.onDrop$.complete()
+        this.onDragEnter$.complete()
+        this.onDragLeave$.complete()
+        this.onDragOver$.complete()
     }
 
     @HostListener('dragover', ['$event'])

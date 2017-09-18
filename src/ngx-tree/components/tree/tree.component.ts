@@ -6,12 +6,14 @@ import {
     HostListener,
     Input,
     OnChanges,
+    OnDestroy,
     Output,
     SimpleChanges,
     TemplateRef,
     ViewChild,
 } from '@angular/core'
 import 'element-closest'
+import each from 'lodash-es/each'
 import { EventsMap, TREE_EVENTS } from '../../constants/events'
 import {
     createTreeUIOptions,
@@ -31,7 +33,7 @@ import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
     templateUrl: './tree.component.html',
     styleUrls: ['./tree.component.scss'],
 })
-export class TreeComponent implements OnChanges {
+export class TreeComponent implements OnChanges, OnDestroy {
     emitterMap: EventsMap
     treeModel: TreeModel = null
     UIOptions: TreeUIOptions
@@ -114,6 +116,12 @@ export class TreeComponent implements OnChanges {
                 nodeClass: this.nodeClass,
             })
         }
+    }
+
+    ngOnDestroy() {
+        each(this.emitterMap, function (emitter) {
+            emitter.complete()
+        })
     }
 
     @HostListener('body: keydown', ['$event'])

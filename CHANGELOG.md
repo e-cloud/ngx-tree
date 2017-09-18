@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/e-cloud/ngx-tree/compare/v0.3.4...v0.4.0) (2017-09-18)
+
+
+### Bug Fixes
+
+* **expander:** center the expander, optimize template and style ([5e3be34](https://github.com/e-cloud/ngx-tree/commit/5e3be34))
+* **options:** ensure tree component has default data options ([aa32c1b](https://github.com/e-cloud/ngx-tree/commit/aa32c1b))
+
+
+### Features
+
+* **activateTarget:** support specifying the activated node ([02fa222](https://github.com/e-cloud/ngx-tree/commit/02fa222))
+* **expander-template:** support custom template for tree expander ([9158c38](https://github.com/e-cloud/ngx-tree/commit/9158c38))
+* **template-context:** deprecate $implicit context for template context ([5ef5498](https://github.com/e-cloud/ngx-tree/commit/5ef5498))
+
+
+
 <a name="0.3.4"></a>
 ## [0.3.4](https://github.com/e-cloud/ngx-tree/compare/v0.3.3...v0.3.4) (2017-09-15)
 

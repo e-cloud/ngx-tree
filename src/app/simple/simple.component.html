@@ -18,7 +18,7 @@
   (blur)="log($event)"
   (initialized)="log($event)"
   (loadChildren)="log($event)">
-  <ng-template #treeNodeTemplate let-node>
+  <ng-template #treeNodeTemplate let-node="node">
     <span title="{{node.data.subTitle}}">{{ node.data.name }}</span>
     <span class="pull-right">{{ childrenCount(node) }}</span>
   </ng-template>

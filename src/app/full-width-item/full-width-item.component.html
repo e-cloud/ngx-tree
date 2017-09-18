@@ -6,7 +6,7 @@
   [allowDrag]="customOptions.allowDrag"
   [allowDrop]="customOptions.allowDrop"
   [levelPadding]="customOptions.levelPadding">
-  <ng-template #treeNodeTemplate let-node>
+  <ng-template #treeNodeTemplate let-node="node">
     <span title="{{node.data.subTitle}}">{{ node.data.name }}</span>
   </ng-template>
 </ngx-tree>

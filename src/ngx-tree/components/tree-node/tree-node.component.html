@@ -1,4 +1,4 @@
-<ng-container *ngIf="!templates.treeNodeFullTemplate">
+<ng-template [ngIf]="!templates.treeNodeFullTemplate">
   <ngx-tree-node-wrapper [style.padding-left]="options.levelPadding(node)"
                          [node]="node"
                          [options]="options"
@@ -23,9 +23,9 @@
                           [options]="options"
                           [children]="node.children"
                           [templates]="templates"></ngx-tree-node-children>
-</ng-container>
+</ng-template>
 
 <ng-container
   [ngTemplateOutlet]="templates.treeNodeFullTemplate"
-  [ngOutletContext]="{ $implicit: node, node: node, index: index, options: options, templates: templates }">
+  [ngOutletContext]="{ $implicit: null, node: node, index: index, options: options, templates: templates }">
 </ng-container>

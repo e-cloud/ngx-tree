@@ -283,11 +283,26 @@ export class TreeModel {
         this.roots.forEach((root) => root.traverse(fn))
     }
 
+    activateNode(id) {
+        const target = this.getNodeById(id)
+        if (target) {
+            target.setActiveAndVisible()
+
+            return true
+        }
+
+        return false
+    }
+
     focusNode(id: string) {
         const target = this.getNodeById(id)
         if (target) {
             target.focus()
+
+            return true
         }
+
+        return false
     }
 
     /**

@@ -37,7 +37,8 @@ export class TreeComponent implements OnChanges {
     UIOptions: TreeUIOptions
 
     @Input() nodes: TreeNode[]
-    @Input() focusedNode: string
+    @Input() focusTarget: string
+    @Input() activateTarget: string
     @Input() dataOptions: TreeDataOptions
 
     @Input() allowDrag: boolean | IAllowDragFn
@@ -85,6 +86,36 @@ export class TreeComponent implements OnChanges {
         this.UIOptions = createTreeUIOptions()
     }
 
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.nodes && changes.nodes.currentValue) {
+            this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, this.dataOptions)
+        } else if (changes.dataOptions && changes.dataOptions.currentValue && this.treeModel) {
+            this.treeModel.updateOptions(changes.dataOptions.currentValue)
+        }
+
+        if (changes.focusTarget && changes.focusTarget.currentValue && this.treeModel) {
+            this.treeModel.focusNode(this.focusTarget)
+        }
+
+        if (changes.activateTarget && changes.activateTarget.currentValue && this.treeModel) {
+            this.treeModel.activateNode(this.activateTarget)
+        }
+
+        if (changes.allowDrag
+            || changes.allowDrop
+            || changes.levelPadding
+            || changes.useVirtualScroll
+            || changes.nodeClass) {
+            this.UIOptions = createTreeUIOptions({
+                allowDrag: this.allowDrag,
+                allowDrop: this.allowDrop,
+                levelPadding: this.levelPadding,
+                useVirtualScroll: this.useVirtualScroll,
+                nodeClass: this.nodeClass,
+            })
+        }
+    }
+
     @HostListener('body: keydown', ['$event'])
     onKeydown($event) {
         if (!this.treeModel.isFocused) {
@@ -106,32 +137,6 @@ export class TreeComponent implements OnChanges {
 
         if (!insideClick) {
             this.treeModel.setFocus(false)
-        }
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.nodes && changes.nodes.currentValue) {
-            this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, this.dataOptions)
-        } else if (changes.dataOptions && changes.dataOptions.currentValue && this.treeModel) {
-            this.treeModel.updateOptions(changes.dataOptions.currentValue)
-        }
-
-        if (changes.focusedNode && changes.focusedNode.currentValue && this.treeModel) {
-            this.treeModel.focusNode(this.focusedNode)
-        }
-
-        if (changes.allowDrag
-            || changes.allowDrop
-            || changes.levelPadding
-            || changes.useVirtualScroll
-            || changes.nodeClass) {
-            this.UIOptions = createTreeUIOptions({
-                allowDrag: this.allowDrag,
-                allowDrop: this.allowDrop,
-                levelPadding: this.levelPadding,
-                useVirtualScroll: this.useVirtualScroll,
-                nodeClass: this.nodeClass,
-            })
         }
     }
 

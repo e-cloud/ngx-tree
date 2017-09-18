@@ -80,6 +80,8 @@ export class TreeComponent implements OnChanges {
 
             return map
         }, {}) as any
+
+        this.UIOptions = createTreeUIOptions()
     }
 
     @HostListener('body: keydown', ['$event'])

@@ -10,6 +10,7 @@ import {
     OnDestroy,
     OnInit,
     Renderer2,
+    SimpleChanges,
 } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
@@ -92,10 +93,14 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
         })
     }
 
-    ngOnChanges(changes) {
+    ngOnChanges(changes: SimpleChanges) {
         if ('treeModel' in changes) {
             this.virtualScroll.setDisabled(!this.enable)
             if (this.virtualScroll.isDisabled()) {
+                if (!changes.treeModel.isFirstChange()) {
+                    this.treeModel.fireEvent({ eventName: TREE_EVENTS.initialized })
+                }
+
                 return
             }
 
@@ -107,6 +112,8 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
     ngAfterViewInit() {
         setTimeout(() => {
             if (this.virtualScroll.isDisabled()) {
+                this.treeModel.fireEvent({ eventName: TREE_EVENTS.initialized })
+
                 return
             }
 

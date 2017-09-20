@@ -106,6 +106,15 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
 
             this.initEventSubscription()
             this.virtualScroll.reCalcPositions(this.treeModel)
+
+            if (!changes.treeModel.isFirstChange()) {
+                // use setTimeout to avoid do calculation on old data,
+                // let the new data render first round
+                setTimeout(() => {
+                    this.setViewport()
+                    this.treeModel.fireEvent({ eventName: TREE_EVENTS.initialized })
+                })
+            }
         }
     }
 

@@ -37,6 +37,7 @@ export class TreeComponent implements OnChanges, OnDestroy {
     emitterMap: EventsMap
     treeModel: TreeModel = null
     UIOptions: TreeUIOptions
+    refreshTree = false
 
     @Input() nodes: TreeNode[]
     @Input() focusTarget: string
@@ -91,6 +92,9 @@ export class TreeComponent implements OnChanges, OnDestroy {
     ngOnChanges(changes: SimpleChanges) {
         if (changes.nodes && changes.nodes.currentValue) {
             this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, this.dataOptions)
+            if (!changes.nodes.isFirstChange()) {
+                this.refreshTree = true
+            }
         } else if (changes.dataOptions && changes.dataOptions.currentValue && this.treeModel) {
             this.treeModel.updateOptions(changes.dataOptions.currentValue)
         }

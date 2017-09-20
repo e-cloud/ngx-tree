@@ -34,6 +34,7 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
     @Input() templates: any
     @Input() disableMarginTop = false
     @Input() children: TreeNode[]
+    @Input() refreshTree = false
 
     @HostBinding('@expandAnimation')
     expandAnimation = true
@@ -67,7 +68,8 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnChanges(changes: SimpleChanges) {
         if ('children' in changes && changes.children.currentValue) {
-            this.viewportNodes = this.virtualScroll.isDisabled() ? this.children : this.viewportNodes
+            this.viewportNodes = this.virtualScroll.isDisabled() || this.refreshTree
+                ? this.children : this.viewportNodes
         }
     }
 

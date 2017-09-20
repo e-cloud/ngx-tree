@@ -51,7 +51,7 @@ export class TreeModel {
     /**
      * @returns Current expanded nodes
      */
-    get expandedNodes() {
+    get expandedNodes(): TreeNode[] {
         const nodes = Array.from(this.expandedNodeIds.keys())
             .filter((id) => this.expandedNodeIds.get(id))
             .map((id) => this.getNodeById(id))
@@ -62,7 +62,7 @@ export class TreeModel {
     /**
      * @returns Current active (selected) nodes
      */
-    get activeNodes() {
+    get activeNodes(): TreeNode[] {
         const nodes = Array.from(this.activeNodeIds.keys())
             .filter((id) => this.activeNodeIds.get(id))
             .map((id) => this.nodeCache.get(id))

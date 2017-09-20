@@ -26,6 +26,7 @@ import {
     TreeUIOptions,
 } from '../../models'
 import { TreeDraggingTargetService } from '../../services/tree-dragging-target.service'
+import { TreeNodeChildrenComponent } from '../tree-node-children/tree-node-children.component'
 import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
 
 @Component({
@@ -50,6 +51,7 @@ export class TreeComponent implements OnChanges, OnDestroy {
     @Input() useVirtualScroll: boolean
     @Input() nodeClass: (node: TreeNode) => string
     @Input() enableAnimation = true
+    @Input() keepNodesExpanded = false
 
     @Output() expand: EventEmitter<any> = null
     @Output() collapse: EventEmitter<any> = null
@@ -74,6 +76,7 @@ export class TreeComponent implements OnChanges, OnDestroy {
     @ContentChild('treeNodeFullTemplate') treeNodeFullTemplate: TemplateRef<any>
 
     @ViewChild('viewport') viewportComponent: TreeViewportComponent
+    @ViewChild('root') root: TreeNodeChildrenComponent
 
     constructor(public treeDraggingTargetService: TreeDraggingTargetService) {
         this.emitterMap = Object.keys(TREE_EVENTS).reduce((map, name) => {
@@ -91,7 +94,13 @@ export class TreeComponent implements OnChanges, OnDestroy {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.nodes && changes.nodes.currentValue) {
+            const oldTreeModel = this.treeModel
             this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, this.dataOptions)
+            if (oldTreeModel && this.keepNodesExpanded) {
+                oldTreeModel.expandedNodes.forEach(node => {
+                    this.treeModel.setExpandedNodeInPlace(node)
+                })
+            }
             if (!changes.nodes.isFirstChange()) {
                 this.refreshTree = true
             }

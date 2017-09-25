@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.1"></a>
+## [0.5.1](https://github.com/e-cloud/ngx-tree/compare/v0.5.0...v0.5.1) (2017-09-25)
+
+
+### Bug Fixes
+
+* **tree-node:** only display children when node has children ([3e3fd7b](https://github.com/e-cloud/ngx-tree/commit/3e3fd7b))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/e-cloud/ngx-tree/compare/v0.4.0...v0.5.0) (2017-09-20)
 

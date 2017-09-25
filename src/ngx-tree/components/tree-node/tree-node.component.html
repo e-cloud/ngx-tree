@@ -18,7 +18,7 @@
                          [treeDragEnabled]="allowDrag(node)">
   </ngx-tree-node-wrapper>
 
-  <ngx-tree-node-children *ngIf="node.isExpanded"
+  <ngx-tree-node-children *ngIf="node.isExpanded && node.hasChildren"
                           [node]="node"
                           [options]="options"
                           [children]="node.children"

@@ -53,6 +53,11 @@ export class TreeVirtualScroll {
     }
 
     reCalcPositions(treeModel: TreeModel) {
+        // here we reset the root nodes' positions to properly recalculate the positions
+        // after some actions like filter
+        treeModel.roots.forEach(node => {
+            node.position = 0
+        })
         treeModel.virtualRoot.height = this.getPositionAfter(treeModel.getVisibleRoots(), 0)
     }
 

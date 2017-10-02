@@ -1,4 +1,8 @@
+<input id="filter" #filter (keyup)="tree.treeModel.filterNodes(filter.value)" placeholder="filter nodes"/>
+<button (click)="tree.treeModel.clearFilter()">Clear Filter</button>
+
 <ngx-tree
+  #tree
   [enableAnimation]="false"
   [nodes]="nodes"
   [dataOptions]="customOptions"

@@ -60,7 +60,10 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
         this.viewportNodes = this.children
         this.scrollSub = this.virtualScroll.waitForCollection((metrics) => {
             if (this.node.treeModel && this.node.isExpanded) {
-                this.viewportNodes = this.getViewportNodes(this.node.children, metrics)
+                // here we directly access node's visibleChildren but not component's `children`
+                // property is, because it will only be updated on next lifecycle check, which is
+                // after the collection notification
+                this.viewportNodes = this.getViewportNodes(this.node.visibleChildren, metrics)
                 this.marginTop = this.calcMarginTop()
             }
         })

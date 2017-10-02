@@ -18,10 +18,10 @@
                          [treeDragEnabled]="allowDrag(node)">
   </ngx-tree-node-wrapper>
 
-  <ngx-tree-node-children *ngIf="node.isExpanded && node.hasChildren"
+  <ngx-tree-node-children *ngIf="node.isExpanded && node.hasVisibleChildren"
                           [node]="node"
                           [options]="options"
-                          [children]="node.children"
+                          [children]="node.visibleChildren"
                           [templates]="templates"></ngx-tree-node-children>
 </ng-template>
 

@@ -74,6 +74,11 @@ export class TreeNode {
         return !!(this.data.hasChildren || (this.children && this.children.length > 0))
     }
 
+    // helper get functions:
+    get hasVisibleChildren() {
+        return !!(this.data.hasChildren || (this.visibleChildren && this.visibleChildren.length > 0))
+    }
+
     // proxy functions:
     get options(): TreeDataOptions {
         return this.treeModel.options

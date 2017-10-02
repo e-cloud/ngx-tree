@@ -215,15 +215,15 @@ export class TreeModel {
     }
 
     isNodeExpanded(node: TreeNode) {
-        return this.expandedNodeIds.get(node.id)
+        return !!this.expandedNodeIds.get(node.id)
     }
 
     isNodeHidden(node: TreeNode) {
-        return this.hiddenNodeIds.get(node.id)
+        return !!this.hiddenNodeIds.get(node.id)
     }
 
     isNodeActive(node: TreeNode) {
-        return this.activeNodeIds.get(node.id)
+        return !!this.activeNodeIds.get(node.id)
     }
 
     isNodeFocused(node: TreeNode) {

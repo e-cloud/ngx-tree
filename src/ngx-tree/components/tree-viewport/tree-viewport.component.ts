@@ -40,8 +40,8 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
     private ticking = false
     private scrollIntoViewTicking = false
     private lastScrollIntoViewTarget: ScrollIntoViewTarget
-    private structureChangeSub: Subscription
-    private scrollIntoViewSub: Subscription
+    private structureChangeSub = Subscription.EMPTY
+    private scrollIntoViewSub = Subscription.EMPTY
     private scrollTimer: number
 
     constructor(public virtualScroll: TreeVirtualScroll, private elementRef: ElementRef, private renderer: Renderer2) {

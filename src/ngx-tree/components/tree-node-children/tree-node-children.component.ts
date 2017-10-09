@@ -41,7 +41,7 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
 
     @HostBinding('class.tree-node-children') className = true
 
-    private scrollSub: Subscription
+    private scrollSub = Subscription.EMPTY
 
     constructor(private virtualScroll: TreeVirtualScroll) {
     }

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.2"></a>
+## [0.5.2](https://github.com/e-cloud/ngx-tree/compare/v0.5.1...v0.5.2) (2017-10-09)
+
+
+### Bug Fixes
+
+* **filter:** correct the broken filter functionality ([63674e2](https://github.com/e-cloud/ngx-tree/commit/63674e2))
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](https://github.com/e-cloud/ngx-tree/compare/v0.5.0...v0.5.1) (2017-09-25)
 

@@ -1,5 +1,6 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { filter, scan } from 'rxjs/operators'
 import { Subject } from 'rxjs/Subject'
 import { Subscription } from 'rxjs/Subscription'
 import { TreeModel, TreeNode } from '../models'
@@ -44,7 +45,7 @@ export class TreeVirtualScroll {
 
     waitForCollection(observer): Subscription {
         return this.collectionMonitor$
-            .filter(val => !!val)
+            .pipe(filter(val => !!val))
             .subscribe(observer)
     }
 
@@ -74,8 +75,7 @@ export class TreeVirtualScroll {
             node.position < this.lastScrollTop || // node is above viewport
             node.position + this.averageNodeHeight > this.lastScrollTop + this.currentViewport.height) { // node is below viewport
 
-            return scrollToMiddle ?
-                node.position - this.currentViewport.height / 2 + this.averageNodeHeight : // scroll to middle
+            return scrollToMiddle ? node.position - this.currentViewport.height / 2 + this.averageNodeHeight : // scroll to middle
                 node.position // scroll to start
         }
 
@@ -110,7 +110,7 @@ export class TreeVirtualScroll {
 
     private collectAverageNodeHeight() {
         this.nodeHeightAnalytics$
-            .scan((acc, cur) => {
+            .pipe(scan<number, number[]>((acc, cur) => {
                 const lastAvg = acc[0] / acc[1]
                 const sum = cur + acc[0]
                 const count = acc[1] + 1
@@ -120,7 +120,7 @@ export class TreeVirtualScroll {
                 }
 
                 return [sum, count]
-            }, [0, 0])
+            }, [0, 0]))
             .subscribe(pair => {
                 this.averageNodeHeight = pair[0] / pair[1]
                 if (pair[1] >= this.quota) {

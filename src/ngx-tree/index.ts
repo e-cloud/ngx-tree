@@ -15,8 +15,6 @@ import { TreeDropDirective } from './directives/tree-drop.directive'
 import { TreeDraggingTargetService } from './services/tree-dragging-target.service'
 import { TreeVirtualScroll, VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA } from './services/tree-virtual-scroll.service'
 
-import './rxjs-imports'
-
 @NgModule({
     imports: [
         CommonModule,

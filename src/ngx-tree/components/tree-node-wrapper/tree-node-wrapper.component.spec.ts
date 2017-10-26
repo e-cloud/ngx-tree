@@ -11,7 +11,10 @@ import { TreeNodeWrapperComponent } from './tree-node-wrapper.component'
     template: '',
 })
 export class FakeTreeNodeExpanderComponent {
+    @Input() options: TreeUIOptions
     @Input() node: TreeNode
+    @Input() index: number
+    @Input() template: TemplateRef<any>
 }
 
 @Component({
@@ -46,7 +49,7 @@ describe('TreeNodeWrapperComponent', () => {
                         provide: VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA,
                         useValue: 5,
                     },
-                ]
+                ],
             })
             .compileComponents()
     }))

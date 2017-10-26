@@ -12,7 +12,7 @@ import {
     Renderer2,
     SimpleChanges,
 } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
+import { merge } from 'rxjs/observable/merge'
 import { Subscription } from 'rxjs/Subscription'
 import { TREE_EVENTS } from '../../constants/events'
 import { ScrollIntoViewTarget, TreeModel } from '../../models'
@@ -165,7 +165,7 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
             })
         })
 
-        this.structureChangeSub = Observable.merge(
+        this.structureChangeSub = merge(
             this.treeModel.events.expand,
             this.treeModel.events.collapse,
             this.treeModel.events.loadChildren,

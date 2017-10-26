@@ -46,6 +46,7 @@ describe('TreeNodeComponent', () => {
         component = fixture.componentInstance
         component.options = createTreeUIOptions()
         component.node = {} as any
+        component.templates = {} as any
         fixture.detectChanges()
     })
 

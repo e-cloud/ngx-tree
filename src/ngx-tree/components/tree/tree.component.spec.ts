@@ -17,6 +17,7 @@ export class FakeTreeNodeChildrenComponent {
     @Input() templates: any
     @Input() disableMarginTop = false
     @Input() children: TreeNode[]
+    @Input() refreshTree = false
 
     constructor() {
     }

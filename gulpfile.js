@@ -4,6 +4,7 @@ const path = require('path')
 const ngc = require('@angular/compiler-cli/src/main').main
 const rollup = require('rollup')
 const sourcemaps = require('rollup-plugin-sourcemaps');
+const localResolve = require('rollup-plugin-local-resolve');
 const del = require('del')
 const runSequence = require('run-sequence')
 const inlineResources = require('./tools/gulp/inline-resources')
@@ -37,7 +38,8 @@ const rollupBaseConfig = {
   ],
 
   plugins: [
-    sourcemaps()
+    sourcemaps(),
+    localResolve()
   ]
 };
 
@@ -75,17 +77,16 @@ gulp.task('inline-resources', function () {
  * 4. Run the Angular compiler, ngc, on the /.tmp folder. This will output all
  *    compiled modules to the /build folder.
  */
-gulp.task('ngc', function () {
-  return ngc({
-    project: `${tmpFolder}/tsconfig.es5.json`
-  })
-    .then((exitCode) => {
-      if (exitCode === 1) {
-        // This error is caught in the 'compile' task by the runSequence method callback
-        // so that when ngc fails to compile, the whole compile process stops running
-        throw new Error('ngc compilation failed');
-      }
-    });
+gulp.task('ngc', function (cb) {
+  const exitCode = ngc(['-p', `${tmpFolder}/tsconfig.es5.json`])
+
+  if (exitCode === 1) {
+    // This error is caught in the 'compile' task by the runSequence method callback
+    // so that when ngc fails to compile, the whole compile process stops running
+    throw new Error('ngc compilation failed');
+  }
+
+  cb()
 });
 
 /**

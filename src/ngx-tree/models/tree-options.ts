@@ -114,6 +114,10 @@ export interface RawTreeUIOptions {
     nodeClass?(node: TreeNode): string;
 }
 
+/**
+ * create tree options about UI with defaults
+ * @param rawOpts
+ */
 export function createTreeUIOptions(rawOpts: RawTreeUIOptions = {}) {
     const levelPaddingOpt = rawOpts.levelPadding
     if (isNumber(levelPaddingOpt)) {
@@ -153,6 +157,10 @@ export interface TreeDataOptions {
     getChildren?(node: TreeNode): Promise<any[]>;
 }
 
+/**
+ * create tree options about data with defaults
+ * @param rawOpts
+ */
 export function createTreeDataOptions(rawOpts?: TreeDataOptions) {
     return defaultsDeep({}, rawOpts, defaultDataOptions)
 }

@@ -1,3 +1,9 @@
+/**
+ * a binary search function
+ * @param nodes
+ * @param condition
+ * @param firstIndex
+ */
 export function binarySearch<T>(nodes: T[], condition: (item: T) => boolean, firstIndex = 0) {
     let left = firstIndex
     let right = nodes.length - 1

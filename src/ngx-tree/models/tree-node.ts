@@ -16,12 +16,10 @@ export class TreeNode {
     children: TreeNode[]
     /**
      * top edge position relative to the top edge of scroll area
-     * @type {number}
      */
     position = 0
     /**
      * the visual height of the node
-     * @type {number}
      */
     height = 0
     loadingChildren = false

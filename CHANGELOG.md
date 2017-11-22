@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/e-cloud/ngx-tree/compare/v0.6.0...v0.7.0) (2017-11-22)
+
+
+### Bug Fixes
+
+* **type:** remove unnecessary types and code ([a775aad](https://github.com/e-cloud/ngx-tree/commit/a775aad))
+
+
+### Features
+
+* **deps:** upgrade deps to support Angular 5 ([5936f8f](https://github.com/e-cloud/ngx-tree/commit/5936f8f))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/e-cloud/ngx-tree/compare/v0.5.3...v0.6.0) (2017-10-26)
 

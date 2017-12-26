@@ -31,9 +31,9 @@
     "element-closest": "^2.0.2"
   },
   "peerDependencies": {
-    "@angular/core": "^4.0.0 || ~5.0.0",
-    "@angular/animations": "^4.0.0 || ~5.0.0",
-    "@angular/common": "^4.0.0 || ~5.0.0",
+    "@angular/core": "^4.0.0 || ^5.0.0",
+    "@angular/animations": "^4.0.0 || ^5.0.0",
+    "@angular/common": "^4.0.0 || ^5.0.0",
     "lodash-es": "^4.17.4",
     "rxjs": "^5.5.0",
     "zone.js": "^0.8.4"

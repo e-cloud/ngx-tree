@@ -26,15 +26,63 @@ const rollupBaseConfig = {
 
   sourcemap: true,
 
+  globals: {
+    // The key here is library name, and the value is the the name of the global variable name
+    // the window object.
+    // See https://github.com/rollup/rollup/wiki/JavaScript-API#globals for more.
+    '@angular/animations': 'ng.animations',
+    '@angular/common': 'ng.common',
+    '@angular/core': 'ng.core',
+    '@angular/forms': 'ng.forms',
+    '@angular/platform-browser': 'ng.platform.browser',
+    'rxjs': 'Rx',
+    'rxjs/Observable': 'Rx',
+    'rxjs/observable/empty': 'Rx.Observable',
+    'rxjs/observable/fromEvent': 'Rx.Observable',
+    'rxjs/observable/fromPromise': 'Rx.Observable',
+    'rxjs/observable/merge': 'Rx.Observable',
+    'rxjs/observable/of': 'Rx.Observable',
+    'rxjs/observable/throw': 'Rx.Observable',
+    'rxjs/BehaviorSubject': 'Rx',
+    'rxjs/Subject': 'Rx',
+  },
+
   external: [
     // A list of IDs of modules that should remain external to the bundle
     // See https://github.com/rollup/rollup/wiki/JavaScript-API#external
     '@angular/core',
-    '@angular/common',
-    '@angular/platform-browser',
     '@angular/animations',
+    '@angular/common',
+    '@angular/forms',
+    '@angular/platform-browser',
+    '@angular/router',
+    'lodash-es',
+    'lodash-es/defaults',
+    'lodash-es/defaultsDeep',
+    'lodash-es/isNumber',
+    'lodash-es/compact',
+    'lodash-es/each',
+    'lodash-es/find',
+    'lodash-es/first',
+    'lodash-es/isFunction',
+    'lodash-es/isString',
+    'lodash-es/last',
+    'lodash-es/pullAt',
+    'lodash-es/without',
     'rxjs',
-    'lodash-es'
+    'rxjs/operators',
+    'rxjs/Observable',
+    'rxjs/observable/empty',
+    'rxjs/observable/forkJoin',
+    'rxjs/observable/fromEvent',
+    'rxjs/observable/fromPromise',
+    'rxjs/observable/merge',
+    'rxjs/observable/of',
+    'rxjs/observable/of',
+    'rxjs/observable/throw',
+    'rxjs/BehaviorSubject',
+    'rxjs/Subject',
+    'rxjs/Subscription',
   ],
 
   plugins: [
@@ -122,11 +170,6 @@ gulp.task('rollup:umd', async function () {
     // Export mode to use
     // See https://github.com/rollup/rollup/wiki/JavaScript-API#exports
     exports: 'named',
-
-    // See https://github.com/rollup/rollup/wiki/JavaScript-API#globals
-    globals: {
-      typescript: 'ts'
-    },
 
     file: path.join(distFolder, `${libName}.umd.js`),
     sourcemapFile: path.join(buildFolder, `${libName}.umd.js`),

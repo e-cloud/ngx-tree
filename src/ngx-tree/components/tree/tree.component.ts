@@ -40,8 +40,17 @@ export class TreeComponent implements OnChanges, OnDestroy {
     UIOptions: TreeUIOptions
     refreshTree = false
 
+    /**
+     * source data
+     */
     @Input() nodes: TreeNode[]
+    /**
+     * id of the node to be focused on
+     */
     @Input() focusTarget: string
+    /**
+     * id of the node to be activated
+     */
     @Input() activateTarget: string
     @Input() dataOptions: TreeDataOptions
 

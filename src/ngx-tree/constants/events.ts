@@ -17,12 +17,21 @@ export const TREE_EVENTS = {
     addNode: 'addNode',
 }
 
+/**
+ * all events that the tree will trigger
+ */
 export interface EventsMap {
     expand: EventEmitter<TreeEvent>
     collapse: EventEmitter<TreeEvent>
     toggleExpander: EventEmitter<TreeEvent>
+    /**
+     * normally triggered by clicking or tabbing the enter key
+     */
     activate: EventEmitter<TreeEvent>
     deactivate: EventEmitter<TreeEvent>
+    /**
+     * focus is different from activate, because focus can be changed by arrow keys of keyboard
+     */
     focus: EventEmitter<TreeEvent>
     blur: EventEmitter<TreeEvent>
     initialized: EventEmitter<TreeEvent>

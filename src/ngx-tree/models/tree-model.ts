@@ -18,14 +18,20 @@ export interface ScrollIntoViewTarget {
 }
 
 export class TreeModel {
+    /**
+     * static cache for recording the tree model while using multiple tree component in same container.
+     */
     static focusedTree: TreeModel = null
 
     /**
-     * All root nodes
+     * All root nodes, it will have one item if a user input a single root tree.
      */
     roots: TreeNode[]
-    virtualRoot: TreeNode
-    scrollIntoView$: Subject<ScrollIntoViewTarget> = new Subject()
+    /**
+     * a tree node created internally to represent the root node of input data
+     */
+    readonly virtualRoot: TreeNode
+    readonly scrollIntoView$: Subject<ScrollIntoViewTarget> = new Subject()
 
     /**
      * Is the tree currently focused
@@ -35,7 +41,7 @@ export class TreeModel {
     }
 
     /**
-     * @returns      true if the tree is empty
+     * if the tree is empty
      */
     get isEmptyTree() {
         return this.roots && this.roots.length === 0

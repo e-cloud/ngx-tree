@@ -5,10 +5,16 @@ import { defaultActionMapping } from './actions'
 import { TreeModel } from './tree-model'
 import { TreeNode } from './tree-node'
 
+/**
+ * common functions to handle tree actions
+ */
 export interface ActionHandler {
     (tree: TreeModel, node: TreeNode, $event: any, ...rest);
 }
 
+/**
+ * a mapping model to link mouse events and keyboard events with actions
+ */
 export interface ActionMapping {
     mouse?: {
         click?: ActionHandler,

@@ -8,7 +8,7 @@
     "build:lib": "ng-packagr",
     "start": "ng serve -o",
     "docs": "npm run docs:build",
-    "docs:build": "compodoc -p tsconfig.json -n ngx-tree -d docs --hideGenerator",
+    "docs:build": "compodoc -p src/ngx-tree/tsconfig.doc.json -n ngx-tree -d docs --hideGenerator",
     "docs:serve": "npm run docs:build -- -s",
     "docs:watch": "npm run docs:build -- -s -w",
     "lint": "ng lint --type-check",

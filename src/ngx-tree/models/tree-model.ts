@@ -82,7 +82,7 @@ export class TreeModel {
         /**
          * Options that are passed to the tree component
          */
-        public options: TreeDataOptions,
+        public options?: TreeDataOptions,
     ) {
         this.options = createTreeDataOptions(options)
         const virtualRootConfig = {

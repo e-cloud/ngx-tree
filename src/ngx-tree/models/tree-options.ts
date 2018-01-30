@@ -118,7 +118,7 @@ export interface RawTreeUIOptions {
  * create tree options about UI with defaults
  * @param rawOpts
  */
-export function createTreeUIOptions(rawOpts: RawTreeUIOptions = {}) {
+export function createTreeUIOptions(rawOpts: RawTreeUIOptions = {}): TreeUIOptions {
     const levelPaddingOpt = rawOpts.levelPadding
     if (isNumber(levelPaddingOpt)) {
         rawOpts.levelPadding = function (node: TreeNode) {
@@ -149,7 +149,7 @@ export interface TreeDataOptions {
     /**
      * Change the default mouse and key actions on the tree
      */
-    actionMapping?: any;
+    actionMapping?: ActionMapping;
 
     /**
      * Supply function for getting fields asynchronously. Should return a Promise
@@ -161,7 +161,7 @@ export interface TreeDataOptions {
  * create tree options about data with defaults
  * @param rawOpts
  */
-export function createTreeDataOptions(rawOpts?: TreeDataOptions) {
+export function createTreeDataOptions(rawOpts: TreeDataOptions = {}): TreeDataOptions {
     return defaultsDeep({}, rawOpts, defaultDataOptions)
 }
 

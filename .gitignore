@@ -41,8 +41,11 @@ package-lock.json
 /*.*
 e2e
 src
-tools
+tools/*
 
 
 !/*.html
 !.gitignore
+!.gitattributes
+!docs
+!tools/gh-pages-release.sh

@@ -1,0 +1,2314 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ngx-tree</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	    <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ngx-tree</a>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="../index.html">ngx-tree</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../index.html"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="../overview.html" 
+                                         href="../overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                                <li class="link">
+                                  <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                        <a href="../changelog.html"
+                                    >
+                                        <span class="fa fa-file-text-o"></span>CHANGELOG
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../modules.html" >
+                            <div class="menu-toggler linked" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            >
+                                <span class="fa fa-archive"></span>
+                                <span class="link-name">Modules</span>
+                                <span class="fa fa-angle-down"></span>
+                            </div>
+                        </a>
+                        <ul class="links collapse "
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="../modules/NgxTreeModule.html" >NgxTreeModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-components-links"
+                            >
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="../components/TreeComponent.html"  data-type="entity-link" class="active" >TreeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TreeLoadingComponent.html" >TreeLoadingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TreeNodeChildrenComponent.html" >TreeNodeChildrenComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TreeNodeComponent.html" >TreeNodeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TreeNodeContentComponent.html" >TreeNodeContentComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TreeNodeDropSlotComponent.html" >TreeNodeDropSlotComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TreeNodeExpanderComponent.html" >TreeNodeExpanderComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TreeNodeWrapperComponent.html" >TreeNodeWrapperComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/TreeViewportComponent.html" >TreeViewportComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-directives-links"
+                            >
+                            <span class="fa fa-code"></span>
+                            <span>Directives</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-directives-links"
+                            >
+                                <li class="link">
+                                    <a href="../directives/TreeDragDirective.html" >TreeDragDirective</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../directives/TreeDropDirective.html" >TreeDropDirective</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-classes-links"
+                            >
+                            <span class="fa fa-file-code-o"></span>
+                            <span>Classes</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-classes-links"
+                            >
+                                <li class="link">
+                                    <a href="../classes/TreeModel.html" >TreeModel</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../classes/TreeNode.html" >TreeNode</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-injectables-links"
+                            >
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="../injectables/TreeDraggingTargetService.html" >TreeDraggingTargetService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/TreeVirtualScroll.html" >TreeVirtualScroll</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-interfaces-links"
+                            >
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/ActionHandler.html" >ActionHandler</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ActionMapping.html" >ActionMapping</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/DropTarget.html" >DropTarget</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/EventsMap.html" >EventsMap</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/RawTreeUIOptions.html" >RawTreeUIOptions</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ScrollIntoViewTarget.html" >ScrollIntoViewTarget</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/TreeDataOptions.html" >TreeDataOptions</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/TreeEvent.html" >TreeEvent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/TreeUIOptions.html" >TreeUIOptions</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-miscellaneous-links"
+                            >
+                            <span class="fa fa-cubes"></span>
+                            <span>Miscellaneous</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-miscellaneous-links"
+                            >
+                                <li class="link">
+                                  <a href="../miscellaneous/functions.html" data-type="entity-link" >Functions</a>
+                                </li>
+                                <li class="link">
+                                  <a href="../miscellaneous/typealiases.html" data-type="entity-link" >Type aliases</a>
+                                </li>
+                                <li class="link">
+                                  <a href="../miscellaneous/variables.html" data-type="entity-link" >Variables</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+            
+                </ul>
+            
+            </nav>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="../index.html">ngx-tree</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../index.html"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="../overview.html" 
+                                                href="../overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                                       <li class="link">
+                                         <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                               <a href="../changelog.html"
+                                           >
+                                               <span class="fa fa-file-text-o"></span>CHANGELOG
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../modules.html" >
+                                   <div class="menu-toggler linked" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   >
+                                       <span class="fa fa-archive"></span>
+                                       <span class="link-name">Modules</span>
+                                       <span class="fa fa-angle-down"></span>
+                                   </div>
+                               </a>
+                               <ul class="links collapse "
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="../modules/NgxTreeModule.html" >NgxTreeModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#components-links"
+                   >
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="../components/TreeComponent.html"  data-type="entity-link" class="active" >TreeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TreeLoadingComponent.html" >TreeLoadingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TreeNodeChildrenComponent.html" >TreeNodeChildrenComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TreeNodeComponent.html" >TreeNodeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TreeNodeContentComponent.html" >TreeNodeContentComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TreeNodeDropSlotComponent.html" >TreeNodeDropSlotComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TreeNodeExpanderComponent.html" >TreeNodeExpanderComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TreeNodeWrapperComponent.html" >TreeNodeWrapperComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/TreeViewportComponent.html" >TreeViewportComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#directives-links"
+                   >
+                                   <span class="fa fa-code"></span>
+                                   <span>Directives</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="directives-links"
+                   >
+                                       <li class="link">
+                                           <a href="../directives/TreeDragDirective.html" >TreeDragDirective</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../directives/TreeDropDirective.html" >TreeDropDirective</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#classes-links"
+                   >
+                                   <span class="fa fa-file-code-o"></span>
+                                   <span>Classes</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="classes-links"
+                   >
+                                       <li class="link">
+                                           <a href="../classes/TreeModel.html" >TreeModel</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../classes/TreeNode.html" >TreeNode</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#injectables-links"
+                   >
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="../injectables/TreeDraggingTargetService.html" >TreeDraggingTargetService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/TreeVirtualScroll.html" >TreeVirtualScroll</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#interfaces-links"
+                   >
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/ActionHandler.html" >ActionHandler</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ActionMapping.html" >ActionMapping</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/DropTarget.html" >DropTarget</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/EventsMap.html" >EventsMap</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/RawTreeUIOptions.html" >RawTreeUIOptions</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ScrollIntoViewTarget.html" >ScrollIntoViewTarget</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/TreeDataOptions.html" >TreeDataOptions</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/TreeEvent.html" >TreeEvent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/TreeUIOptions.html" >TreeUIOptions</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#miscellaneous-links"
+                   >
+                                   <span class="fa fa-cubes"></span>
+                                   <span>Miscellaneous</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="miscellaneous-links"
+                   >
+                                       <li class="link">
+                                         <a href="../miscellaneous/functions.html" data-type="entity-link" >Functions</a>
+                                       </li>
+                                       <li class="link">
+                                         <a href="../miscellaneous/typealiases.html" data-type="entity-link" >Type aliases</a>
+                                       </li>
+                                       <li class="link">
+                                         <a href="../miscellaneous/variables.html" data-type="entity-link" >Variables</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                   
+                       </ul>
+                   
+                   </nav>
+               </div>
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>TreeComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active">
+        <a href="#info" id="info-tab" role="tab" data-toggle="tab" data-link="info">Info</a>
+    </li>
+
+    <li>
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    </li>
+
+    <li>
+        <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+    </li>
+    <li>
+        <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/ngx-tree/components/tree/tree.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>ngx-tree</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>tree.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./tree.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+        <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#emitterMap">emitterMap</a>
+                            </li>
+                            <li>
+                                <a href="#expanderTemplate">expanderTemplate</a>
+                            </li>
+                            <li>
+                                <a href="#loadingTemplate">loadingTemplate</a>
+                            </li>
+                            <li>
+                                <a href="#refreshTree">refreshTree</a>
+                            </li>
+                            <li>
+                                <a href="#root">root</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#treeDraggingTargetService">treeDraggingTargetService</a>
+                            </li>
+                            <li>
+                                <a href="#treeModel">treeModel</a>
+                            </li>
+                            <li>
+                                <a href="#treeNodeFullTemplate">treeNodeFullTemplate</a>
+                            </li>
+                            <li>
+                                <a href="#treeNodeTemplate">treeNodeTemplate</a>
+                            </li>
+                            <li>
+                                <a href="#treeNodeWrapperTemplate">treeNodeWrapperTemplate</a>
+                            </li>
+                            <li>
+                                <a href="#UIOptions">UIOptions</a>
+                            </li>
+                            <li>
+                                <a href="#viewportComponent">viewportComponent</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnChanges">ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#sizeChanged">sizeChanged</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activateTarget">activateTarget</a>
+                            </li>
+                            <li>
+                                <a href="#allowDrag">allowDrag</a>
+                            </li>
+                            <li>
+                                <a href="#allowDrop">allowDrop</a>
+                            </li>
+                            <li>
+                                <a href="#dataOptions">dataOptions</a>
+                            </li>
+                            <li>
+                                <a href="#enableAnimation">enableAnimation</a>
+                            </li>
+                            <li>
+                                <a href="#focusTarget">focusTarget</a>
+                            </li>
+                            <li>
+                                <a href="#keepNodesExpanded">keepNodesExpanded</a>
+                            </li>
+                            <li>
+                                <a href="#levelPadding">levelPadding</a>
+                            </li>
+                            <li>
+                                <a href="#nodeClass">nodeClass</a>
+                            </li>
+                            <li>
+                                <a href="#nodes">nodes</a>
+                            </li>
+                            <li>
+                                <a href="#useVirtualScroll">useVirtualScroll</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activate">activate</a>
+                            </li>
+                            <li>
+                                <a href="#addNode">addNode</a>
+                            </li>
+                            <li>
+                                <a href="#blur">blur</a>
+                            </li>
+                            <li>
+                                <a href="#changeFilter">changeFilter</a>
+                            </li>
+                            <li>
+                                <a href="#collapse">collapse</a>
+                            </li>
+                            <li>
+                                <a href="#deactivate">deactivate</a>
+                            </li>
+                            <li>
+                                <a href="#expand">expand</a>
+                            </li>
+                            <li>
+                                <a href="#focus">focus</a>
+                            </li>
+                            <li>
+                                <a href="#initialized">initialized</a>
+                            </li>
+                            <li>
+                                <a href="#loadChildren">loadChildren</a>
+                            </li>
+                            <li>
+                                <a href="#moveNode">moveNode</a>
+                            </li>
+                            <li>
+                                <a href="#removeNode">removeNode</a>
+                            </li>
+                            <li>
+                                <a href="#toggleExpander">toggleExpander</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostBindings</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#class.ngx-tree">class.ngx-tree</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#body: keydown">body: keydown</a>
+                            </li>
+                            <li>
+                                <a href="#body: mousedown">body: mousedown</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h3 id="constructor">Constructor</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>constructor(treeDraggingTargetService: <a href="../injectables/TreeDraggingTargetService.html">TreeDraggingTargetService</a>)</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:88</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div>
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>treeDraggingTargetService</td>
+                                                      <td>
+                                                                <code><a href="../injectables/TreeDraggingTargetService.html" target="_self" >TreeDraggingTargetService</a></code>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="inputs">Inputs</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="activateTarget"></a>
+                            <code>activateTarget</code>
+                        </td>
+                        <td class="col-md-10">
+                            <div><p>id of the node to be activated</p>
+</div>
+                              <p>
+                                <em>Type:</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                              </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:54</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="allowDrag"></a>
+                            <code>allowDrag</code>
+                        </td>
+                        <td class="col-md-10">
+                              <p>
+                                <em>Type:</em>    <code><a href="../miscellaneous/typealiases.html#IAllowDragFn" target="_self" >boolean | IAllowDragFn</a></code>
+
+                              </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:57</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="allowDrop"></a>
+                            <code>allowDrop</code>
+                        </td>
+                        <td class="col-md-10">
+                              <p>
+                                <em>Type:</em>    <code><a href="../miscellaneous/typealiases.html#IAllowDropFn" target="_self" >boolean | IAllowDropFn</a></code>
+
+                              </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:58</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="dataOptions"></a>
+                            <code>dataOptions</code>
+                        </td>
+                        <td class="col-md-10">
+                              <p>
+                                <em>Type:</em>    <code><a href="../interfaces/TreeDataOptions.html" target="_self" >TreeDataOptions</a></code>
+
+                              </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:55</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="enableAnimation"></a>
+                            <code>enableAnimation</code>
+                        </td>
+                        <td class="col-md-10">
+                            <p>
+                              <em>Default value: </em><code>true</code>
+                            </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:62</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="focusTarget"></a>
+                            <code>focusTarget</code>
+                        </td>
+                        <td class="col-md-10">
+                            <div><p>id of the node to be focused on</p>
+</div>
+                              <p>
+                                <em>Type:</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                              </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:50</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="keepNodesExpanded"></a>
+                            <code>keepNodesExpanded</code>
+                        </td>
+                        <td class="col-md-10">
+                            <p>
+                              <em>Default value: </em><code>false</code>
+                            </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:63</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="levelPadding"></a>
+                            <code>levelPadding</code>
+                        </td>
+                        <td class="col-md-10">
+                              <p>
+                                <em>Type:</em>    <code><a href="../miscellaneous/typealiases.html#ILevelPaddingFn" target="_self" >number | ILevelPaddingFn</a></code>
+
+                              </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:59</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="nodeClass"></a>
+                            <code>nodeClass</code>
+                        </td>
+                        <td class="col-md-10">
+                              <p>
+                                <em>Type:</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                              </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:61</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="nodes"></a>
+                            <code>nodes</code>
+                        </td>
+                        <td class="col-md-10">
+                            <div><p>source data</p>
+</div>
+                              <p>
+                                <em>Type:</em>    <code><a href="../classes/TreeNode.html" target="_self" >TreeNode[]</a></code>
+
+                              </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:46</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="useVirtualScroll"></a>
+                            <code>useVirtualScroll</code>
+                        </td>
+                        <td class="col-md-10">
+                              <p>
+                                <em>Type:</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                              </p>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:60</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="outputs">Outputs</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="activate"></a>
+                            <code>activate</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:68</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="addNode"></a>
+                            <code>addNode</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:76</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="blur"></a>
+                            <code>blur</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:71</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="changeFilter"></a>
+                            <code>changeFilter</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:75</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="collapse"></a>
+                            <code>collapse</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:66</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="deactivate"></a>
+                            <code>deactivate</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:69</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="expand"></a>
+                            <code>expand</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:65</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="focus"></a>
+                            <code>focus</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:70</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="initialized"></a>
+                            <code>initialized</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:72</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="loadChildren"></a>
+                            <code>loadChildren</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:74</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="moveNode"></a>
+                            <code>moveNode</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:73</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="removeNode"></a>
+                            <code>removeNode</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:77</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="toggleExpander"></a>
+                            <code>toggleExpander</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:67</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3>HostBindings</h3>        <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="class.ngx-tree"></a>
+                            <span class="name">
+                                <b>
+                                class.ngx-tree
+                                </b>
+                                <a href="#class.ngx-tree"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>class.ngx-tree:     <code></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value : </i><code>true</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:79</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3>HostListeners</h3>        <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="body: keydown"></a>
+                            <span class="name">
+                                <b>
+                                body: keydown
+                                </b>
+                                <a href="#body: keydown"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Arguments : </i><code>'$event' </code>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>body: keydown($event: )</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:150</a></div>
+                                </td>
+                            </tr>
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="body: mousedown"></a>
+                            <span class="name">
+                                <b>
+                                body: mousedown
+                                </b>
+                                <a href="#body: mousedown"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Arguments : </i><code>'$event' </code>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>body: mousedown($event: )</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="165" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:165</a></div>
+                                </td>
+                            </tr>
+    
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        
+            <h3 id="methods">
+                Methods
+            </h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="ngOnChanges"></a>
+                            <span class="name">
+                                <b>
+                                ngOnChanges
+                                </b>
+                                <a href="#ngOnChanges"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:104</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>changes</td>
+                                                      <td>
+                                                              <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="../s/id.html" target="_self" >void</a></code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="ngOnDestroy"></a>
+                            <span class="name">
+                                <b>
+                                ngOnDestroy
+                                </b>
+                                <a href="#ngOnDestroy"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>ngOnDestroy()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:143</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="../s/id.html" target="_self" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="sizeChanged"></a>
+                            <span class="name">
+                                <b>
+                                sizeChanged
+                                </b>
+                                <a href="#sizeChanged"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>sizeChanged()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:173</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="../s/id.html" target="_self" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        
+            <h3 id="inputs">
+                Properties
+            </h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="emitterMap"></a>
+                            <span class="name">
+                                <b>
+                                emitterMap
+                                </b>
+                                <a href="#emitterMap"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>emitterMap:     <code><a href="../interfaces/EventsMap.html" target="_self" >EventsMap</a></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code><a href="../interfaces/EventsMap.html" target="_self" >EventsMap</a></code>
+    
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:38</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="expanderTemplate"></a>
+                            <span class="name">
+                                <b>
+                                expanderTemplate
+                                </b>
+                                <a href="#expanderTemplate"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>expanderTemplate:     <code>TemplateRef&lt;any&gt;</code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code>TemplateRef&lt;any&gt;</code>
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Decorators : </i><code>ContentChild</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:82</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="loadingTemplate"></a>
+                            <span class="name">
+                                <b>
+                                loadingTemplate
+                                </b>
+                                <a href="#loadingTemplate"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>loadingTemplate:     <code>TemplateRef&lt;any&gt;</code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code>TemplateRef&lt;any&gt;</code>
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Decorators : </i><code>ContentChild</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:81</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="refreshTree"></a>
+                            <span class="name">
+                                <b>
+                                refreshTree
+                                </b>
+                                <a href="#refreshTree"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>refreshTree:     <code></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value : </i><code>false</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:41</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="root"></a>
+                            <span class="name">
+                                <b>
+                                root
+                                </b>
+                                <a href="#root"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>root:     <code><a href="../classes/TreeNode.html" target="_self" >TreeNodeChildrenComponent</a></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code><a href="../classes/TreeNode.html" target="_self" >TreeNodeChildrenComponent</a></code>
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Decorators : </i><code>ViewChild</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:88</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="treeDraggingTargetService"></a>
+                            <span class="name">
+                                <b>
+                                    <span class="modifier">Public</span>
+                                treeDraggingTargetService
+                                </b>
+                                <a href="#treeDraggingTargetService"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-reset"></span><code>treeDraggingTargetService:     <code><a href="../injectables/TreeDraggingTargetService.html" target="_self" >TreeDraggingTargetService</a></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code><a href="../injectables/TreeDraggingTargetService.html" target="_self" >TreeDraggingTargetService</a></code>
+    
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:90</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="treeModel"></a>
+                            <span class="name">
+                                <b>
+                                treeModel
+                                </b>
+                                <a href="#treeModel"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>treeModel:     <code><a href="../classes/TreeModel.html" target="_self" >TreeModel</a></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code><a href="../classes/TreeModel.html" target="_self" >TreeModel</a></code>
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value : </i><code>null</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:39</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="treeNodeFullTemplate"></a>
+                            <span class="name">
+                                <b>
+                                treeNodeFullTemplate
+                                </b>
+                                <a href="#treeNodeFullTemplate"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>treeNodeFullTemplate:     <code>TemplateRef&lt;any&gt;</code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code>TemplateRef&lt;any&gt;</code>
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Decorators : </i><code>ContentChild</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:85</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="treeNodeTemplate"></a>
+                            <span class="name">
+                                <b>
+                                treeNodeTemplate
+                                </b>
+                                <a href="#treeNodeTemplate"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>treeNodeTemplate:     <code>TemplateRef&lt;any&gt;</code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code>TemplateRef&lt;any&gt;</code>
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Decorators : </i><code>ContentChild</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:83</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="treeNodeWrapperTemplate"></a>
+                            <span class="name">
+                                <b>
+                                treeNodeWrapperTemplate
+                                </b>
+                                <a href="#treeNodeWrapperTemplate"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>treeNodeWrapperTemplate:     <code>TemplateRef&lt;any&gt;</code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code>TemplateRef&lt;any&gt;</code>
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Decorators : </i><code>ContentChild</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:84</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="UIOptions"></a>
+                            <span class="name">
+                                <b>
+                                UIOptions
+                                </b>
+                                <a href="#UIOptions"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>UIOptions:     <code><a href="../interfaces/TreeUIOptions.html" target="_self" >TreeUIOptions</a></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code><a href="../interfaces/TreeUIOptions.html" target="_self" >TreeUIOptions</a></code>
+    
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:40</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="viewportComponent"></a>
+                            <span class="name">
+                                <b>
+                                viewportComponent
+                                </b>
+                                <a href="#viewportComponent"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>viewportComponent:     <code><a href="../components/TreeViewportComponent.html" target="_self" >TreeViewportComponent</a></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code><a href="../components/TreeViewportComponent.html" target="_self" >TreeViewportComponent</a></code>
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Decorators : </i><code>ViewChild</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/ngx-tree/components/tree/tree.component.ts:87</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+    </section>
+
+</div>
+
+
+    <div class="tab-pane fade tab-source-code" id="c-source">
+        <pre class="line-numbers"><code class="language-typescript">import {
+    Component,
+    ContentChild,
+    EventEmitter,
+    HostBinding,
+    HostListener,
+    Input,
+    OnChanges,
+    OnDestroy,
+    Output,
+    SimpleChanges,
+    TemplateRef,
+    ViewChild,
+} from &#x27;@angular/core&#x27;
+import &#x27;element-closest&#x27;
+import each from &#x27;lodash-es/each&#x27;
+import { EventsMap, TREE_EVENTS } from &#x27;../../constants/events&#x27;
+import {
+    createTreeUIOptions,
+    IAllowDragFn,
+    IAllowDropFn,
+    ILevelPaddingFn,
+    TreeDataOptions,
+    TreeModel,
+    TreeNode,
+    TreeUIOptions,
+} from &#x27;../../models&#x27;
+import { TreeDraggingTargetService } from &#x27;../../services/tree-dragging-target.service&#x27;
+import { TreeNodeChildrenComponent } from &#x27;../tree-node-children/tree-node-children.component&#x27;
+import { TreeViewportComponent } from &#x27;../tree-viewport/tree-viewport.component&#x27;
+
+@Component({
+    selector: &#x27;ngx-tree&#x27;,
+    templateUrl: &#x27;./tree.component.html&#x27;,
+    styleUrls: [&#x27;./tree.component.scss&#x27;],
+})
+export class TreeComponent implements OnChanges, OnDestroy {
+    emitterMap: EventsMap
+    treeModel: TreeModel &#x3D; null
+    UIOptions: TreeUIOptions
+    refreshTree &#x3D; false
+
+    /**
+     * source data
+     */
+    @Input() nodes: TreeNode[]
+    /**
+     * id of the node to be focused on
+     */
+    @Input() focusTarget: string
+    /**
+     * id of the node to be activated
+     */
+    @Input() activateTarget: string
+    @Input() dataOptions: TreeDataOptions
+
+    @Input() allowDrag: boolean | IAllowDragFn
+    @Input() allowDrop: boolean | IAllowDropFn
+    @Input() levelPadding: number | ILevelPaddingFn
+    @Input() useVirtualScroll: boolean
+    @Input() nodeClass: (node: TreeNode) &#x3D;&gt; string
+    @Input() enableAnimation &#x3D; true
+    @Input() keepNodesExpanded &#x3D; false
+
+    @Output() expand: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() collapse: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() toggleExpander: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() activate: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() deactivate: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() focus: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() blur: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() initialized: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() moveNode: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() loadChildren: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() changeFilter: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() addNode: EventEmitter&lt;any&gt; &#x3D; null
+    @Output() removeNode: EventEmitter&lt;any&gt; &#x3D; null
+
+    @HostBinding(&#x27;class.ngx-tree&#x27;) className &#x3D; true
+
+    @ContentChild(&#x27;loadingTemplate&#x27;) loadingTemplate: TemplateRef&lt;any&gt;
+    @ContentChild(&#x27;expanderTemplate&#x27;) expanderTemplate: TemplateRef&lt;any&gt;
+    @ContentChild(&#x27;treeNodeTemplate&#x27;) treeNodeTemplate: TemplateRef&lt;any&gt;
+    @ContentChild(&#x27;treeNodeWrapperTemplate&#x27;) treeNodeWrapperTemplate: TemplateRef&lt;any&gt;
+    @ContentChild(&#x27;treeNodeFullTemplate&#x27;) treeNodeFullTemplate: TemplateRef&lt;any&gt;
+
+    @ViewChild(&#x27;viewport&#x27;) viewportComponent: TreeViewportComponent
+    @ViewChild(&#x27;root&#x27;) root: TreeNodeChildrenComponent
+
+    constructor(public treeDraggingTargetService: TreeDraggingTargetService) {
+        this.emitterMap &#x3D; Object.keys(TREE_EVENTS).reduce((map, name) &#x3D;&gt; {
+            if (!this.hasOwnProperty(name)) {
+                throw new TypeError(&#x60;Unmatched events: [${name}]&#x60;)
+            }
+
+            this[name] &#x3D; map[name] &#x3D; new EventEmitter()
+
+            return map
+        }, {}) as any
+
+        this.UIOptions &#x3D; createTreeUIOptions()
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.nodes &amp;&amp; changes.nodes.currentValue) {
+            const oldTreeModel &#x3D; this.treeModel
+            this.treeModel &#x3D; new TreeModel(changes.nodes.currentValue, this.emitterMap, this.dataOptions)
+            if (oldTreeModel &amp;&amp; this.keepNodesExpanded) {
+                oldTreeModel.expandedNodes.forEach(node &#x3D;&gt; {
+                    this.treeModel.setExpandedNodeInPlace(node)
+                })
+            }
+            if (!changes.nodes.isFirstChange()) {
+                this.refreshTree &#x3D; true
+            }
+        } else if (changes.dataOptions &amp;&amp; changes.dataOptions.currentValue &amp;&amp; this.treeModel) {
+            this.treeModel.updateOptions(changes.dataOptions.currentValue)
+        }
+
+        if (changes.focusTarget &amp;&amp; changes.focusTarget.currentValue &amp;&amp; this.treeModel) {
+            this.treeModel.focusNode(this.focusTarget)
+        }
+
+        if (changes.activateTarget &amp;&amp; changes.activateTarget.currentValue &amp;&amp; this.treeModel) {
+            this.treeModel.activateNode(this.activateTarget)
+        }
+
+        if (changes.allowDrag
+            || changes.allowDrop
+            || changes.levelPadding
+            || changes.useVirtualScroll
+            || changes.nodeClass) {
+            this.UIOptions &#x3D; createTreeUIOptions({
+                allowDrag: this.allowDrag,
+                allowDrop: this.allowDrop,
+                levelPadding: this.levelPadding,
+                useVirtualScroll: this.useVirtualScroll,
+                nodeClass: this.nodeClass,
+            })
+        }
+    }
+
+    ngOnDestroy() {
+        each(this.emitterMap, function (emitter) {
+            emitter.complete()
+        })
+    }
+
+    @HostListener(&#x27;body: keydown&#x27;, [&#x27;$event&#x27;])
+    onKeydown($event) {
+        if (!this.treeModel.isFocused) {
+            return
+        }
+
+        if ([&#x27;input&#x27;, &#x27;textarea&#x27;].includes(document.activeElement.tagName.toLowerCase())) {
+            return
+        }
+
+        const focusedNode &#x3D; this.treeModel.focusedNode
+
+        this.treeModel.performKeyAction(focusedNode, $event)
+    }
+
+    @HostListener(&#x27;body: mousedown&#x27;, [&#x27;$event&#x27;])
+    onMousedown($event) {
+        const insideClick &#x3D; $event.target.closest(&#x27;ngx-tree&#x27;)
+
+        if (!insideClick) {
+            this.treeModel.setFocus(false)
+        }
+    }
+
+    sizeChanged() {
+        this.viewportComponent.setViewport()
+    }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade" id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ngx-tree-viewport [@.disabled]&#x3D;&quot;!enableAnimation || viewport.isScrolling&quot;
+                   [enable]&#x3D;&quot;useVirtualScroll&quot;
+                   [treeModel]&#x3D;&quot;treeModel&quot;
+                   #viewport&gt;
+  &lt;div *ngIf&#x3D;&quot;!viewport.virtualScroll.isDisabled()&quot;
+       class&#x3D;&quot;height-raiser&quot;
+       [style.height.px]&#x3D;&quot;treeModel?.virtualRoot.height&quot;&gt;&lt;/div&gt;
+  &lt;div class&#x3D;&quot;tree-root&quot;
+       [class.node-dragging]&#x3D;&quot;treeDraggingTargetService.isDragging()&quot;
+       [class.virtual-scroll-disabled]&#x3D;&quot;viewport.virtualScroll.isDisabled()&quot;
+       [style.transform]&#x3D;&quot;&#x27;translateY(&#x27; + root.marginTop + &#x27;px)&#x27;&quot;&gt;
+    &lt;ngx-tree-node-children #root
+                            [options]&#x3D;&quot;UIOptions&quot;
+                            [disableMarginTop]&#x3D;&quot;true&quot;
+                            [node]&#x3D;&quot;treeModel?.virtualRoot&quot;
+                            [children]&#x3D;&quot;treeModel?.roots&quot;
+                            [refreshTree]&#x3D;&quot;refreshTree&quot;
+                            [templates]&#x3D;&quot;{
+                              expanderTemplate: expanderTemplate,
+                              loadingTemplate: loadingTemplate,
+                              treeNodeTemplate: treeNodeTemplate,
+                              treeNodeWrapperTemplate: treeNodeWrapperTemplate,
+                              treeNodeFullTemplate: treeNodeFullTemplate
+                            }&quot;&gt;
+    &lt;/ngx-tree-node-children&gt;
+  &lt;/div&gt;
+&lt;/ngx-tree-viewport&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade" id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ngx-tree-viewport [@.disabled]="!enableAnimation || viewport.isScrolling"                   [enable]="useVirtualScroll"                   [treeModel]="treeModel"                   #viewport>  <div *ngIf="!viewport.virtualScroll.isDisabled()"       class="height-raiser"       [style.height.px]="treeModel?.virtualRoot.height"></div>  <div class="tree-root"       [class.node-dragging]="treeDraggingTargetService.isDragging()"       [class.virtual-scroll-disabled]="viewport.virtualScroll.isDisabled()"       [style.transform]="\'translateY(\' + root.marginTop + \'px)\'">    <ngx-tree-node-children #root                            [options]="UIOptions"                            [disableMarginTop]="true"                            [node]="treeModel?.virtualRoot"                            [children]="treeModel?.roots"                            [refreshTree]="refreshTree"                            [templates]="{                              expanderTemplate: expanderTemplate,                              loadingTemplate: loadingTemplate,                              treeNodeTemplate: treeNodeTemplate,                              treeNodeWrapperTemplate: treeNodeWrapperTemplate,                              treeNodeFullTemplate: treeNodeFullTemplate                            }">    </ngx-tree-node-children>  </div></ngx-tree-viewport></div>'
+    var COMPONENTS = [{'name': 'TreeComponent', 'selector': 'ngx-tree'},{'name': 'TreeLoadingComponent', 'selector': 'ngx-tree-loading'},{'name': 'TreeNodeChildrenComponent', 'selector': 'ngx-tree-node-children'},{'name': 'TreeNodeComponent', 'selector': 'ngx-tree-node'},{'name': 'TreeNodeContentComponent', 'selector': 'ngx-tree-node-content'},{'name': 'TreeNodeDropSlotComponent', 'selector': 'ngx-tree-node-drop-slot'},{'name': 'TreeNodeExpanderComponent', 'selector': 'ngx-tree-node-expander'},{'name': 'TreeNodeWrapperComponent', 'selector': 'ngx-tree-node-wrapper'},{'name': 'TreeViewportComponent', 'selector': 'ngx-tree-viewport'}];
+    var DIRECTIVES = [{'name': 'TreeDragDirective', 'selector': '[ngxTreeDrag]'},{'name': 'TreeDropDirective', 'selector': '[ngxTreeDrop]'}];
+    var ACTUAL_COMPONENT = {'name': 'TreeComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+           </div>
+       </div>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script>var COMPODOC_CURRENT_PAGE_DEPTH = 1;</script>
+
+       <script src="../js/search/search.js"></script>
+       <script src="../js/search/lunr.min.js"></script>
+       <script src="../js/search/search-lunr.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+       <script src="../js/search/search_index.js"></script>
+
+    </body>
+</html>

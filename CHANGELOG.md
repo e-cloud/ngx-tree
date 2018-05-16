@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/e-cloud/ngx-tree/compare/v0.7.1...v0.8.0) (2018-05-16)
+
+
+### Bug Fixes
+
+* **types:** improve typings ([333036f](https://github.com/e-cloud/ngx-tree/commit/333036f))
+
+
+### Features
+
+* upgrade angular-cli, deps and support Angular 6 ([9698654](https://github.com/e-cloud/ngx-tree/commit/9698654))
+
+
+### BREAKING CHANGES
+
+* upgrading to rxjs 6.0 breaks backward compatibility
+
+
+
 <a name="0.7.1"></a>
 ## [0.7.1](https://github.com/e-cloud/ngx-tree/compare/v0.7.0...v0.7.1) (2017-12-26)
 

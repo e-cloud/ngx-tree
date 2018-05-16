@@ -4,7 +4,7 @@
   "description": "A derived version of angular-tree-component without mobx. Much Better performance.",
   "scripts": {
     "build": "ng build ngx-tree",
-    "build:demo": "ng build demo",
+    "build:demo": "ng build demo --base-href /ngx-tree/docs/demo/ -c production",
     "start": "ng serve -o demo",
     "docs": "npm run docs:build",
     "docs:build": "compodoc -p projects/ngx-tree/tsconfig.doc.json -n ngx-tree -d docs --hideGenerator",

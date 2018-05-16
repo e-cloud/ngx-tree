@@ -17,7 +17,7 @@
       "dom"
     ],
     "paths": {
-      "ngx-tree": [
+      "@e-cloud/ngx-tree": [
         "dist/ngx-tree"
       ]
     }

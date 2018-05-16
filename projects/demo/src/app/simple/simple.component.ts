@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { TreeNode } from 'ngx-tree'
+import { TreeNode } from '@e-cloud/ngx-tree'
 
 @Component({
     selector: 'demo-simple',

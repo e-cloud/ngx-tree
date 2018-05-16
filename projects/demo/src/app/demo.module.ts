@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { NgxTreeModule } from 'ngx-tree'
+import { NgxTreeModule } from '@e-cloud/ngx-tree'
 
 import { DemoComponent } from './demo.component'
 import { DemoRoutingModule } from './demo.routing'

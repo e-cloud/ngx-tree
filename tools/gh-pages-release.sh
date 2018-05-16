@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+yarn build
 yarn docs:build
 yarn build:demo
 currentBranch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`

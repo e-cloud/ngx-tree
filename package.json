@@ -7,7 +7,7 @@
     "build:demo": "ng build demo --base-href /ngx-tree/docs/demo/ -c production",
     "start": "ng serve -o demo",
     "docs": "npm run docs:build",
-    "docs:build": "compodoc -p projects/ngx-tree/tsconfig.doc.json -n ngx-tree -d docs --hideGenerator",
+    "docs:build": "compodoc -p projects/ngx-tree/tsconfig.doc.json -n ngx-tree -d dist/docs --hideGenerator",
     "docs:serve": "npm run docs:build -- -s",
     "docs:watch": "npm run docs:build -- -s -w",
     "lint": "ng lint --type-check",

@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
+yarn build
 yarn docs:build
+yarn build:demo
 currentBranch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 git checkout gh-pages
+yes | cp -rf dist/docs/* docs
 git add -A
 git commit -m "docs update"
 git checkout $currentBranch

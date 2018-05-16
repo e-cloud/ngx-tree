@@ -18,10 +18,7 @@
     ],
     "paths": {
       "ngx-tree": [
-        "./src/ngx-tree"
-      ],
-      "ngx-tree/*": [
-        "./src/ngx-tree/*"
+        "dist/ngx-tree"
       ]
     }
   }

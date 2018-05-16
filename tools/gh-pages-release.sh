@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 yarn docs:build
+yarn build:demo
 currentBranch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 git checkout gh-pages
 git add -A

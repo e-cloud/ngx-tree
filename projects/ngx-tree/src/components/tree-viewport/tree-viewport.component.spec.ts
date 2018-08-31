@@ -30,7 +30,11 @@ describe('TreeViewportComponent', () => {
         fixture = TestBed.createComponent(TreeViewportComponent)
         component = fixture.componentInstance
         component.treeModel = {
-            scrollIntoView$: of({ node: {} })
+            scrollIntoView$: of({ node: {} }),
+            roots: [],
+            getVisibleRoots() {return []},
+            virtualRoot: {},
+            fireEvent() {}
         } as any
         fixture.detectChanges()
     })

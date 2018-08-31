@@ -1,5 +1,12 @@
 # ngx-tree [DEMO](https://e-cloud.github.io/ngx-tree/docs/demo)
 
+<p align="center">
+  <a href="https://travis-ci.org/e-cloud/ngx-tree?branch=master"><img src="https://travis-ci.org/e-cloud/ngx-tree.svg?branch=master" alt="Travis Status"></a>
+  <a href="https://www.npmjs.com/package/@e-cloud/ngx-tree"><img src="https://img.shields.io/npm/v/@e-cloud/ngx-tree.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/@e-cloud/ngx-tree"><img src="https://img.shields.io/npm/l/@e-cloud/ngx-tree.svg" alt="License"></a>
+  <br>
+</p>
+
 ## Claims
 
 This module derivates from [angular-tree-component](https://github.com/500tech/angular-tree-component/). We remove the mobx dependency and do some performance improvements, whilst keep a similar component interface.

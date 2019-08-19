@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy,
     Component,
     ContentChild,
     EventEmitter,
@@ -78,14 +79,14 @@ export class TreeComponent implements OnChanges, OnDestroy {
 
     @HostBinding('class.ngx-tree') className = true
 
-    @ContentChild('loadingTemplate') loadingTemplate: TemplateRef<any>
-    @ContentChild('expanderTemplate') expanderTemplate: TemplateRef<any>
-    @ContentChild('treeNodeTemplate') treeNodeTemplate: TemplateRef<any>
-    @ContentChild('treeNodeWrapperTemplate') treeNodeWrapperTemplate: TemplateRef<any>
-    @ContentChild('treeNodeFullTemplate') treeNodeFullTemplate: TemplateRef<any>
+    @ContentChild('loadingTemplate',  {static: false}) loadingTemplate: TemplateRef<any>
+    @ContentChild('expanderTemplate',  {static: false}) expanderTemplate: TemplateRef<any>
+    @ContentChild('treeNodeTemplate',  {static: false}) treeNodeTemplate: TemplateRef<any>
+    @ContentChild('treeNodeWrapperTemplate',  {static: false}) treeNodeWrapperTemplate: TemplateRef<any>
+    @ContentChild('treeNodeFullTemplate',  {static: false}) treeNodeFullTemplate: TemplateRef<any>
 
-    @ViewChild('viewport') viewportComponent: TreeViewportComponent
-    @ViewChild('root') root: TreeNodeChildrenComponent
+    @ViewChild('viewport', { static: true }) viewportComponent: TreeViewportComponent
+    @ViewChild('root', { static: true }) root: TreeNodeChildrenComponent
 
     constructor(public treeDraggingTargetService: TreeDraggingTargetService) {
         this.emitterMap = Object.keys(TREE_EVENTS).reduce((map, name) => {

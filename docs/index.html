@@ -14,498 +14,39 @@
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="./" class="navbar-brand">ngx-tree</a>
-            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-            <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <nav>
-
-    <ul class="list">
-
-        <li class="title">
-            <a href="index.html" data-type="index-link">ngx-tree</a>
-        </li>
-
-        <li class="divider"></li>
-
-
-        <li class="chapter">
-            <a data-type="chapter-link" href="index.html"><span class="fa fa-home"></span>Getting started</a>
-            <ul class="links">
-                    <li class="link">
-                        <a 
-                            
-                             href="overview.html" 
-                             href="overview.html" 
-                            data-type="chapter-link">
-                            <span class="fa fa-fw fa-th"></span>Overview
-                        </a>
-                    </li>
-                    <li class="link">
-                      <a href="index.html" data-type="chapter-link"><span class="fa fa-file-text-o"></span>README</a>
-                    </li>
-                    <li class="link">
-                            <a href="changelog.html"
-                        data-type="chapter-link">
-                            <span class="fa fa-fw fa-file-text-o"></span>CHANGELOG
-                        </a>
-                    </li>
-            </ul>
-        </li>
-
-
-        <li class="chapter modules">
-            <a data-type="chapter-link" href="modules.html">
-                <div class="menu-toggler linked" data-toggle="collapse"
-                        data-target="#xs-modules-links"
-                >
-                    <span class="fa fa-fw fa-archive"></span>
-                    <span class="link-name">Modules</span>
-                    <span class="fa fa-angle-down"></span>
-                </div>
-            </a>
-            <ul class="links collapse"
-                    id="xs-modules-links"
-                >
-                    <li class="link">
-                        <a href="modules/NgxTreeModule.html" data-type="entity-link">NgxTreeModule</a>
-                            <li class="chapter inner">
-                                <div class="simple menu-toggler" data-toggle="collapse"
-                                        data-target="#xs-components-links-module-NgxTreeModule-f40eca01-21ac-4c22-aaff-6b75bd56a107"
-                                    >
-                                    <span class="fa fa-fw fa-cogs"></span>
-                                    <span>Components</span>
-                                    <span class="fa fa-angle-down"></span>
-                                </div>
-                                <ul class="links collapse"
-                                        id="xs-components-links-module-NgxTreeModule-f40eca01-21ac-4c22-aaff-6b75bd56a107"
-                                    >
-                                        <li class="link">
-                                            <a href="components/TreeLoadingComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeLoadingComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeExpanderComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeExpanderComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeWrapperComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeWrapperComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeChildrenComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeChildrenComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeContentComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeContentComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeViewportComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeViewportComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeDropSlotComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeDropSlotComponent</a>
-                                        </li>
-                                </ul>
-                            </li>
-                            <li class="chapter inner">
-                                <div class="simple menu-toggler" data-toggle="collapse"
-                                        data-target="#xs-directives-links-module-NgxTreeModule-f40eca01-21ac-4c22-aaff-6b75bd56a107"
-                                    >
-                                    <span class="fa fa-fw fa-code"></span>
-                                    <span>Directives</span>
-                                    <span class="fa fa-angle-down"></span>
-                                </div>
-                                <ul class="links collapse"
-                                        id="xs-directives-links-module-NgxTreeModule-f40eca01-21ac-4c22-aaff-6b75bd56a107"
-                                    >
-                                        <li class="link">
-                                            <a href="directives/TreeDragDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeDragDirective</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="directives/TreeDropDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeDropDirective</a>
-                                        </li>
-                                </ul>
-                            </li>
-                    </li>
-            </ul>
-        </li>
-
-
-
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-                    data-target="#xs-classes-links"
-                >
-                <span class="fa fa-fw fa-file-code-o"></span>
-                <span>Classes</span>
-                <span class="fa fa-angle-down"></span>
-            </div>
-            <ul class="links collapse"
-                    id="xs-classes-links"
-                >
-                    <li class="link">
-                        <a href="classes/TreeModel.html" data-type="entity-link">TreeModel</a>
-                    </li>
-                    <li class="link">
-                        <a href="classes/TreeNode.html" data-type="entity-link">TreeNode</a>
-                    </li>
-            </ul>
-        </li>
-
-                <li class="chapter">
-                    <div class="simple menu-toggler" data-toggle="collapse"
-                            data-target="#xs-injectables-links"
-                        >
-                        <span class="fa fa-fw fa-long-arrow-down"></span>
-                        <span>Injectables</span>
-                        <span class="fa fa-angle-down"></span>
-                    </div>
-                    <ul class="links collapse"
-                            id="xs-injectables-links"
-                        >
-                            <li class="link">
-                                <a href="injectables/TreeDraggingTargetService.html" data-type="entity-link">TreeDraggingTargetService</a>
-                            </li>
-                            <li class="link">
-                                <a href="injectables/TreeVirtualScroll.html" data-type="entity-link">TreeVirtualScroll</a>
-                            </li>
-                    </ul>
-                </li>
-
-
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-                    data-target="#xs-interfaces-links"
-                >
-                <span class="fa fa-fw fa-info"></span>
-                <span>Interfaces</span>
-                <span class="fa fa-angle-down"></span>
-            </div>
-            <ul class="links collapse"
-                    id="xs-interfaces-links"
-                >
-                    <li class="link">
-                        <a href="interfaces/ActionHandler.html" data-type="entity-link">ActionHandler</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/ActionMapping.html" data-type="entity-link">ActionMapping</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/DropTarget.html" data-type="entity-link">DropTarget</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/EventsMap.html" data-type="entity-link">EventsMap</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/RawTreeUIOptions.html" data-type="entity-link">RawTreeUIOptions</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/ScrollIntoViewTarget.html" data-type="entity-link">ScrollIntoViewTarget</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/TreeDataOptions.html" data-type="entity-link">TreeDataOptions</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/TreeEvent.html" data-type="entity-link">TreeEvent</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/TreeUIOptions.html" data-type="entity-link">TreeUIOptions</a>
-                    </li>
-            </ul>
-        </li>
-
-
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-                    data-target="#xs-miscellaneous-links"
-                >
-                <span class="fa fa-fw fa-cubes"></span>
-                <span>Miscellaneous</span>
-                <span class="fa fa-angle-down"></span>
-            </div>
-            <ul class="links collapse"
-                    id="xs-miscellaneous-links"
-                >
-                    <li class="link">
-                      <a href="miscellaneous/functions.html" data-type="entity-link">Functions</a>
-                    </li>
-                    <li class="link">
-                      <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>
-                    </li>
-                    <li class="link">
-                      <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
-                    </li>
-            </ul>
-        </li>
-
-
-        <li class="chapter">
-            <a data-type="chapter-link" href="coverage.html"><span class="fa fa-fw fa-tasks"></span>Documentation coverage</a>
-        </li>
-
-
-    </ul>
-
-</nav>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <nav>
-
-    <ul class="list">
-
-        <li class="title">
-            <a href="index.html" data-type="index-link">ngx-tree</a>
-        </li>
-
-        <li class="divider"></li>
-
-            <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-
-        <li class="chapter">
-            <a data-type="chapter-link" href="index.html"><span class="fa fa-home"></span>Getting started</a>
-            <ul class="links">
-                    <li class="link">
-                        <a 
-                            
-                             href="overview.html" 
-                             href="overview.html" 
-                            data-type="chapter-link">
-                            <span class="fa fa-fw fa-th"></span>Overview
-                        </a>
-                    </li>
-                    <li class="link">
-                      <a href="index.html" data-type="chapter-link"><span class="fa fa-file-text-o"></span>README</a>
-                    </li>
-                    <li class="link">
-                            <a href="changelog.html"
-                        data-type="chapter-link">
-                            <span class="fa fa-fw fa-file-text-o"></span>CHANGELOG
-                        </a>
-                    </li>
-            </ul>
-        </li>
-
-
-        <li class="chapter modules">
-            <a data-type="chapter-link" href="modules.html">
-                <div class="menu-toggler linked" data-toggle="collapse"
-                        data-target="#modules-links"
-                >
-                    <span class="fa fa-fw fa-archive"></span>
-                    <span class="link-name">Modules</span>
-                    <span class="fa fa-angle-down"></span>
-                </div>
-            </a>
-            <ul class="links collapse"
-                    id="modules-links"
->
-                    <li class="link">
-                        <a href="modules/NgxTreeModule.html" data-type="entity-link">NgxTreeModule</a>
-                            <li class="chapter inner">
-                                <div class="simple menu-toggler" data-toggle="collapse"
-                                        data-target="#components-links-module-NgxTreeModule-f40eca01-21ac-4c22-aaff-6b75bd56a107"
->
-                                    <span class="fa fa-fw fa-cogs"></span>
-                                    <span>Components</span>
-                                    <span class="fa fa-angle-down"></span>
-                                </div>
-                                <ul class="links collapse"
-                                        id="components-links-module-NgxTreeModule-f40eca01-21ac-4c22-aaff-6b75bd56a107"
->
-                                        <li class="link">
-                                            <a href="components/TreeLoadingComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeLoadingComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeExpanderComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeExpanderComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeWrapperComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeWrapperComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeChildrenComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeChildrenComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeContentComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeContentComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeViewportComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeViewportComponent</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="components/TreeNodeDropSlotComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeNodeDropSlotComponent</a>
-                                        </li>
-                                </ul>
-                            </li>
-                            <li class="chapter inner">
-                                <div class="simple menu-toggler" data-toggle="collapse"
-                                        data-target="#directives-links-module-NgxTreeModule-f40eca01-21ac-4c22-aaff-6b75bd56a107"
->
-                                    <span class="fa fa-fw fa-code"></span>
-                                    <span>Directives</span>
-                                    <span class="fa fa-angle-down"></span>
-                                </div>
-                                <ul class="links collapse"
-                                        id="directives-links-module-NgxTreeModule-f40eca01-21ac-4c22-aaff-6b75bd56a107"
->
-                                        <li class="link">
-                                            <a href="directives/TreeDragDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeDragDirective</a>
-                                        </li>
-                                        <li class="link">
-                                            <a href="directives/TreeDropDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TreeDropDirective</a>
-                                        </li>
-                                </ul>
-                            </li>
-                    </li>
-            </ul>
-        </li>
-
-
-
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-                    data-target="#classes-links"
->
-                <span class="fa fa-fw fa-file-code-o"></span>
-                <span>Classes</span>
-                <span class="fa fa-angle-down"></span>
-            </div>
-            <ul class="links collapse"
-                    id="classes-links"
->
-                    <li class="link">
-                        <a href="classes/TreeModel.html" data-type="entity-link">TreeModel</a>
-                    </li>
-                    <li class="link">
-                        <a href="classes/TreeNode.html" data-type="entity-link">TreeNode</a>
-                    </li>
-            </ul>
-        </li>
-
-                <li class="chapter">
-                    <div class="simple menu-toggler" data-toggle="collapse"
-                            data-target="#injectables-links"
->
-                        <span class="fa fa-fw fa-long-arrow-down"></span>
-                        <span>Injectables</span>
-                        <span class="fa fa-angle-down"></span>
-                    </div>
-                    <ul class="links collapse"
-                            id="injectables-links"
->
-                            <li class="link">
-                                <a href="injectables/TreeDraggingTargetService.html" data-type="entity-link">TreeDraggingTargetService</a>
-                            </li>
-                            <li class="link">
-                                <a href="injectables/TreeVirtualScroll.html" data-type="entity-link">TreeVirtualScroll</a>
-                            </li>
-                    </ul>
-                </li>
-
-
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-                    data-target="#interfaces-links"
->
-                <span class="fa fa-fw fa-info"></span>
-                <span>Interfaces</span>
-                <span class="fa fa-angle-down"></span>
-            </div>
-            <ul class="links collapse"
-                    id="interfaces-links"
->
-                    <li class="link">
-                        <a href="interfaces/ActionHandler.html" data-type="entity-link">ActionHandler</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/ActionMapping.html" data-type="entity-link">ActionMapping</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/DropTarget.html" data-type="entity-link">DropTarget</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/EventsMap.html" data-type="entity-link">EventsMap</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/RawTreeUIOptions.html" data-type="entity-link">RawTreeUIOptions</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/ScrollIntoViewTarget.html" data-type="entity-link">ScrollIntoViewTarget</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/TreeDataOptions.html" data-type="entity-link">TreeDataOptions</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/TreeEvent.html" data-type="entity-link">TreeEvent</a>
-                    </li>
-                    <li class="link">
-                        <a href="interfaces/TreeUIOptions.html" data-type="entity-link">TreeUIOptions</a>
-                    </li>
-            </ul>
-        </li>
-
-
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-                    data-target="#miscellaneous-links"
->
-                <span class="fa fa-fw fa-cubes"></span>
-                <span>Miscellaneous</span>
-                <span class="fa fa-angle-down"></span>
-            </div>
-            <ul class="links collapse"
-                    id="miscellaneous-links"
->
-                    <li class="link">
-                      <a href="miscellaneous/functions.html" data-type="entity-link">Functions</a>
-                    </li>
-                    <li class="link">
-                      <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>
-                    </li>
-                    <li class="link">
-                      <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
-                    </li>
-            </ul>
-        </li>
-
-
-        <li class="chapter">
-            <a data-type="chapter-link" href="coverage.html"><span class="fa fa-fw fa-tasks"></span>Documentation coverage</a>
-        </li>
-
-
-    </ul>
-
-</nav>
+                   <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
                <div class="content getting-started">
                    <div class="content-data">
 
 <h1 id="ngx-tree-demo">ngx-tree <a href="https://e-cloud.github.io/ngx-tree/docs/demo">DEMO</a></h1>
+<p align="center">
+  <a href="https://travis-ci.org/e-cloud/ngx-tree?branch=master"><img src="https://travis-ci.org/e-cloud/ngx-tree.svg?branch=master" alt="Travis Status"></a>
+  <a href="https://www.npmjs.com/package/@e-cloud/ngx-tree"><img src="https://img.shields.io/npm/v/@e-cloud/ngx-tree.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/@e-cloud/ngx-tree"><img src="https://img.shields.io/npm/l/@e-cloud/ngx-tree.svg" alt="License"></a>
+  <br>
+</p>
+
 <h2 id="claims">Claims</h2>
 <p>This module derivates from <a href="https://github.com/500tech/angular-tree-component/">angular-tree-component</a>. We remove the mobx dependency and do some performance improvements, whilst keep a similar component interface.</p>
 <h2 id="installation">Installation</h2>
 <p>To install this library, run:</p>
-<pre class="line-numbers"><code class="language-bash">$ npm install &#64;e-cloud/ngx-tree --save</code></pre><h2 id="usage">Usage</h2>
+<div><pre class="line-numbers"><code class="language-bash">$ npm install &#64;e-cloud/ngx-tree --save</code></pre></div><h2 id="usage">Usage</h2>
 <p>For details, please take a look at <a href="https://e-cloud.github.io/ngx-tree">document site</a></p>
 <h3 id="imports">Imports</h3>
 <p>Once you have installed the library, you can import it in your Angular <code>AppModule</code>:</p>
-<pre class="line-numbers"><code class="language-typescript">import { BrowserModule } from &#39;&#64;angular/platform-browser&#39;;
+<div><pre class="line-numbers"><code class="language-typescript">import { BrowserModule } from &#39;&#64;angular/platform-browser&#39;;
 import { NgModule } from &#39;&#64;angular/core&#39;;
 
 import { AppComponent } from &#39;./app.component&#39;;
@@ -526,9 +67,9 @@ import { NgxTreeModule } from &#39;&#64;e-cloud/ngx-tree&#39;;
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }</code></pre><h3 id="applications">Applications</h3>
+export class AppModule { }</code></pre></div><h3 id="applications">Applications</h3>
 <h4 id="demo-usage">demo usage</h4>
-<pre class="line-numbers"><code class="language-html">&lt;!-- You can now use your library component in app.component.html --&gt;
+<div><pre class="line-numbers"><code class="language-html">&lt;!-- You can now use your library component in app.component.html --&gt;
 &lt;h1&gt;
   {{title}}
 &lt;/h1&gt;
@@ -538,7 +79,7 @@ export class AppModule { }</code></pre><h3 id="applications">Applications</h3>
   &lt;ng-template #treeNodeTemplate let-node=&quot;node&quot;&gt;
     &lt;span title=&quot;{{node.data.subTitle}}&quot;&gt;{{ node.data.name }}&lt;/span&gt;
   &lt;/ng-template&gt;
-&lt;/ngx-tree&gt;</code></pre><blockquote>
+&lt;/ngx-tree&gt;</code></pre></div><blockquote>
 <p><strong>NOTE</strong>: the minimum input for <code>ngx-tree</code> component is <code>nodes</code>.</p>
 </blockquote>
 <h4 id="root-config">Root config</h4>
@@ -557,8 +98,8 @@ export class AppModule { }</code></pre><h3 id="applications">Applications</h3>
 </ul>
 <h2 id="development">Development</h2>
 <p>To generate all <code>*.js</code>, <code>*.d.ts</code> and <code>*.metadata.json</code> files:</p>
-<pre class="line-numbers"><code class="language-bash">$ npm run build</code></pre><p>To lint all <code>*.ts</code> files:</p>
-<pre class="line-numbers"><code class="language-bash">$ npm run lint</code></pre><h2 id="license">License</h2>
+<div><pre class="line-numbers"><code class="language-bash">$ npm run build</code></pre></div><p>To lint all <code>*.ts</code> files:</p>
+<div><pre class="line-numbers"><code class="language-bash">$ npm run lint</code></pre></div><h2 id="license">License</h2>
 <p>MIT © <a href="mailto:saintscott119@gmail.com">e-cloud</a></p>
 
 
@@ -574,10 +115,14 @@ export class AppModule { }</code></pre><h3 id="applications">Applications</h3>
 
 
 
+                   
+
+
+
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -589,6 +134,18 @@ export class AppModule { }</code></pre><h3 id="applications">Applications</h3>
            </div>
        </div>
 
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
        <script src="./js/libs/bootstrap-native.js"></script>
 
        <script src="./js/libs/es6-shim.min.js"></script>
@@ -598,20 +155,16 @@ export class AppModule { }</code></pre><h3 id="applications">Applications</h3>
 
        <script src="./js/compodoc.js"></script>
 
-        <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
-        </script>
-
-       <script src="./js/search/search.js"></script>
-       <script src="./js/search/lunr.min.js"></script>
-       <script src="./js/search/search-lunr.js"></script>
-
        <script src="./js/tabs.js"></script>
        <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
        <script src="./js/libs/prism.js"></script>
        <script src="./js/sourceCode.js"></script>
-       <script src="./js/search/search_index.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
 
 
     </body>

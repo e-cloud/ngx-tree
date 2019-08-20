@@ -23,10 +23,6 @@ export class TreeModel {
     static focusedTree: TreeModel | null = null
 
     /**
-     * All root nodes, it will have one item if a user input a single root tree.
-     */
-    roots: TreeNode[]
-    /**
      * a tree node created internally to represent the root node of input data
      */
     readonly virtualRoot: TreeNode
@@ -75,6 +71,13 @@ export class TreeModel {
         return compact(nodes)
     }
 
+    /**
+     * All root nodes, it will have one item if a user input a single root tree.
+     */
+    get roots(): TreeNode[] {
+        return this.virtualRoot.children
+    }
+
     options: TreeDataOptions
 
     private focusedNodeId: string | null = null
@@ -100,8 +103,6 @@ export class TreeModel {
 
         this.virtualRoot = new TreeNode(virtualRootConfig, null, this, 0)
         this.setExpandedNodeInPlace(this.virtualRoot)
-
-        this.roots = this.virtualRoot.children
     }
 
     addCache(node: TreeNode) {

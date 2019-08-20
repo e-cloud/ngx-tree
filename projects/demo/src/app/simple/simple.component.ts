@@ -29,6 +29,7 @@ export class SimpleComponent {
         idField: 'uuid',
         getChildren: this.getChildren.bind(this),
         useVirtualScroll: true,
+        referenceItemHeight: 22,
         allowDrag: (node) => {
             // console.log('allowDrag?');
             return true
@@ -44,14 +45,18 @@ export class SimpleComponent {
     }
 
     constructor() {
-        this.generateData()
+        this.generateData(4)
     }
 
-    generateData() {
+    regenerateData() {
+        this.generateData(Math.floor(Math.random() * 5))
+    }
+
+    generateData(seed: number) {
         this.nodes = [
             {
                 expanded: true,
-                name: 'root expanded 1',
+                name: `[${seed}]root expanded 1`,
                 subTitle: 'the root',
                 children: [
                     {
@@ -68,7 +73,7 @@ export class SimpleComponent {
             },
             {
                 expanded: true,
-                name: 'root expanded 2',
+                name: `[${seed}]root expanded 2`,
                 subTitle: 'the root',
                 children: [
                     {
@@ -84,12 +89,12 @@ export class SimpleComponent {
                 ],
             },
             {
-                name: 'asyncroot',
+                name: `[${seed}]async root`,
                 hasChildren: true,
             },
             {
                 expanded: true,
-                name: 'root2',
+                name: `[${seed}]root2`,
                 subTitle: 'the second root',
                 children: [
                     {
@@ -167,14 +172,14 @@ export class SimpleComponent {
             },
         ]
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < seed * 5; i++) {
             this.nodes.push({
                 expanded: i === 0,
-                name: `root Dynamic${i}`,
-                subTitle: `root created dynamically ${i}`,
-                children: new Array((i + 1) * 500).fill(null).map((item, n) => ({
-                    name: `child Dynamic${i}.${n}`,
-                    subTitle: `child created dynamically ${i}`,
+                name: `[${seed}]root Dynamic${i}`,
+                subTitle: `[${seed}]root created dynamically ${i}`,
+                children: new Array((i + 1) * seed * 500).fill(null).map((item, n) => ({
+                    name: `[${seed}]child Dynamic${i}.${n}`,
+                    subTitle: `[${seed}]child created dynamically ${i}`,
                     hasChildren: false,
                 })),
             })

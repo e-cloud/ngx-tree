@@ -1,12 +1,15 @@
 <input id="filter" #filter (keyup)="tree.treeModel.filterNodes(filter.value)" placeholder="filter nodes"/>
 <button (click)="tree.treeModel.clearFilter()">Clear Filter</button>
 
+<button (click)="this.regenerateData()">regenerate data</button>
+
 <ngx-tree
   #tree
   [enableAnimation]="false"
   [nodes]="nodes"
   [dataOptions]="customOptions"
   [useVirtualScroll]="customOptions.useVirtualScroll"
+  [referenceItemHeight]="customOptions.referenceItemHeight"
   [allowDrag]="customOptions.allowDrag"
   [allowDrop]="customOptions.allowDrop"
   (expand)="log($event)"

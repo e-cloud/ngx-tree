@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/e-cloud/ngx-tree/compare/v1.0.0...v1.1.0) (2019-08-20)
+
+
+### Bug Fixes
+
+* unsafe data reference for roots in tree model ([33af8d1](https://github.com/e-cloud/ngx-tree/commit/33af8d1))
+
+
+### Features
+
+* support boot up initial rendering performance ([8cb5373](https://github.com/e-cloud/ngx-tree/commit/8cb5373))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/e-cloud/ngx-tree/compare/v0.8.0...v1.0.0) (2019-08-20)
 

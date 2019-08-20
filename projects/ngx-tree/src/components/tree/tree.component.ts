@@ -34,6 +34,7 @@ import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
     selector: 'ngx-tree',
     templateUrl: './tree.component.html',
     styleUrls: ['./tree.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeComponent implements OnChanges, OnDestroy {
     emitterMap: EventsMap

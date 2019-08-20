@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core'
-import { TreeEvent, TreeNode, TreeUIOptions } from '../../models'
 import { merge, Subscription } from 'rxjs'
+
+import { TreeEvent, TreeNode, TreeUIOptions } from '../../models'
 
 @Component({
     selector: 'ngx-tree-node-expander',
@@ -22,15 +23,17 @@ export class TreeNodeExpanderComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.structureChangeSub = merge(
-            this.node.treeModel.events.addNode,
-            this.node.treeModel.events.removeNode,
-        )
-            .subscribe((event: TreeEvent) => {
-                if (event.node && event.node.parent === this.node) {
-                    this.cdRef.markForCheck()
-                }
-            })
+        if (this.node.treeModel) {
+            this.structureChangeSub = merge(
+                this.node.treeModel.events.addNode,
+                this.node.treeModel.events.removeNode,
+            )
+                .subscribe((event: TreeEvent) => {
+                    if (event.node && event.node.parent === this.node) {
+                        this.cdRef.markForCheck()
+                    }
+                })
+        }
     }
 
     ngOnDestroy() {

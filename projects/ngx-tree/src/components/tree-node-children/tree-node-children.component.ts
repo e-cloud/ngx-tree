@@ -1,5 +1,15 @@
 import { animate, style, transition, trigger } from '@angular/animations'
-import { Component, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, } from '@angular/core'
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    SimpleChanges,
+} from '@angular/core'
 import { Subscription } from 'rxjs'
 import { TreeNode, TreeUIOptions } from '../../models'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
@@ -24,6 +34,7 @@ export const EXPANSION_PANEL_ANIMATION_TIMING = '225ms cubic-bezier(0.4,0.0,0.2,
             ]),
         ]),
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
     marginTop = 0
@@ -41,11 +52,6 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
 
     @HostBinding('class.tree-node-children') className = true
 
-    private scrollSub = Subscription.EMPTY
-
-    constructor(private virtualScroll: TreeVirtualScroll) {
-    }
-
     @HostBinding('class.tree-children-no-padding')
     get noPadding() {
         return !this.options.levelPadding
@@ -54,6 +60,11 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
     @HostBinding('style.margin-top.px')
     get marginTopAttr() {
         return this.disableMarginTop ? 0 : this.marginTop
+    }
+
+    private scrollSub = Subscription.EMPTY
+
+    constructor(private virtualScroll: TreeVirtualScroll, private cdRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
@@ -65,6 +76,7 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
                 // after the collection notification
                 this.viewportNodes = this.getViewportNodes(this.node.visibleChildren, metrics)
                 this.marginTop = this.calcMarginTop()
+                this.cdRef.markForCheck()
             }
         })
     }

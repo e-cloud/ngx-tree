@@ -5,7 +5,7 @@
     "target": "es2015",
     "module": "es2015",
     "declaration": true,
-    "strict": false,
+    "strict": true,
     "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {

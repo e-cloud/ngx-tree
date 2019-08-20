@@ -1,5 +1,5 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core'
-import { BehaviorSubject, Subject, Subscription } from 'rxjs'
+import { BehaviorSubject, Observer, PartialObserver, Subject, Subscription } from 'rxjs'
 import { filter, scan } from 'rxjs/operators'
 import { TreeModel, TreeNode } from '../models'
 
@@ -7,6 +7,15 @@ const Y_OFFSET_NODE_SIZE = 3
 let id = 0
 
 export const VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA = new InjectionToken('VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA')
+
+export interface PosPair {
+    startPos: number
+    endPos: number
+}
+
+function pairIsValid(input: any): input is PosPair {
+    return !!input
+}
 
 @Injectable()
 export class TreeVirtualScroll {
@@ -18,8 +27,8 @@ export class TreeVirtualScroll {
     private lastScrollTop = 0
     private disabled = false
 
-    private collectionMonitor$ = new BehaviorSubject(null)
-    private nodeHeightAnalytics$ = new Subject()
+    private collectionMonitor$ = new BehaviorSubject<PosPair | null>(null)
+    private nodeHeightAnalytics$ = new Subject<number>()
 
     constructor(@Inject(VIRTUAL_SCROLL_NODE_HEIGHT_QUOTA) private quota: number) {
         this.id = id++
@@ -41,13 +50,13 @@ export class TreeVirtualScroll {
         })
     }
 
-    waitForCollection(observer): Subscription {
+    waitForCollection(observer: any): Subscription {
         return this.collectionMonitor$
-            .pipe(filter(val => !!val))
+            .pipe(filter(pairIsValid))
             .subscribe(observer)
     }
 
-    reportNodeHeight(data) {
+    reportNodeHeight(data: number) {
         this.nodeHeightAnalytics$.next(data)
     }
 
@@ -60,7 +69,7 @@ export class TreeVirtualScroll {
         treeModel.virtualRoot.height = this.getPositionAfter(treeModel.getVisibleRoots(), 0)
     }
 
-    setDisabled(isDisabled) {
+    setDisabled(isDisabled: boolean) {
         this.disabled = isDisabled
     }
 

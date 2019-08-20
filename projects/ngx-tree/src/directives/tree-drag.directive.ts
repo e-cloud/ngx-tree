@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, OnChanges, Renderer2 } from '@angular/core'
+import { Directive, ElementRef, HostListener, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core'
 import { TreeNode } from '../models'
 import { TreeDraggingTargetService } from '../services/tree-dragging-target.service'
 
@@ -19,10 +19,10 @@ export class TreeDragDirective implements OnChanges {
     }
 
     @HostListener('dragstart', ['$event'])
-    onDragStart(ev) {
+    onDragStart(ev: DragEvent) {
         // setting the data is required by firefox
-        ev.dataTransfer.setData('text', this.draggingTarget.id)
-        ev.dataTransfer.dropEffect = 'move'
+        ev.dataTransfer!.setData('text', this.draggingTarget.id)
+        ev.dataTransfer!.dropEffect = 'move'
         this.renderer.addClass(this.el.nativeElement, DRAGGING_TARGET_CLASS)
 
         this.treeDraggingTargetService.set(this.draggingTarget)
@@ -41,7 +41,7 @@ export class TreeDragDirective implements OnChanges {
     }*/
 
     @HostListener('dragend', ['$event'])
-    onDragEnd(event) {
+    onDragEnd(event: DragEvent) {
         if (this.draggingTarget.mouseAction) {
             this.draggingTarget.mouseAction('dragEnd', event)
         }
@@ -51,7 +51,7 @@ export class TreeDragDirective implements OnChanges {
         this.treeDraggingTargetService.set(null)
     }
 
-    ngOnChanges(changes) {
+    ngOnChanges(changes: SimpleChanges) {
         if ('treeDragEnabled' in changes) {
             this.renderer.setAttribute(this.el.nativeElement, 'draggable', this.treeDragEnabled ? 'true' : 'false')
         }

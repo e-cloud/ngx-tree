@@ -20,7 +20,7 @@ export class TreeModel {
     /**
      * static cache for recording the tree model while using multiple tree component in same container.
      */
-    static focusedTree: TreeModel = null
+    static focusedTree: TreeModel | null = null
 
     /**
      * All root nodes, it will have one item if a user input a single root tree.
@@ -75,7 +75,9 @@ export class TreeModel {
         return compact(nodes)
     }
 
-    private focusedNodeId: string = null
+    options: TreeDataOptions
+
+    private focusedNodeId: string | null = null
     private expandedNodeIds: Map<string, boolean> = new Map()
     private activeNodeIds: Map<string, boolean> = new Map()
     private hiddenNodeIds: Map<string, boolean> = new Map()
@@ -87,13 +89,13 @@ export class TreeModel {
         /**
          * Options that are passed to the tree component
          */
-        public options?: TreeDataOptions,
+        options?: TreeDataOptions,
     ) {
         this.options = createTreeDataOptions(options)
         const virtualRootConfig = {
             virtual: true,
             // todo: determine to use fixed children field later
-            [this.options.childrenField]: this.nodes,
+            [this.options.childrenField!]: this.nodes,
         }
 
         this.virtualRoot = new TreeNode(virtualRootConfig, null, this, 0)
@@ -114,11 +116,11 @@ export class TreeModel {
     fireEvent(event: TreeEvent) {
         // event.treeModel = this
 
-        this.events[event.eventName].emit(event)
+        this.events[<keyof EventsMap>event.eventName].emit(event)
     }
 
     subscribe(eventName: string, fn: Observer<TreeEvent>) {
-        return this.events[eventName].subscribe(fn)
+        return this.events[<keyof EventsMap>eventName].subscribe(fn)
     }
 
     // getters
@@ -158,7 +160,7 @@ export class TreeModel {
      * @param     startNode  optional. Which node to start traversing from
      * @returns   The node, if found - null otherwise
      */
-    getNodeByPath(path: (string | number)[], startNode: TreeNode = null): TreeNode {
+    getNodeByPath(path: (string | number)[], startNode: TreeNode | null = null): TreeNode | null {
         if (!path) {
             return null
         }
@@ -197,7 +199,7 @@ export class TreeModel {
      * @param     startNode  optional. Which node to start traversing from
      * @returns   First node that matches the predicate, if found - null otherwise
      */
-    getNodeBy(predicate: (node: TreeNode) => boolean, startNode: TreeNode = null) {
+    getNodeBy(predicate: (node: TreeNode) => boolean, startNode: TreeNode | null = null): TreeNode | null {
         // todo: refactor to a loop
         startNode = startNode || this.virtualRoot
 
@@ -217,6 +219,8 @@ export class TreeModel {
                 }
             }
         }
+
+        return null
     }
 
     isNodeExpanded(node: TreeNode) {
@@ -272,7 +276,7 @@ export class TreeModel {
      * Set focus on a node
      * @param node
      */
-    setFocusedNode(node: TreeNode) {
+    setFocusedNode(node: TreeNode | null) {
         this.focusedNodeId = node ? node.id : null
     }
 
@@ -288,7 +292,7 @@ export class TreeModel {
         this.roots.forEach((root) => root.traverse(fn))
     }
 
-    activateNode(id) {
+    activateNode(id: string) {
         const target = this.getNodeById(id)
         if (target) {
             target.setActiveAndVisible()
@@ -382,7 +386,7 @@ export class TreeModel {
 
     performKeyAction(node: TreeNode, $event: KeyboardEvent) {
         // todo: the keyCode is deprecated on MDN, replace it some day
-        const action = this.options.actionMapping.keys[$event.keyCode]
+        const action = this.options.actionMapping!.keys![$event.keyCode]
         if (action) {
             $event.preventDefault()
             action(this, node, $event)
@@ -403,7 +407,7 @@ export class TreeModel {
      * @param autoShow  if true, make sure all nodes that passed the filter are visible
      */
     filterNodes(filter: string | ((node: TreeNode) => boolean), autoShow = true) {
-        let filterFn
+        let filterFn: any
 
         if (!filter) {
             return this.clearFilter()
@@ -411,7 +415,7 @@ export class TreeModel {
 
         // support function and string filter
         if (isString(filter)) {
-            filterFn = (node) => node.displayField.toLowerCase().includes(filter.toLowerCase())
+            filterFn = (node: TreeNode) => node.displayField.toLowerCase().includes(filter.toLowerCase())
         } else if (isFunction(filter)) {
             filterFn = filter
         } else {
@@ -464,7 +468,7 @@ export class TreeModel {
         })
     }
 
-    scrollIntoView(node: TreeNode, force: boolean, scrollToMiddle: boolean) {
+    scrollIntoView(node: TreeNode, force: boolean, scrollToMiddle = true) {
         this.scrollIntoView$.next({
             node, force, scrollToMiddle,
         })

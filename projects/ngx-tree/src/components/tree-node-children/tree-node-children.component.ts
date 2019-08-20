@@ -11,8 +11,8 @@ import {
     SimpleChanges,
 } from '@angular/core'
 import { Subscription } from 'rxjs'
-import { TreeNode, TreeUIOptions } from '../../models'
-import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
+import { TreeNode, TreeTemplateMapping, TreeUIOptions } from '../../models'
+import { PosPair, TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
 import { binarySearch } from '../../util'
 
 /** Time and timing curve for expansion panel animations. */
@@ -42,7 +42,7 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() options: TreeUIOptions
     @Input() node: TreeNode
-    @Input() templates: any
+    @Input() templates: TreeTemplateMapping
     @Input() disableMarginTop = false
     @Input() children: TreeNode[]
     @Input() refreshTree = false
@@ -69,7 +69,7 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnInit() {
         this.viewportNodes = this.children
-        this.scrollSub = this.virtualScroll.waitForCollection((metrics) => {
+        this.scrollSub = this.virtualScroll.waitForCollection((metrics: PosPair) => {
             if (this.node.treeModel && this.node.isExpanded) {
                 // here we directly access node's visibleChildren but not component's `children`
                 // property is, because it will only be updated on next lifecycle check, which is
@@ -92,7 +92,7 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
         this.scrollSub.unsubscribe()
     }
 
-    trackNode(index, node) {
+    trackNode(index: number, node: TreeNode) {
         return node.id
     }
 
@@ -101,12 +101,12 @@ export class TreeNodeChildrenComponent implements OnInit, OnChanges, OnDestroy {
 
         // condition on root node is because the virtual root's self height is 0
         return firstNode
-            ? Math.max(0, firstNode.position - firstNode.parent.position -
-                (firstNode.parent.isRoot ? 0 : this.virtualScroll.averageNodeHeight))
+            ? Math.max(0, firstNode.position - firstNode.parent!.position -
+                (firstNode.parent!.isRoot ? 0 : this.virtualScroll.averageNodeHeight))
             : 0
     }
 
-    getViewportNodes(nodes: TreeNode[], { startPos, endPos }) {
+    getViewportNodes(nodes: TreeNode[], { startPos, endPos }: PosPair) {
         if (!nodes || !nodes.length) {
             return []
         }

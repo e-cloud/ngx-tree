@@ -181,7 +181,7 @@ export class SimpleComponent {
         }
     }
 
-    getChildren(node: any) {
+    getChildren(node: TreeNode) {
         return new Promise((resolve, reject) => {
             setTimeout(() => resolve(this.asyncChildren.map((c) => {
                 return Object.assign({}, c, {

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Inp
 import isFunction from 'lodash-es/isFunction'
 import { merge, Subscription } from 'rxjs'
 
-import { TreeEvent, TreeNode, TreeUIOptions } from '../../models'
+import { TreeEvent, TreeNode, TreeTemplateMapping, TreeUIOptions } from '../../models'
 
 @Component({
     selector: 'ngx-tree-node',
@@ -14,7 +14,7 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
     @Input() node: TreeNode
     @Input() options: TreeUIOptions
     @Input() index: number
-    @Input() templates: any
+    @Input() templates: TreeTemplateMapping
 
     @HostBinding('class.tree-node') className = true
     private operationSub = Subscription.EMPTY
@@ -32,7 +32,7 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         if (this.node.treeModel) {
-            this.operationSub = merge(
+            this.operationSub = merge<TreeEvent>(
                 this.node.treeModel.events.activate,
                 this.node.treeModel.events.deactivate,
                 this.node.treeModel.events.focus,

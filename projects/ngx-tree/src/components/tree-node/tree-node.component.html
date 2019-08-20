@@ -1,5 +1,5 @@
 <ng-template [ngIf]="!templates.treeNodeFullTemplate">
-  <ngx-tree-node-wrapper [style.padding-left]="options.levelPadding(node)"
+  <ngx-tree-node-wrapper [style.padding-left]="options.levelPadding!(node)"
                          [node]="node"
                          [options]="options"
                          [index]="index"

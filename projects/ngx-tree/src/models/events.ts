@@ -6,3 +6,8 @@ export interface TreeEvent {
     isExpanded?: boolean
     to?: { parent: TreeNode; index: number }
 }
+
+export interface DragAndDropEvent {
+    event: MouseEvent
+    element: TreeNode | null
+}

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import isFunction from 'lodash-es/isFunction'
-import { TreeNode, TreeUIOptions } from '../../models'
+import { DragAndDropEvent, TreeNode, TreeUIOptions } from '../../models'
 
 @Component({
     selector: 'ngx-tree-node-drop-slot',
@@ -13,7 +13,7 @@ export class TreeNodeDropSlotComponent {
     @Input() options: TreeUIOptions
     @Input() dropIndex: number
 
-    allowDrop = (element, $event) =>
+    allowDrop = (element: TreeNode, $event: DragEvent) =>
         isFunction(this.options.allowDrop)
             ? this.options.allowDrop(element, {
                 parent: this.node,
@@ -21,7 +21,7 @@ export class TreeNodeDropSlotComponent {
             }, $event)
             : false
 
-    onDrop($event) {
+    onDrop($event: DragAndDropEvent) {
         this.node.mouseAction('drop', $event.event, {
             from: $event.element,
             to: { parent: this.node, index: this.dropIndex },

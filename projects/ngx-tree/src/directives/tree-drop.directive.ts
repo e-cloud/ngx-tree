@@ -1,21 +1,21 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output, Renderer2 } from '@angular/core'
 import isFunction from 'lodash-es/isFunction'
-import { TreeNode } from '../models'
+import { DragAndDropEvent, TreeNode } from '../models'
 import { TreeDraggingTargetService } from '../services/tree-dragging-target.service'
 
 const DRAG_OVER_CLASS = 'is-dragging-over'
 const DRAG_DISABLED_CLASS = 'is-dragging-over-disabled'
 
-export type AllowDropPredicate = (element: TreeNode, $event: MouseEvent) => boolean
+export type AllowDropPredicate = (element: TreeNode | null | undefined, $event: MouseEvent) => boolean
 
 @Directive({
     selector: '[ngxTreeDrop]',
 })
 export class TreeDropDirective implements OnDestroy {
-    @Output('ngxTreeDrop') onDrop$ = new EventEmitter()
-    @Output('treeDropDragOver') onDragOver$ = new EventEmitter()
-    @Output('treeDropDragLeave') onDragLeave$ = new EventEmitter()
-    @Output('treeDropDragEnter') onDragEnter$ = new EventEmitter()
+    @Output('ngxTreeDrop') onDrop$ = new EventEmitter<DragAndDropEvent>()
+    @Output('treeDropDragOver') onDragOver$ = new EventEmitter<DragAndDropEvent>()
+    @Output('treeDropDragLeave') onDragLeave$ = new EventEmitter<DragAndDropEvent>()
+    @Output('treeDropDragEnter') onDragEnter$ = new EventEmitter<DragAndDropEvent>()
 
     @Input()
     set treeAllowDrop(allowDrop: boolean | AllowDropPredicate) {
@@ -55,7 +55,7 @@ export class TreeDropDirective implements OnDestroy {
             this.addClass()
         }
 
-        this._stopEvent(event)
+        this._stopEvent($event)
     }
 
     @HostListener('dragenter', ['$event'])
@@ -69,7 +69,7 @@ export class TreeDropDirective implements OnDestroy {
 
         this.onDragEnter$.emit({ event: $event, element: this.treeDraggedElement.get() })
 
-        this._stopEvent(event)
+        this._stopEvent($event)
     }
 
     @HostListener('dragleave', ['$event'])
@@ -83,7 +83,7 @@ export class TreeDropDirective implements OnDestroy {
 
         this.onDragLeave$.emit({ event: $event, element: this.treeDraggedElement.get() })
 
-        this._stopEvent(event)
+        this._stopEvent($event)
     }
 
     @HostListener('drop', ['$event'])
@@ -100,7 +100,7 @@ export class TreeDropDirective implements OnDestroy {
         this._stopEvent($event)
     }
 
-    allowDrop($event) {
+    allowDrop($event: MouseEvent) {
         return this._allowDrop(this.treeDraggedElement.get(), $event)
     }
 

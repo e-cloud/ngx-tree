@@ -24,7 +24,7 @@ export class TreeNodeExpanderComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         if (this.node.treeModel) {
-            this.structureChangeSub = merge(
+            this.structureChangeSub = merge<TreeEvent>(
                 this.node.treeModel.events.addNode,
                 this.node.treeModel.events.removeNode,
             )

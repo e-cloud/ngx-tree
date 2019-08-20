@@ -4,9 +4,9 @@ import last from 'lodash-es/last'
 import pullAt from 'lodash-es/pullAt'
 import without from 'lodash-es/without'
 import { TREE_EVENTS } from '../constants/events'
-import { TreeEvent } from './events'
+import { DragAndDropEvent, TreeEvent } from './events'
 import { TreeModel } from './tree-model'
-import { TreeDataOptions } from './tree-options'
+import { AvailableMouseEvents, CustomFieldNames, CustomFieldPrefix, TreeDataOptions } from './tree-options'
 
 export class TreeNode {
     /**
@@ -23,7 +23,7 @@ export class TreeNode {
      */
     height = 0
     loadingChildren = false
-    elementRef: ElementRef
+    elementRef: ElementRef | null
 
     get isHidden() {
         return this.treeModel.isNodeHidden(this)
@@ -56,7 +56,7 @@ export class TreeNode {
     /**
      * Level in the tree (starts from 1).
      */
-    get level() {
+    get level(): number {
         return this.parent ? this.parent.level + 1 : 0
     }
 
@@ -109,13 +109,14 @@ export class TreeNode {
 
     constructor(
         /**
-         * Pointer to the original data.
+         * any - Pointer to the original data.
+         *
          */
         public data: any,
         /**
-         * Parent node
+         * TreeNode - Parent node
          */
-        public parent: TreeNode,
+        public parent: TreeNode | null,
         public treeModel: TreeModel,
         /**
          * index of the node inside its parent's children
@@ -128,7 +129,7 @@ export class TreeNode {
         }
 
         treeModel.addCache(this)
-        if (data[this.options.isExpandedField]) {
+        if (data[this.options.isExpandedField!]) {
             treeModel.setExpandedNodeInPlace(this)
         }
 
@@ -144,15 +145,15 @@ export class TreeNode {
         this.treeModel.fireEvent(event)
     }
 
-    getField(key: string) {
-        return this.data[this.options[`${key}Field`]]
+    getField(key: CustomFieldPrefix) {
+        return this.data[this.options[<CustomFieldNames>`${key}Field`]!]
     }
 
-    setField(key: string, value) {
-        this.data[this.options[`${key}Field`]] = value
+    setField(key: string, value: any) {
+        this.data[this.options[<CustomFieldNames>`${key}Field`]!] = value
     }
 
-    onDrop($event) {
+    onDrop($event: DragAndDropEvent) {
         this.mouseAction('drop', $event.event, {
             from: $event.element,
             to: { parent: this, index: 0, dropOnNode: true },
@@ -206,7 +207,7 @@ export class TreeNode {
      * @param skipHidden
      * @returns next node.
      */
-    findNextNode(goInside = true, skipHidden = false) {
+    findNextNode(goInside = true, skipHidden = false): false | TreeNode | null {
         return goInside && this.isExpanded && this.getFirstChild(skipHidden) ||
             this.findNextSibling(skipHidden) ||
             this.parent && this.parent.findNextNode(false, skipHidden)
@@ -217,7 +218,7 @@ export class TreeNode {
      * @param skipHidden whether to skip hidden nodes
      * @returns previous node.
      */
-    findPreviousNode(skipHidden = false) {
+    findPreviousNode(skipHidden = false):  TreeNode | null {
         const previousSibling = this.findPreviousSibling(skipHidden)
         if (!previousSibling) {
             return this.parent
@@ -229,11 +230,11 @@ export class TreeNode {
     /**
      * @returns      true if this node is a descendant of the parameter node
      */
-    isDescendantOf(node: TreeNode) {
+    isDescendantOf(node: TreeNode): boolean {
         if (this === node) {
             return true
         } else {
-            return this.parent && this.parent.isDescendantOf(node)
+            return !!this.parent && this.parent.isDescendantOf(node)
         }
     }
 
@@ -443,12 +444,12 @@ export class TreeNode {
         this.fireEvent({ eventName: TREE_EVENTS.addNode, node })
     }
 
-    appendChild(data) {
+    appendChild(data: any) {
         this.addChild(data, this.children ? this.children.length : 0)
     }
 
     remove() {
-        this.parent.removeChild(this)
+        this.parent!.removeChild(this)
     }
 
     removeChild(node: TreeNode) {
@@ -468,14 +469,14 @@ export class TreeNode {
             this.treeModel.setExpandedNodeInPlace(node, false)
         }
 
-        node.treeModel = null
+        node.treeModel = null as any
         node.elementRef = null
     }
 
-    mouseAction(actionName: string, $event: MouseEvent, data: any = null) {
+    mouseAction(actionName: AvailableMouseEvents, $event: any, data: any = null) {
         this.treeModel.setFocus(true)
 
-        const actionMapping = this.options.actionMapping.mouse
+        const actionMapping = this.options.actionMapping!.mouse!
         const action = actionMapping[actionName]
 
         if (action) {
@@ -483,7 +484,7 @@ export class TreeNode {
         }
     }
 
-    private reCalcChildrenIndices(offset) {
+    private reCalcChildrenIndices(offset: number) {
         this.children.slice(offset).forEach((child, index) => {
             child.index = index + offset
         })
@@ -491,10 +492,10 @@ export class TreeNode {
 
     private initChildren() {
         this.children = this.getField('children')
-            .map((data, index) => new TreeNode(data, this, this.treeModel, index))
+            .map((data: any, index: number) => new TreeNode(data, this, this.treeModel, index))
     }
 
-    private getLastOpenDescendant(skipHidden = false) {
+    private getLastOpenDescendant(skipHidden = false): TreeNode {
         const lastChild = this.getLastChild(skipHidden)
 
         return (this.isCollapsed || !lastChild)

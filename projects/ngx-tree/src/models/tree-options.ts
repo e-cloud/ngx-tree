@@ -2,14 +2,16 @@ import defaults from 'lodash-es/defaults'
 import defaultsDeep from 'lodash-es/defaultsDeep'
 import isNumber from 'lodash-es/isNumber'
 import { defaultActionMapping } from './actions'
+import { DragAndDropEvent } from './events'
 import { TreeModel } from './tree-model'
 import { TreeNode } from './tree-node'
 
 /**
  * common functions to handle tree actions
  */
-export interface ActionHandler {
-    (tree: TreeModel, node: TreeNode, $event: any, ...rest);
+export interface ActionHandler<T = any> {
+    // tslint:disable-next-line:callable-types
+    (tree: TreeModel, node: TreeNode, $event: T, ...args: any[]): void;
 }
 
 /**
@@ -17,22 +19,26 @@ export interface ActionHandler {
  */
 export interface ActionMapping {
     mouse?: {
-        click?: ActionHandler,
-        dblClick?: ActionHandler,
-        contextMenu?: ActionHandler,
-        expanderClick?: ActionHandler,
-        dragStart?: ActionHandler,
-        drag?: ActionHandler,
-        dragEnd?: ActionHandler,
-        dragOver?: ActionHandler,
-        dragLeave?: ActionHandler,
-        dragEnter?: ActionHandler,
-        drop?: ActionHandler,
+        click?: ActionHandler<MouseEvent>,
+        dblClick?: ActionHandler<MouseEvent>,
+        contextMenu?: ActionHandler<MouseEvent>,
+        expanderClick?: ActionHandler<MouseEvent>,
+        dragStart?: ActionHandler<DragAndDropEvent>,
+        drag?: ActionHandler<DragAndDropEvent>,
+        dragEnd?: ActionHandler<DragAndDropEvent>,
+        dragOver?: ActionHandler<DragAndDropEvent>,
+        dragLeave?: ActionHandler<DragAndDropEvent>,
+        dragEnter?: ActionHandler<DragAndDropEvent>,
+        drop?: ActionHandler<DragAndDropEvent>,
     };
     keys?: {
-        [key: number]: ActionHandler
+        [key: number]: ActionHandler<KeyboardEvent>
     };
 }
+
+export type PropType<TObj, TProp extends keyof TObj> = TObj[TProp]
+
+export type AvailableMouseEvents = keyof Exclude<PropType<ActionMapping, 'mouse'>, undefined>
 
 export interface DropTarget {
     parent: TreeNode
@@ -59,7 +65,7 @@ export const defaultDataOptions: TreeDataOptions = {
     idField: 'id',
     isExpandedField: 'isExpanded',
     actionMapping: defaultActionMapping,
-    getChildren: (node) => null,
+    getChildren: (node: TreeNode) => Promise.resolve([]),
 }
 
 export interface TreeUIOptions {
@@ -134,6 +140,9 @@ export function createTreeUIOptions(rawOpts: RawTreeUIOptions = {}): TreeUIOptio
 
     return defaults({}, rawOpts, defaultUIOptions)
 }
+
+export type CustomFieldPrefix = 'id' | 'children' | 'display' | 'isExpanded'
+export type CustomFieldNames = 'idField' | 'childrenField' | 'displayField' | 'isExpandedField'
 
 export interface TreeDataOptions {
     /**

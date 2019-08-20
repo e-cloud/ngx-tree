@@ -41,13 +41,13 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
     private lastScrollIntoViewTarget: ScrollIntoViewTarget
     private structureChangeSub = Subscription.EMPTY
     private scrollIntoViewSub = Subscription.EMPTY
-    private scrollTimer: number
+    private scrollTimer: number | null
 
     constructor(public virtualScroll: TreeVirtualScroll, private elementRef: ElementRef, private renderer: Renderer2) {
     }
 
     @HostListener('scroll', ['$event'])
-    onScroll(event) {
+    onScroll(event: MouseEvent) {
         this.disableEventsWhenScrolling()
         if (this.virtualScroll.isDisabled()) {
             return
@@ -79,10 +79,10 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
             if (target.node.elementRef) {
                 this.scrollIntoViewAndTick(target, () => {
                     const lastTarget = this.lastScrollIntoViewTarget
-                    if (lastTarget.node.elementRef.nativeElement.scrollIntoViewIfNeeded) {
-                        lastTarget.node.elementRef.nativeElement.scrollIntoViewIfNeeded(lastTarget.scrollToMiddle)
+                    if (lastTarget.node.elementRef!.nativeElement.scrollIntoViewIfNeeded) {
+                        lastTarget.node.elementRef!.nativeElement.scrollIntoViewIfNeeded(lastTarget.scrollToMiddle)
                     } else {
-                        lastTarget.node.elementRef.nativeElement.scrollIntoView({
+                        lastTarget.node.elementRef!.nativeElement.scrollIntoView({
                             behavior: 'auto',
                             block: 'end',
                         })

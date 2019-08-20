@@ -21,7 +21,7 @@ import {
     IAllowDragFn,
     IAllowDropFn,
     ILevelPaddingFn,
-    TreeDataOptions,
+    TreeDataOptions, TreeEvent,
     TreeModel,
     TreeNode,
     TreeUIOptions,
@@ -38,7 +38,7 @@ import { TreeViewportComponent } from '../tree-viewport/tree-viewport.component'
 })
 export class TreeComponent implements OnChanges, OnDestroy {
     emitterMap: EventsMap
-    treeModel: TreeModel = null
+    treeModel: TreeModel = null as any
     UIOptions: TreeUIOptions
     refreshTree = false
 
@@ -64,19 +64,19 @@ export class TreeComponent implements OnChanges, OnDestroy {
     @Input() enableAnimation = true
     @Input() keepNodesExpanded = false
 
-    @Output() expand: EventEmitter<any> = null
-    @Output() collapse: EventEmitter<any> = null
-    @Output() toggleExpander: EventEmitter<any> = null
-    @Output() activate: EventEmitter<any> = null
-    @Output() deactivate: EventEmitter<any> = null
-    @Output() focus: EventEmitter<any> = null
-    @Output() blur: EventEmitter<any> = null
-    @Output() initialized: EventEmitter<any> = null
-    @Output() moveNode: EventEmitter<any> = null
-    @Output() loadChildren: EventEmitter<any> = null
-    @Output() changeFilter: EventEmitter<any> = null
-    @Output() addNode: EventEmitter<any> = null
-    @Output() removeNode: EventEmitter<any> = null
+    @Output() expand = new EventEmitter<TreeEvent>()
+    @Output() collapse = new EventEmitter<TreeEvent>()
+    @Output() toggleExpander = new EventEmitter<TreeEvent>()
+    @Output() activate = new EventEmitter<TreeEvent>()
+    @Output() deactivate = new EventEmitter<TreeEvent>()
+    @Output() focus = new EventEmitter<TreeEvent>()
+    @Output() blur = new EventEmitter<TreeEvent>()
+    @Output() initialized = new EventEmitter<TreeEvent>()
+    @Output() moveNode = new EventEmitter<TreeEvent>()
+    @Output() loadChildren = new EventEmitter<TreeEvent>()
+    @Output() changeFilter = new EventEmitter<TreeEvent>()
+    @Output() addNode = new EventEmitter<TreeEvent>()
+    @Output() removeNode = new EventEmitter<TreeEvent>()
 
     @HostBinding('class.ngx-tree') className = true
 
@@ -90,7 +90,7 @@ export class TreeComponent implements OnChanges, OnDestroy {
     @ViewChild('root', { static: true }) root: TreeNodeChildrenComponent
 
     constructor(public treeDraggingTargetService: TreeDraggingTargetService) {
-        this.emitterMap = Object.keys(TREE_EVENTS).reduce((map, name) => {
+        this.emitterMap = (<(keyof typeof TREE_EVENTS)[]>Object.keys(TREE_EVENTS)).reduce((map, name) => {
             if (!this.hasOwnProperty(name)) {
                 throw new TypeError(`Unmatched events: [${name}]`)
             }
@@ -98,7 +98,7 @@ export class TreeComponent implements OnChanges, OnDestroy {
             this[name] = map[name] = new EventEmitter()
 
             return map
-        }, {}) as any
+        }, {} as EventsMap)
 
         this.UIOptions = createTreeUIOptions()
     }
@@ -109,7 +109,7 @@ export class TreeComponent implements OnChanges, OnDestroy {
             this.treeModel = new TreeModel(changes.nodes.currentValue, this.emitterMap, this.dataOptions)
             if (oldTreeModel && this.keepNodesExpanded) {
                 oldTreeModel.expandedNodes.forEach(node => {
-                    this.treeModel.setExpandedNodeInPlace(node)
+                    this.treeModel!.setExpandedNodeInPlace(node)
                 })
             }
             if (!changes.nodes.isFirstChange()) {
@@ -149,23 +149,23 @@ export class TreeComponent implements OnChanges, OnDestroy {
     }
 
     @HostListener('body: keydown', ['$event'])
-    onKeydown($event) {
+    onKeydown($event: KeyboardEvent) {
         if (!this.treeModel.isFocused) {
             return
         }
 
-        if (['input', 'textarea'].includes(document.activeElement.tagName.toLowerCase())) {
+        if (['input', 'textarea'].includes(document.activeElement!.tagName.toLowerCase())) {
             return
         }
 
-        const focusedNode = this.treeModel.focusedNode
+        const focusedNode = this.treeModel.focusedNode!
 
         this.treeModel.performKeyAction(focusedNode, $event)
     }
 
     @HostListener('body: mousedown', ['$event'])
-    onMousedown($event) {
-        const insideClick = $event.target.closest('ngx-tree')
+    onMousedown($event: MouseEvent) {
+        const insideClick = (<HTMLElement>$event.target)!.closest('ngx-tree')
 
         if (!insideClick) {
             this.treeModel.setFocus(false)

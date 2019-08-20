@@ -1,6 +1,6 @@
 <ngx-tree-node *ngFor="let child of viewportNodes; let i = index; trackBy: trackNode"
                [options]="options"
-               [ngClass]="[options.nodeClass(child), 'tree-node-level-'+ child.level]"
+               [ngClass]="[options.nodeClass!(child), 'tree-node-level-'+ child.level]"
                [class.tree-node-expanded]="child.isExpanded"
                [class.tree-node-collapsed]="child.isCollapsed"
                [class.tree-node-leaf]="child.isLeaf"
@@ -12,6 +12,6 @@
 </ngx-tree-node>
 
 <ngx-tree-loading *ngIf="!node.children"
-                  [style.padding-left]="options.levelPadding(node)"
+                  [style.padding-left]="options.levelPadding!(node)"
                   [template]="templates.loadingTemplate"
                   [node]="node"></ngx-tree-loading>

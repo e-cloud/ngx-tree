@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnDestroy, OnInit, } from '@angular/core'
-import { TreeNode, TreeUIOptions } from '../../models'
+import { TreeNode, TreeTemplateMapping, TreeUIOptions } from '../../models'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
 
 @Component({
@@ -12,7 +12,7 @@ export class TreeNodeWrapperComponent implements OnInit, OnDestroy, AfterViewIni
     @Input() node: TreeNode
     @Input() options: TreeUIOptions
     @Input() index: number
-    @Input() templates: any
+    @Input() templates: TreeTemplateMapping
 
     @HostBinding('class.tree-node-wrapper') className = true
 

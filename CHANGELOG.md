@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/e-cloud/ngx-tree/compare/v0.8.0...v1.0.0) (2019-08-20)
+
+
+### Features
+
+* improve change detection for wrapper and expander ([83da7d3](https://github.com/e-cloud/ngx-tree/commit/83da7d3))
+* support completely type safe source code ([9e5c7e9](https://github.com/e-cloud/ngx-tree/commit/9e5c7e9))
+* support fully onpush change detection strategy ([9e5ce08](https://github.com/e-cloud/ngx-tree/commit/9e5ce08))
+* upgrade to angular 8 ([4a999cc](https://github.com/e-cloud/ngx-tree/commit/4a999cc))
+
+
+
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/e-cloud/ngx-tree/compare/v0.7.1...v0.8.0) (2018-05-16)
 

@@ -86,7 +86,7 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                            <a href="#call-declaration-295793d62f6bc4dc8a5a3bf866325c6f">Unamed property</a>
+                                            <a href="#call-declaration-d4370c06f31a541d51015c58eee1b04e">Unamed property</a>
                                 </li>
                             </ul>
                         </td>
@@ -105,7 +105,7 @@
                                     <tr>
                                         <td class="col-md-4">
                                             <i>Signature :</i>
-                                            <a name="call-declaration-295793d62f6bc4dc8a5a3bf866325c6f"></a>
+                                            <a name="call-declaration-d4370c06f31a541d51015c58eee1b04e"></a>
                                             <code>
                                                 <!--ts.SyntaxKind.CallSignature-->
                                                     [tree: TreeModel, node: TreeNode, $event: T, args: any[]]
@@ -243,6 +243,11 @@ export interface TreeUIOptions {
      * Default is false
      */
     useVirtualScroll?: boolean;
+    /**
+     * the item height in tree the virtual scrolling algorithm will refer to, not determinate
+     * if user provide a proper value, it would boost the initial rendering time for tree with big dataset initially
+     */
+    referenceItemHeight?: number;
 
     /**
      * Supply function for getting a custom class for the node component
@@ -255,6 +260,7 @@ export interface RawTreeUIOptions {
     allowDrop?: boolean | IAllowDropFn;
     levelPadding?: number | ILevelPaddingFn;
     useVirtualScroll?: boolean;
+    referenceItemHeight?: number;
 
     nodeClass?(node: TreeNode): string;
 }

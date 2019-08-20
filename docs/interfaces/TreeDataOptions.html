@@ -148,8 +148,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="172"
-                            class="link-to-prism">projects/ngx-tree/src/models/tree-options.ts:172</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="178"
+                            class="link-to-prism">projects/ngx-tree/src/models/tree-options.ts:178</a></div>
                 </td>
             </tr>
 
@@ -519,6 +519,11 @@ export interface TreeUIOptions {
      * Default is false
      */
     useVirtualScroll?: boolean;
+    /**
+     * the item height in tree the virtual scrolling algorithm will refer to, not determinate
+     * if user provide a proper value, it would boost the initial rendering time for tree with big dataset initially
+     */
+    referenceItemHeight?: number;
 
     /**
      * Supply function for getting a custom class for the node component
@@ -531,6 +536,7 @@ export interface RawTreeUIOptions {
     allowDrop?: boolean | IAllowDropFn;
     levelPadding?: number | ILevelPaddingFn;
     useVirtualScroll?: boolean;
+    referenceItemHeight?: number;
 
     nodeClass?(node: TreeNode): string;
 }

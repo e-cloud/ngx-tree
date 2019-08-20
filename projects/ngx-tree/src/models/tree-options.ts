@@ -110,6 +110,11 @@ export interface TreeUIOptions {
      * Default is false
      */
     useVirtualScroll?: boolean;
+    /**
+     * the item height in tree the virtual scrolling algorithm will refer to, not determinate
+     * if user provide a proper value, it would boost the initial rendering time for tree with big dataset initially
+     */
+    referenceItemHeight?: number;
 
     /**
      * Supply function for getting a custom class for the node component
@@ -122,6 +127,7 @@ export interface RawTreeUIOptions {
     allowDrop?: boolean | IAllowDropFn;
     levelPadding?: number | ILevelPaddingFn;
     useVirtualScroll?: boolean;
+    referenceItemHeight?: number;
 
     nodeClass?(node: TreeNode): string;
 }

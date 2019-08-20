@@ -31,6 +31,7 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
     isScrolling = false
 
     @Input() enable: boolean
+    @Input() referenceItemHeight = 0
 
     @Input() treeModel: TreeModel
 
@@ -104,6 +105,9 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
             }
 
             this.initEventSubscription()
+            if (this.referenceItemHeight) {
+                this.virtualScroll.averageNodeHeight = this.referenceItemHeight
+            }
             this.virtualScroll.reCalcPositions(this.treeModel)
 
             if (!changes.treeModel.isFirstChange()) {
@@ -113,6 +117,9 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
                     this.setViewport()
                     this.treeModel.fireEvent({ eventName: TREE_EVENTS.initialized })
                 })
+            } else if (this.referenceItemHeight) {
+                // boot up the rendering performance at first change
+                this.setViewport()
             }
         }
     }

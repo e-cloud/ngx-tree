@@ -60,6 +60,7 @@ export class TreeComponent implements OnChanges, OnDestroy {
     @Input() allowDrop: boolean | IAllowDropFn
     @Input() levelPadding: number | ILevelPaddingFn
     @Input() useVirtualScroll: boolean
+    @Input() referenceItemHeight: number
     @Input() nodeClass: (node: TreeNode) => string
     @Input() enableAnimation = true
     @Input() keepNodesExpanded = false
@@ -137,6 +138,7 @@ export class TreeComponent implements OnChanges, OnDestroy {
                 allowDrop: this.allowDrop,
                 levelPadding: this.levelPadding,
                 useVirtualScroll: this.useVirtualScroll,
+                referenceItemHeight: this.referenceItemHeight,
                 nodeClass: this.nodeClass,
             })
         }

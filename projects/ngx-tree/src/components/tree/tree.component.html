@@ -1,6 +1,7 @@
 <ngx-tree-viewport [@.disabled]="!enableAnimation || viewport.isScrolling"
                    [enable]="useVirtualScroll"
                    [treeModel]="treeModel"
+                   [referenceItemHeight]="UIOptions.referenceItemHeight"
                    #viewport>
   <div *ngIf="!viewport.virtualScroll.isDisabled()"
        class="height-raiser"

@@ -45,7 +45,7 @@ export class TreeComponent implements OnChanges, OnDestroy {
     /**
      * source data
      */
-    @Input() nodes: TreeNode[]
+    @Input() nodes: any[]
     /**
      * id of the node to be focused on
      */

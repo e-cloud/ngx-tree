@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/e-cloud/ngx-tree/compare/v1.1.0...v1.1.1) (2019-08-21)
+
+
+### Bug Fixes
+
+* incorrect type for input nodes ([2f68736](https://github.com/e-cloud/ngx-tree/commit/2f68736))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/e-cloud/ngx-tree/compare/v1.0.0...v1.1.0) (2019-08-20)
 

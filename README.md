@@ -19,6 +19,9 @@ To install this library, run:
 $ npm install @e-cloud/ngx-tree --save
 ```
 
+> NOTE: we use [Element.closest](https://developer.mozilla.org/docs/Web/API/Element/closest), If you want to compromise
+> with IE 11, please apply the polyfill https://github.com/jonathantneal/closest to your probject.
+
 ## Usage
 
 For details, please take a look at [document site](https://e-cloud.github.io/ngx-tree)

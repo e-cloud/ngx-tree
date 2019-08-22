@@ -13,7 +13,6 @@ import {
     TemplateRef,
     ViewChild,
 } from '@angular/core'
-import 'element-closest'
 import each from 'lodash-es/each'
 import { EventsMap, TREE_EVENTS } from '../../constants/events'
 import {

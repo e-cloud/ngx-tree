@@ -33,6 +33,8 @@ export class TreeNodeComponent implements OnInit, OnDestroy {
     ngOnInit() {
         if (this.node.treeModel) {
             this.operationSub = merge<TreeEvent>(
+                this.node.treeModel.events.expand,
+                this.node.treeModel.events.collapse,
                 this.node.treeModel.events.activate,
                 this.node.treeModel.events.deactivate,
                 this.node.treeModel.events.focus,

@@ -1,6 +1,6 @@
 {
   "name": "@e-cloud/ngx-tree",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "A derived version of angular-tree-component without mobx. Much Better performance.",
   "repository": {
     "type": "git",

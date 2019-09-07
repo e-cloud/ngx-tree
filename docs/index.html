@@ -42,7 +42,11 @@
 <p>This module derivates from <a href="https://github.com/500tech/angular-tree-component/">angular-tree-component</a>. We remove the mobx dependency and do some performance improvements, whilst keep a similar component interface.</p>
 <h2 id="installation">Installation</h2>
 <p>To install this library, run:</p>
-<div><pre class="line-numbers"><code class="language-bash">$ npm install &#64;e-cloud/ngx-tree --save</code></pre></div><h2 id="usage">Usage</h2>
+<div><pre class="line-numbers"><code class="language-bash">$ npm install &#64;e-cloud/ngx-tree --save</code></pre></div><blockquote>
+<p>NOTE: we use <a href="https://developer.mozilla.org/docs/Web/API/Element/closest">Element.closest</a>, If you want to compromise
+with IE 11, please apply the polyfill <a href="https://github.com/jonathantneal/closest">https://github.com/jonathantneal/closest</a> to your probject.</p>
+</blockquote>
+<h2 id="usage">Usage</h2>
 <p>For details, please take a look at <a href="https://e-cloud.github.io/ngx-tree">document site</a></p>
 <h3 id="imports">Imports</h3>
 <p>Once you have installed the library, you can import it in your Angular <code>AppModule</code>:</p>

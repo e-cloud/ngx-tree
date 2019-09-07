@@ -59,7 +59,7 @@ describe('TreeNodeWrapperComponent', () => {
         component = fixture.componentInstance
         component.options = createTreeUIOptions()
         component.node = {} as any
-        component.templates = {}
+        component.templates = <any>{}
         fixture.detectChanges()
     })
 

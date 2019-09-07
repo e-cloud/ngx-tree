@@ -16,6 +16,7 @@ import { merge, Subscription } from 'rxjs'
 import { TREE_EVENTS } from '../../constants/events'
 import { ScrollIntoViewTarget, TreeModel } from '../../models'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
+import {auditTime} from "rxjs/operators";
 
 const DISABLE_ON_SCROLL_CLASS = 'disable-events-on-scroll'
 
@@ -179,6 +180,7 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
             this.treeModel.events.addNode,
             this.treeModel.events.removeNode,
         )
+            .pipe(auditTime(0))
             .subscribe(() => {
                 this.virtualScroll.reCalcPositions(this.treeModel)
                 this.setViewport()

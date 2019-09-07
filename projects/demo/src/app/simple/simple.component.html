@@ -2,6 +2,8 @@
 <button (click)="tree.treeModel.clearFilter()">Clear Filter</button>
 
 <button (click)="this.regenerateData()">regenerate data</button>
+<button (click)="tree.treeModel.expandAll()">expand all</button>
+<button (click)="tree.treeModel.collapseAll()">collapse all</button>
 
 <ngx-tree
   #tree

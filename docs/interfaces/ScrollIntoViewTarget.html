@@ -554,7 +554,7 @@ export class TreeModel {
         }
 
         if (previousNode.isExpanded) {
-            previousNode.toggleExpanded()
+            previousNode.collapse()
         } else {
             const nextNode &#x3D; previousNode.parent
             if (nextNode) {

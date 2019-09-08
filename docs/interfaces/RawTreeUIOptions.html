@@ -88,6 +88,10 @@
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
+                                        <a href="#auditViewportUpdate">auditViewportUpdate</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#levelPadding">levelPadding</a>
                                 </li>
                                 <li>
@@ -148,8 +152,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="132"
-                            class="link-to-prism">projects/ngx-tree/src/models/tree-options.ts:132</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">projects/ngx-tree/src/models/tree-options.ts:141</a></div>
                 </td>
             </tr>
 
@@ -253,6 +257,40 @@
                                     <tr>
                                         <td class="col-md-4">
                                             <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#IAllowDropFn" target="_self" >boolean | IAllowDropFn</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="auditViewportUpdate"></a>
+                                        <span class="name"><b>auditViewportUpdate</b><a href="#auditViewportUpdate"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>auditViewportUpdate:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -492,6 +530,14 @@ export interface TreeUIOptions {
      * if user provide a proper value, it would boost the initial rendering time for tree with big dataset initially
      */
     referenceItemHeight?: number;
+    /**
+     * an optional field to prevent repeating viewport update,
+     * which is caused by some massive tree structure changes, such as &#x60;collapseAll()&#x60;, &#x60;expandAll()&#x60;
+     * setting this field with a number would be useful for large scale tree, like throttle tailing.
+     *
+     * however, it would also caused the tree to be irreponsible for a short while
+     */
+    auditViewportUpdate?: number;
 
     /**
      * Supply function for getting a custom class for the node component
@@ -505,6 +551,7 @@ export interface RawTreeUIOptions {
     levelPadding?: number | ILevelPaddingFn;
     useVirtualScroll?: boolean;
     referenceItemHeight?: number;
+    auditViewportUpdate?: number;
 
     nodeClass?(node: TreeNode): string;
 }

@@ -138,6 +138,10 @@
                                     <span class="modifier">Private</span>
                                 <a href="#structureChangeSub">structureChangeSub</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toggleChangeSub">toggleChangeSub</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -216,7 +220,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">projects/ngx-tree/src/components/tree-node-expander/tree-node-expander.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">projects/ngx-tree/src/components/tree-node-expander/tree-node-expander.component.ts:21</a></div>
                             </td>
                         </tr>
 
@@ -399,8 +403,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">projects/ngx-tree/src/components/tree-node-expander/tree-node-expander.component.ts:39</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">projects/ngx-tree/src/components/tree-node-expander/tree-node-expander.component.ts:49</a></div>
                 </td>
             </tr>
 
@@ -438,8 +442,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">projects/ngx-tree/src/components/tree-node-expander/tree-node-expander.component.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">projects/ngx-tree/src/components/tree-node-expander/tree-node-expander.component.ts:26</a></div>
                 </td>
             </tr>
 
@@ -488,6 +492,33 @@
 
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toggleChangeSub"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            toggleChangeSub</b>
+                            <a href="#toggleChangeSub"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>Subscription.EMPTY</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">projects/ngx-tree/src/components/tree-node-expander/tree-node-expander.component.ts:21</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
 </section>
 
 </div>
@@ -514,6 +545,7 @@ export class TreeNodeExpanderComponent implements OnInit, OnDestroy {
     @HostBinding(&#x27;class.tree-node-expander&#x27;) className &#x3D; true
 
     private structureChangeSub &#x3D; Subscription.EMPTY
+    private toggleChangeSub &#x3D; Subscription.EMPTY
 
     constructor(private cdRef: ChangeDetectorRef) {
     }
@@ -529,11 +561,21 @@ export class TreeNodeExpanderComponent implements OnInit, OnDestroy {
                         this.cdRef.markForCheck()
                     }
                 })
+            this.toggleChangeSub &#x3D; merge&lt;TreeEvent&gt;(
+                this.node.treeModel.events.expand,
+                this.node.treeModel.events.collapse,
+            )
+                .subscribe((event: TreeEvent) &#x3D;&gt; {
+                    if (event.node &amp;&amp; event.node &#x3D;&#x3D;&#x3D; this.node) {
+                        this.cdRef.markForCheck()
+                    }
+                })
         }
     }
 
     ngOnDestroy() {
         this.structureChangeSub.unsubscribe()
+        this.toggleChangeSub.unsubscribe()
     }
 }
 </code></pre>

@@ -17,7 +17,7 @@ export class TreeNode {
     /**
      * top edge position relative to the top edge of scroll area
      */
-    position = 0
+    position = -1
     /**
      * the visual height of the node
      */
@@ -270,7 +270,7 @@ export class TreeNode {
             return this.toggleExpanded()
         }
 
-        return Promise.resolve()
+        return this
     }
 
     /**
@@ -278,29 +278,47 @@ export class TreeNode {
      */
     collapse() {
         if (this.isExpanded) {
-            this.toggleExpanded()
+            // as collapse operation doesn't introduce side effect, not need to
+            this.treeModel.setExpandedNode(this, false)
         }
 
         return this
     }
 
     /**
-     * Invokes a method for every node under this one - depth first
+     * Invokes a method for every node under this one - async depth first(preorder)
+     * @param fn  a function that receives the node
+     */
+    traverseAsync(fn: (node: TreeNode) => any) {
+        const result = fn(this)
+        if (result instanceof Promise) {
+            result.then(() => {
+                if (this.children) {
+                    this.children.forEach((child) => child.traverseAsync(fn))
+                }
+            })
+        } else if (this.children) {
+            this.children.forEach((child) => child.traverseAsync(fn))
+        }
+    }
+
+    /**
+     * Invokes a method for every node under this one - depth first(preorder)
      * @param fn  a function that receives the node
      */
     traverse(fn: (node: TreeNode) => any) {
-        Promise.resolve(fn(this)).then(() => {
-            if (this.children) {
-                this.children.forEach((child) => child.traverse(fn))
-            }
-        })
+        fn(this)
+
+        if (this.children) {
+            this.children.forEach((child) => child.traverse(fn))
+        }
     }
 
     /**
      * expand all nodes under this one
      */
     expandAll() {
-        this.traverse((node) => node.expand())
+        this.traverseAsync((node) => node.expand())
     }
 
     /**
@@ -322,7 +340,7 @@ export class TreeNode {
             }
         }
 
-        return Promise.resolve()
+        return this
     }
 
     setActive(isActive = true, isMulti = false) {

@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/e-cloud/ngx-tree/compare/v1.1.4...v1.2.0) (2019-09-08)
+
+
+### Bug Fixes
+
+* missing update for node expander when toggle triggerred ([b80541d](https://github.com/e-cloud/ngx-tree/commit/b80541d))
+
+
+### Features
+
+* add an optional performance-sensitive field ([f31df58](https://github.com/e-cloud/ngx-tree/commit/f31df58))
+
+
+### Performance Improvements
+
+* distinguish async and sync traverse for performance concert ([b67b01e](https://github.com/e-cloud/ngx-tree/commit/b67b01e))
+
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/e-cloud/ngx-tree/compare/v1.1.3...v1.1.4) (2019-09-07)
 

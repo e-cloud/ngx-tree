@@ -286,23 +286,6 @@ export class TreeNode {
     }
 
     /**
-     * Invokes a method for every node under this one - async depth first(preorder)
-     * @param fn  a function that receives the node
-     */
-    traverseAsync(fn: (node: TreeNode) => any) {
-        const result = fn(this)
-        if (result instanceof Promise) {
-            result.then(() => {
-                if (this.children) {
-                    this.children.forEach((child) => child.traverseAsync(fn))
-                }
-            })
-        } else if (this.children) {
-            this.children.forEach((child) => child.traverseAsync(fn))
-        }
-    }
-
-    /**
      * Invokes a method for every node under this one - depth first(preorder)
      * @param fn  a function that receives the node
      */
@@ -318,7 +301,7 @@ export class TreeNode {
      * expand all nodes under this one
      */
     expandAll() {
-        this.traverseAsync((node) => node.expand())
+        this.traverse((node) => node.expand())
     }
 
     /**

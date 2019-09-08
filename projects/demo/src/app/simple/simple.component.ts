@@ -30,6 +30,7 @@ export class SimpleComponent {
         getChildren: this.getChildren.bind(this),
         useVirtualScroll: true,
         referenceItemHeight: 22,
+        auditViewportUpdate: 0,
         allowDrag: (node) => {
             // console.log('allowDrag?');
             return true

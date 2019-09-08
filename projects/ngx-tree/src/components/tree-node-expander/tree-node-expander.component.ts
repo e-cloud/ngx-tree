@@ -18,6 +18,7 @@ export class TreeNodeExpanderComponent implements OnInit, OnDestroy {
     @HostBinding('class.tree-node-expander') className = true
 
     private structureChangeSub = Subscription.EMPTY
+    private toggleChangeSub = Subscription.EMPTY
 
     constructor(private cdRef: ChangeDetectorRef) {
     }
@@ -33,10 +34,20 @@ export class TreeNodeExpanderComponent implements OnInit, OnDestroy {
                         this.cdRef.markForCheck()
                     }
                 })
+            this.toggleChangeSub = merge<TreeEvent>(
+                this.node.treeModel.events.expand,
+                this.node.treeModel.events.collapse,
+            )
+                .subscribe((event: TreeEvent) => {
+                    if (event.node && event.node === this.node) {
+                        this.cdRef.markForCheck()
+                    }
+                })
         }
     }
 
     ngOnDestroy() {
         this.structureChangeSub.unsubscribe()
+        this.toggleChangeSub.unsubscribe()
     }
 }

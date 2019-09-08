@@ -12,11 +12,12 @@ import {
     Renderer2,
     SimpleChanges,
 } from '@angular/core'
+import isNumber from 'lodash-es/isNumber'
 import { merge, Subscription } from 'rxjs'
+import { auditTime } from 'rxjs/operators'
 import { TREE_EVENTS } from '../../constants/events'
 import { ScrollIntoViewTarget, TreeModel } from '../../models'
 import { TreeVirtualScroll } from '../../services/tree-virtual-scroll.service'
-import {auditTime} from "rxjs/operators";
 
 const DISABLE_ON_SCROLL_CLASS = 'disable-events-on-scroll'
 
@@ -33,6 +34,7 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
 
     @Input() enable: boolean
     @Input() referenceItemHeight = 0
+    @Input() auditViewportUpdate?: number
 
     @Input() treeModel: TreeModel
 
@@ -172,7 +174,8 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
             })
         })
 
-        this.structureChangeSub = merge(
+
+        let structureChange$ = merge(
             this.treeModel.events.expand,
             this.treeModel.events.collapse,
             this.treeModel.events.loadChildren,
@@ -180,11 +183,17 @@ export class TreeViewportComponent implements OnInit, OnChanges, AfterViewInit, 
             this.treeModel.events.addNode,
             this.treeModel.events.removeNode,
         )
-            .pipe(auditTime(0))
-            .subscribe(() => {
-                this.virtualScroll.reCalcPositions(this.treeModel)
-                this.setViewport()
-            })
+
+        if (isNumber(this.auditViewportUpdate)) {
+            structureChange$ = structureChange$.pipe(
+                auditTime(this.auditViewportUpdate)
+            )
+        }
+
+        this.structureChangeSub = structureChange$.subscribe(() => {
+            this.virtualScroll.reCalcPositions(this.treeModel)
+            this.setViewport()
+        })
     }
 
     setViewport() {

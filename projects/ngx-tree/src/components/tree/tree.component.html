@@ -2,6 +2,7 @@
                    [enable]="useVirtualScroll"
                    [treeModel]="treeModel"
                    [referenceItemHeight]="UIOptions.referenceItemHeight"
+                   [auditViewportUpdate]="UIOptions.auditViewportUpdate"
                    #viewport>
   <div *ngIf="!viewport.virtualScroll.isDisabled()"
        class="height-raiser"

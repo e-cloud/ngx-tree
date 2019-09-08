@@ -115,6 +115,14 @@ export interface TreeUIOptions {
      * if user provide a proper value, it would boost the initial rendering time for tree with big dataset initially
      */
     referenceItemHeight?: number;
+    /**
+     * an optional field to prevent repeating viewport update,
+     * which is caused by some massive tree structure changes, such as `collapseAll()`, `expandAll()`
+     * setting this field with a number would be useful for large scale tree, like throttle tailing.
+     *
+     * however, it would also caused the tree to be irreponsible for a short while
+     */
+    auditViewportUpdate?: number;
 
     /**
      * Supply function for getting a custom class for the node component
@@ -128,6 +136,7 @@ export interface RawTreeUIOptions {
     levelPadding?: number | ILevelPaddingFn;
     useVirtualScroll?: boolean;
     referenceItemHeight?: number;
+    auditViewportUpdate?: number;
 
     nodeClass?(node: TreeNode): string;
 }

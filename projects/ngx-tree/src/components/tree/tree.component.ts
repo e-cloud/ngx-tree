@@ -60,6 +60,7 @@ export class TreeComponent implements OnChanges, OnDestroy {
     @Input() levelPadding: number | ILevelPaddingFn
     @Input() useVirtualScroll: boolean
     @Input() referenceItemHeight: number
+    @Input() auditViewportUpdate?: number
     @Input() nodeClass: (node: TreeNode) => string
     @Input() enableAnimation = true
     @Input() keepNodesExpanded = false
@@ -131,13 +132,16 @@ export class TreeComponent implements OnChanges, OnDestroy {
             || changes.allowDrop
             || changes.levelPadding
             || changes.useVirtualScroll
-            || changes.nodeClass) {
+            || changes.nodeClass
+            || changes.referenceItemHeight
+            || changes.auditViewportUpdate) {
             this.UIOptions = createTreeUIOptions({
                 allowDrag: this.allowDrag,
                 allowDrop: this.allowDrop,
                 levelPadding: this.levelPadding,
                 useVirtualScroll: this.useVirtualScroll,
                 referenceItemHeight: this.referenceItemHeight,
+                auditViewportUpdate: this.auditViewportUpdate,
                 nodeClass: this.nodeClass,
             })
         }

@@ -33,6 +33,7 @@ export class FakeTreeViewportComponent {
 
     @Input() treeModel: TreeModel
     @Input() referenceItemHeight = 0
+    @Input() auditViewportUpdate?: number
 
     virtualScroll = {
         isDisabled() {return false}

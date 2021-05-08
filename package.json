@@ -59,7 +59,7 @@
     "karma-jasmine": "^2.0.0",
     "karma-jasmine-html-reporter": "^1.4.0",
     "lodash-es": "^4.17.10",
-    "ng-packagr": "^5.5.0",
+    "ng-packagr": "^10.1.1",
     "protractor": "^5.1.2",
     "rxjs": "^6.5.2",
     "standard-version": "^4.1.0",
